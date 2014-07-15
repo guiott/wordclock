@@ -1,0 +1,63 @@
+*** COMMUNICATION FINITE STATE MACHINE
+
+When a new cycle need to be started in the communication Finite State Machine,
+to kick off the FSM execution call:
+StartCommFsmSched(FsmStruct);
+where FsmStruct is the structure
+already defined with the sequence to perform.
+
+===========================================
+Example, to read time with WiFly from INRIM:
+
+struct FsmTable
+{// Scheduler for Finite State Machine
+    unsigned char Stat;         // status index
+    const unsigned char * Str;  // string to send or receive
+    FsmCallbackFunc pCallback;  // function to call after RX or TX is over
+};
+
+.......
+
+struct FsmTable ReadTimeFsm[] =
+{/* scheduler used for comm protocol with WiFLy
+  this reads time from http://www.inrim.it
+ */
+    {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
+    {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
+    {FsmTx, "open", (FsmCallbackFunc)CommFsmIdle},
+    {FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+    {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+};
+
+this defines the operations to perform in each status (Stat), the string to send
+in TX operation or to wait as a terminator in RX and the function to call back
+at the end of the specific status.
+
+.......
+
+StartCommFsmSched(ReadTimeFsm);  // read time from http://www.inrim.it
+
+.......
+
+===========================================
+
+CommFsmSched() is initialized and starts with the first process in the queue.
+In the example it is TX of the string "$$$" to enter WiFLy in command mode.
+Then waits for the answer "CMD".
+All the operations but the last one returns doing nothing, simply executing the
+dummy procedure "CommFsmIdle". At the last step the string received is decoded
+to set the internal clock with the correct time.
+
+The TX operation is started by the FSM calling "StartTx()" function.
+This one fills up the TX buffer with string to transmit:
+ReadTimeFsm[FsmIndx].Str
+and enabling Usart TX interrupt. After that all the characters in the buffer
+are transmitted only using the ISR triggered by the Usart peripheral.
+When the buffer has been all transmitted, the ISR disables the TX interrupt
+itself and enables the CommFsmFlag to call the FSM scheduler in order to perform
+the next step. Each FSM operation has two phases, the first one calls the main
+operation, the second one the callback function.
+
+
+
+

@@ -1,0 +1,9 @@
+Message[3004] ../quadSonar.c 230 : comparison of a signed integer to an unsigned integer detected
+Warning[2059] ../quadSonar.c 230 : unary minus of unsigned value
+Message[3004] ../quadSonar.c 230 : comparison of a signed integer to an unsigned integer detected
+Message[3004] ../quadSonar.c 244 : comparison of a signed integer to an unsigned integer detected
+Warning[2059] ../quadSonar.c 244 : unary minus of unsigned value
+Message[3004] ../quadSonar.c 244 : comparison of a signed integer to an unsigned integer detected
+Message[3004] ../quadSonar.c 258 : comparison of a signed integer to an unsigned integer detected
+Warning[2059] ../quadSonar.c 258 : unary minus of unsigned value
+Message[3004] ../quadSonar.c 258 : comparison of a signed integer to an unsigned integer detected

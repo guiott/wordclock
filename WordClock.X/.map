@@ -1,0 +1,833 @@
+MPLINK 4.40, Linker
+Linker Map File - Created Sun Jul  8 10:43:59 2012
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+               _entry_scn       code   0x000000    program   0x000006
+           .code___init.o       code   0x000006    program   0x000002
+               HighVector       code   0x000008    program   0x000006
+      .idata_fxd1616u.o_i    romdata   0x00000e    program   0x000000
+      .romdata_fxd1616u.o    romdata   0x00000e    program   0x000000
+      .idata_pw1setdc.o_i    romdata   0x00000e    program   0x000000
+      .romdata_pw1setdc.o    romdata   0x00000e    program   0x000000
+     .romdata_quadSonar.o    romdata   0x00000e    program   0x000000
+        .idata___init.o_i    romdata   0x00000e    program   0x000000
+        .romdata___init.o    romdata   0x00000e    program   0x000000
+      .romdata_settings.o    romdata   0x00000e    program   0x000000
+      .idata_settings.o_i    romdata   0x00000e    program   0x000000
+            .code_c018i.o       code   0x00000e    program   0x000000
+         .romdata_c018i.o    romdata   0x00000e    program   0x000000
+         .idata_c018i.o_i    romdata   0x00000e    program   0x000000
+                LowVector       code   0x000018    program   0x000006
+                   .cinit    romdata   0x00001e    program   0x00000e
+        .code_quadSonar.o       code   0x00002c    program   0x000b68
+                     PROG       code   0x000b94    program   0x000314
+         .code_settings.o       code   0x000ea8    program   0x000106
+               _cinit_scn       code   0x000fae    program   0x00009e
+         .code_pw1setdc.o       code   0x00104c    program   0x00005e
+         .code_fxd1616u.o       code   0x0010aa    program   0x00002c
+                    .code       code   0x0010d6    program   0x000020
+             _startup_scn       code   0x0010f6    program   0x00001c
+             .stringtable    romdata   0x001112    program   0x000016
+     .idata_quadSonar.o_i    romdata   0x001128    program   0x000014
+.config_300001_quadSonar.o    romdata   0x300001    program   0x000001
+.config_300002_quadSonar.o    romdata   0x300002    program   0x000001
+.config_300003_quadSonar.o    romdata   0x300003    program   0x000001
+.config_300005_quadSonar.o    romdata   0x300005    program   0x000001
+.config_300006_quadSonar.o    romdata   0x300006    program   0x000001
+                MATH_DATA      udata   0x000000       data   0x000014
+                 .tmpdata      udata   0x000014       data   0x00000a
+ InterruptHandlerHigh_tmp      udata   0x00001e       data   0x000006
+  InterruptHandlerLow_tmp      udata   0x000024       data   0x000002
+       .udata_quadSonar.o      udata   0x000080       data   0x000038
+       .idata_quadSonar.o      idata   0x0000b8       data   0x000014
+           .udata_c018i.o      udata   0x0000cc       data   0x00000a
+           .idata_c018i.o      idata   0x0000d6       data   0x000000
+        .udata_settings.o      udata   0x0000d6       data   0x000000
+        .idata_settings.o      idata   0x0000d6       data   0x000000
+        .udata_fxd1616u.o      udata   0x0000d6       data   0x000000
+        .idata_fxd1616u.o      idata   0x0000d6       data   0x000000
+        .udata_pw1setdc.o      udata   0x0000d6       data   0x000000
+        .idata_pw1setdc.o      idata   0x0000d6       data   0x000000
+          .udata___init.o      udata   0x0000d6       data   0x000000
+          .idata___init.o      idata   0x0000d6       data   0x000000
+                   .stack      udata   0x000e00       data   0x000100
+            SFR_UNBANKED0      udata   0x000f80       data   0x000080
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00000d      
+                            0x000018    0x00113b      
+                            0x300001    0x300003      
+                            0x300005    0x300006      
+            4407 out of 66584 program addresses used, program memory utilization is 6%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    Cycle   0x000712    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   D1616S   0x000cba    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                D1616SNEG   0x000cc8    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                 D1616SOK   0x000cc4    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                  D1616SX   0x000cda    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                  DA1616S   0x000caa    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                     Echo   0x000486    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 FLO1632S   0x000b98    program     extern C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                 FLO1632U   0x000b94    program     extern C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                    FPM32   0x000bbe    program     extern C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                 FXD1616S   0x000c98    program     extern C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                 FXD1616U   0x0010aa    program     extern C:\MCC18\v3_39\src\traditional\math\fxd1616u.c
+                 FXM1616S   0x000ce4    program     extern C:\MCC18\v3_39\src\traditional\math\fxm1616s.asm
+                  INT3216   0x000d3e    program     extern C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+     InterruptHandlerHigh   0x0008bc    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+      InterruptHandlerLow   0x000878    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+      InterruptVectorHigh   0x000008    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+       InterruptVectorLow   0x000018    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              ResetTimer1   0x000830    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 SelectUS   0x000512    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                SetDCPWM1   0x00104c    program     extern C:\MCC18\v3_39\src\pmc_common\PWM\pw1setdc.c
+                   SetMux   0x0006d8    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   SetPWM   0x000836    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                SetTimer0   0x000804    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              SetTxBuffer   0x000450    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 Settings   0x000ea8    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/settings.c
+                State3End   0x000a66    program     static                          
+                State4End   0x000b42    program     static                          
+               TSIGN1616A   0x000d30    program     static C:\MCC18\v3_39\src\traditional\math\fxm1616s.asm
+                   TxChar   0x000416    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              Uchar2Ascii   0x0000b4    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 __FpExit   0x000da8    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                 __FpPack   0x000dd4    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+            __FpReturnNaN   0x000d9c    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+         __FpReturnNegInf   0x000dae    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnNegZero   0x000dc6    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+         __FpReturnPosInf   0x000db4    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnPosZero   0x000dce    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnSignInf   0x000daa    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+       __FpReturnSignZero   0x000dc2    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+              __FpReturnW   0x000e2c    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+              __FpUnPackA   0x000e4c    program     extern C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+              __FpUnPackB   0x000e7c    program     extern C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+         ___else_lbl00065   0x00095c    program     static                          
+         ___else_lbl00087   0x000b68    program     static                          
+         ___else_lbl00089   0x000b48    program     static                          
+         ___else_lbl00091   0x000a6c    program     static                          
+         ___else_lbl00093   0x00099e    program     static                          
+         ___else_lbl00095   0x00092e    program     static                          
+          ___for_lbl00067   0x000a5a    program     static                          
+          ___for_lbl00068   0x000a64    program     static                          
+          ___for_lbl00069   0x000a4e    program     static                          
+          ___for_lbl00070   0x000a58    program     static                          
+          ___for_lbl00073   0x0009ee    program     static                          
+          ___for_lbl00075   0x0009c6    program     static                          
+          ___for_lbl00077   0x000b38    program     static                          
+          ___for_lbl00078   0x000b42    program     static                          
+          ___for_lbl00079   0x000b2c    program     static                          
+          ___for_lbl00080   0x000b36    program     static                          
+          ___for_lbl00083   0x000acc    program     static                          
+          ___for_lbl00085   0x000aa4    program     static                          
+           ___if_lbl00003   0x000072    program     static                          
+           ___if_lbl00004   0x000088    program     static                          
+           ___if_lbl00005   0x0000b0    program     static                          
+           ___if_lbl00006   0x0000b0    program     static                          
+           ___if_lbl00063   0x0008f2    program     static                          
+           ___if_lbl00064   0x00097a    program     static                          
+           ___if_lbl00066   0x000998    program     static                          
+           ___if_lbl00071   0x000a4c    program     static                          
+           ___if_lbl00072   0x000a4e    program     static                          
+           ___if_lbl00074   0x000a5a    program     static                          
+           ___if_lbl00081   0x000b2a    program     static                          
+           ___if_lbl00082   0x000b2c    program     static                          
+           ___if_lbl00084   0x000b38    program     static                          
+           ___if_lbl00086   0x000b6e    program     static                          
+           ___if_lbl00088   0x000b6e    program     static                          
+           ___if_lbl00090   0x000b6e    program     static                          
+           ___if_lbl00092   0x000b6e    program     static                          
+           ___if_lbl00094   0x000b6e    program     static                          
+           ___if_lbl00096   0x000b72    program     static                          
+       ___return_lbl00000   0x0000b2    program     static                          
+       ___return_lbl00000   0x0010d4    program     static                          
+       ___return_lbl00000   0x000004    program     static                          
+       ___return_lbl00001   0x001110    program     static                          
+       ___return_lbl00002   0x00104a    program     static                          
+       ___return_lbl00058   0x00001c    program     static                          
+       ___return_lbl00061   0x00000c    program     static                          
+       ___return_lbl00062   0x000b72    program     static                          
+        ___while_lbl00001   0x00005e    program     static                          
+        ___while_lbl00002   0x0000b2    program     static                          
+               __config_0   0x300001    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_1   0x300002    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_2   0x300003    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_3   0x300005    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_4   0x300006    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   __init   0x000006    program     extern C:\MCC18\v3_39\src\traditional\stdclib\__init.c
+               __string_0   0x00111d    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __string_1   0x001112    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              __tmplbl_10   0x000a92    program     static                          
+              __tmplbl_11   0x000a8e    program     static                          
+              __tmplbl_12   0x000a7e    program     static                          
+              __tmplbl_17   0x0009d2    program     static                          
+              __tmplbl_18   0x0009fa    program     static                          
+              __tmplbl_19   0x000ab0    program     static                          
+              __tmplbl_20   0x000ad8    program     static                          
+            __zero_memory   0x0010d6    program     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                _do_cinit   0x000fae    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                   _entry   0x000000    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                 _startup   0x0010f6    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                compare_l   0x0010ec    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                copy_loop   0x001020    program     static                          
+            copy_one_byte   0x001026    program     static                          
+                     done   0x00104a    program     static                          
+             done_copying   0x001034    program     static                          
+                  endloop   0x0010d0    program     static                          
+                 jANotInf   0x000bdc    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+              jBothFinite   0x000bea    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+             jBothNotZero   0x000bf6    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                    jExit   0x000d9a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                jHaveZero   0x000bf2    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                jI2F16Beg   0x000ba8    program     static C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                    jLoop   0x000d7a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                jLoopExit   0x000d8a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                     jMax   0x000d4e    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jMaxNeg   0x000d5c    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jMaxPos   0x000d52    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jNotInf   0x000d6a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jPkLoop   0x000de2    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+             jPkRoundDone   0x000e2c    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+               jPkRoundIt   0x000e14    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+             jPkShiftDone   0x000dfe    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+           jReturnPosInf0   0x000db8    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                  jUnpkA1   0x000e56    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkA2   0x000e6e    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkANZ   0x000e64    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkB1   0x000e86    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkB2   0x000e9e    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkBNZ   0x000e94    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkNaN   0x000e78    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                    jZero   0x000d64    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+               jZero1and2   0x000dbc    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                     loop   0x0010b4    program     static                          
+                     loop   0x001106    program     static                          
+                   loop_h   0x0010e4    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   loop_l   0x0010ee    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     main   0x00002c    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                     test   0x000fc8    program     static                          
+               zero_block   0x0010e4    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON0   0x000fc2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON0bits   0x000fc2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON1   0x000fc1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON1bits   0x000fc1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON2   0x000fc0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON2bits   0x000fc0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    ADRES   0x000fc3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADRESH   0x000fc4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADRESL   0x000fc3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  BAUDCON   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              BAUDCONbits   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  BAUDCTL   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              BAUDCTLbits   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      BSR   0x000fe0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  CCP1CON   0x000fbd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              CCP1CONbits   0x000fbd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  CCP2CON   0x000fba       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              CCP2CONbits   0x000fba       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CCPR1   0x000fbe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR1H   0x000fbf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR1L   0x000fbe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CCPR2   0x000fbb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR2H   0x000fbc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR2L   0x000fbb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CMCON   0x000fb4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                CMCONbits   0x000fb4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CVRCON   0x000fb5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               CVRCONbits   0x000fb5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               Ccpr2HBuff   0x00008f       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+               Ccpr2LBuff   0x000090       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   CmTick   0x0000b3       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                     DDRA   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRAbits   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     DDRB   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRBbits   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     DDRC   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRCbits   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     Dist   0x000087       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                  ECCP1AS   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              ECCP1ASbits   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 ECCP1DEL   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+             ECCP1DELbits   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ECCPAS   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ECCPASbits   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    EEADR   0x000fa9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EEADRH   0x000faa       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EECON1   0x000fa6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               EECON1bits   0x000fa6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EECON2   0x000fa7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EEDATA   0x000fa8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR0   0x000fe9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR0H   0x000fea       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR0L   0x000fe9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR1   0x000fe1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR1H   0x000fe2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR1L   0x000fe1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR2   0x000fd9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR2H   0x000fda       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR2L   0x000fd9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  HLVDCON   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              HLVDCONbits   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                I2cRegPtr   0x0000b7       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                 I2cRegRx   0x0000c5       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                 I2cRegTx   0x0000be       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                    INDF0   0x000fef       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    INDF1   0x000fe7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    INDF2   0x000fdf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   INTCON   0x000ff2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  INTCON2   0x000ff1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              INTCON2bits   0x000ff1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  INTCON3   0x000ff0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              INTCON3bits   0x000ff0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               INTCONbits   0x000ff2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     IPR1   0x000f9f       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 IPR1bits   0x000f9f       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     IPR2   0x000fa2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 IPR2bits   0x000fa2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATA   0x000f89       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATAbits   0x000f89       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATB   0x000f8a       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATBbits   0x000f8a       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATC   0x000f8b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATCbits   0x000f8b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   LVDCON   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               LVDCONbits   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   OSCCON   0x000fd3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               OSCCONbits   0x000fd3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  OSCTUNE   0x000f9b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              OSCTUNEbits   0x000f9b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                       PC   0x000ff9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      PCL   0x000ff9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PCLATH   0x000ffa       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PCLATU   0x000ffb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIE1   0x000f9d       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIE1bits   0x000f9d       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIE2   0x000fa0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIE2bits   0x000fa0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIR1   0x000f9e       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIR1bits   0x000f9e       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIR2   0x000fa1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIR2bits   0x000fa1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW0   0x000feb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW1   0x000fe3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW2   0x000fdb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTA   0x000f80       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTAbits   0x000f80       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTB   0x000f81       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTBbits   0x000f81       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTC   0x000f82       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTCbits   0x000f82       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTE   0x000f84       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTEbits   0x000f84       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC0   0x000fed       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC1   0x000fe5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC2   0x000fdd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC0   0x000fee       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC1   0x000fe6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC2   0x000fde       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      PR2   0x000fcb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC0   0x000fec       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC1   0x000fe4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC2   0x000fdc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PROD   0x000ff3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PRODH   0x000ff4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PRODL   0x000ff3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PWM1CON   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              PWM1CONbits   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     RCON   0x000fd0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 RCONbits   0x000fd0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    RCREG   0x000fae       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    RCSTA   0x000fab       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                RCSTAbits   0x000fab       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     SIGN   0x000000       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+                    SPBRG   0x000faf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SPBRGH   0x000fb0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SSPADD   0x000fc8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SSPBUF   0x000fc9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPCON1   0x000fc6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPCON1bits   0x000fc6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPCON2   0x000fc5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPCON2bits   0x000fc5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPSTAT   0x000fc7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPSTATbits   0x000fc7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   STATUS   0x000fd8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               STATUSbits   0x000fd8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   STKPTR   0x000ffc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               STKPTRbits   0x000ffc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T0CON   0x000fd5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T0CONbits   0x000fd5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T1CON   0x000fcd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T1CONbits   0x000fcd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T2CON   0x000fca       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T2CONbits   0x000fca       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T3CON   0x000fb1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T3CONbits   0x000fb1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   TABLAT   0x000ff5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   TBLPTR   0x000ff6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRH   0x000ff7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRL   0x000ff6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRU   0x000ff8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR0H   0x000fd7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR0L   0x000fd6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR1H   0x000fcf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR1L   0x000fce       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TMR2   0x000fcc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR3H   0x000fb3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR3L   0x000fb2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      TOS   0x000ffd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSH   0x000ffe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSL   0x000ffd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSU   0x000fff       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISA   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISAbits   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISB   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISBbits   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISC   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISCbits   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TXREG   0x000fad       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TXSTA   0x000fac       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TXSTAbits   0x000fac       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+             Timer0_150us   0x000081       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+              Timer0_49ms   0x000085       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+             Timer0_850us   0x000083       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+              TimerStatus   0x0000bc       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   TxBuff   0x000091       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+               TxBuffIndx   0x0000b2       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                TxBuffLen   0x0000b1       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   UsIndx   0x0000bd       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                 VARbits1   0x000080       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                        W   0x000fe8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   WDTCON   0x000fd1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               WDTCONbits   0x000fd1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     WREG   0x000fe8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 __AARGB0   0x000009       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB1   0x000008       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB2   0x000007       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB3   0x000006       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB4   0x000005       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB5   0x000004       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB6   0x000003       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB7   0x000002       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                   __AEXP   0x00000a       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __BARGB0   0x00000e       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB1   0x00000d       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB2   0x00000c       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB3   0x00000b       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                   __BEXP   0x00000f       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                __FPFLAGS   0x000001       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+            __FPFLAGSbits   0x000001       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+                  __REMB0   0x000005       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB1   0x000004       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB2   0x000003       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB3   0x000002       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                   __TEMP   0x000013       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB0   0x000013       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB1   0x000012       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB2   0x000011       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB3   0x000010       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                  __tmp_0   0x000014       data     static C:\MCC18\v3_39\src\pmc_common\PWM\pw1setdc.c
+                  __tmp_0   0x000014       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                  __tmp_1   0x000024       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                  __tmp_2   0x00001e       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                curr_byte   0x0000cf       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+               curr_entry   0x0000d1       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                 data_ptr   0x0000d3       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                        i   0x0000b8       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                        j   0x0000ba       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                     prom   0x0000cc       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   _entry   0x000000    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+       ___return_lbl00000   0x000004    program     static                          
+                   __init   0x000006    program     extern C:\MCC18\v3_39\src\traditional\stdclib\__init.c
+      InterruptVectorHigh   0x000008    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+       ___return_lbl00061   0x00000c    program     static                          
+       InterruptVectorLow   0x000018    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+       ___return_lbl00058   0x00001c    program     static                          
+                     main   0x00002c    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+        ___while_lbl00001   0x00005e    program     static                          
+           ___if_lbl00003   0x000072    program     static                          
+           ___if_lbl00004   0x000088    program     static                          
+           ___if_lbl00006   0x0000b0    program     static                          
+           ___if_lbl00005   0x0000b0    program     static                          
+       ___return_lbl00000   0x0000b2    program     static                          
+        ___while_lbl00002   0x0000b2    program     static                          
+              Uchar2Ascii   0x0000b4    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   TxChar   0x000416    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              SetTxBuffer   0x000450    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                     Echo   0x000486    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 SelectUS   0x000512    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   SetMux   0x0006d8    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                    Cycle   0x000712    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                SetTimer0   0x000804    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+              ResetTimer1   0x000830    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                   SetPWM   0x000836    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+      InterruptHandlerLow   0x000878    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+     InterruptHandlerHigh   0x0008bc    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+           ___if_lbl00063   0x0008f2    program     static                          
+         ___else_lbl00095   0x00092e    program     static                          
+         ___else_lbl00065   0x00095c    program     static                          
+           ___if_lbl00064   0x00097a    program     static                          
+           ___if_lbl00066   0x000998    program     static                          
+         ___else_lbl00093   0x00099e    program     static                          
+          ___for_lbl00075   0x0009c6    program     static                          
+              __tmplbl_17   0x0009d2    program     static                          
+          ___for_lbl00073   0x0009ee    program     static                          
+              __tmplbl_18   0x0009fa    program     static                          
+           ___if_lbl00071   0x000a4c    program     static                          
+          ___for_lbl00069   0x000a4e    program     static                          
+           ___if_lbl00072   0x000a4e    program     static                          
+          ___for_lbl00070   0x000a58    program     static                          
+           ___if_lbl00074   0x000a5a    program     static                          
+          ___for_lbl00067   0x000a5a    program     static                          
+          ___for_lbl00068   0x000a64    program     static                          
+                State3End   0x000a66    program     static                          
+         ___else_lbl00091   0x000a6c    program     static                          
+              __tmplbl_12   0x000a7e    program     static                          
+              __tmplbl_11   0x000a8e    program     static                          
+              __tmplbl_10   0x000a92    program     static                          
+          ___for_lbl00085   0x000aa4    program     static                          
+              __tmplbl_19   0x000ab0    program     static                          
+          ___for_lbl00083   0x000acc    program     static                          
+              __tmplbl_20   0x000ad8    program     static                          
+           ___if_lbl00081   0x000b2a    program     static                          
+          ___for_lbl00079   0x000b2c    program     static                          
+           ___if_lbl00082   0x000b2c    program     static                          
+          ___for_lbl00080   0x000b36    program     static                          
+          ___for_lbl00077   0x000b38    program     static                          
+           ___if_lbl00084   0x000b38    program     static                          
+          ___for_lbl00078   0x000b42    program     static                          
+                State4End   0x000b42    program     static                          
+         ___else_lbl00089   0x000b48    program     static                          
+         ___else_lbl00087   0x000b68    program     static                          
+           ___if_lbl00086   0x000b6e    program     static                          
+           ___if_lbl00088   0x000b6e    program     static                          
+           ___if_lbl00090   0x000b6e    program     static                          
+           ___if_lbl00092   0x000b6e    program     static                          
+           ___if_lbl00094   0x000b6e    program     static                          
+       ___return_lbl00062   0x000b72    program     static                          
+           ___if_lbl00096   0x000b72    program     static                          
+                 FLO1632U   0x000b94    program     extern C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                 FLO1632S   0x000b98    program     extern C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                jI2F16Beg   0x000ba8    program     static C:\MCC18\v3_39\src\traditional\math\cast16FP.asm
+                    FPM32   0x000bbe    program     extern C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                 jANotInf   0x000bdc    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+              jBothFinite   0x000bea    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                jHaveZero   0x000bf2    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+             jBothNotZero   0x000bf6    program     static C:\MCC18\v3_39\src\traditional\math\mulFP.asm
+                 FXD1616S   0x000c98    program     extern C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                  DA1616S   0x000caa    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                   D1616S   0x000cba    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                 D1616SOK   0x000cc4    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                D1616SNEG   0x000cc8    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                  D1616SX   0x000cda    program     static C:\MCC18\v3_39\src\traditional\math\fxd1616s.asm
+                 FXM1616S   0x000ce4    program     extern C:\MCC18\v3_39\src\traditional\math\fxm1616s.asm
+               TSIGN1616A   0x000d30    program     static C:\MCC18\v3_39\src\traditional\math\fxm1616s.asm
+                  INT3216   0x000d3e    program     extern C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                     jMax   0x000d4e    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jMaxPos   0x000d52    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jMaxNeg   0x000d5c    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                    jZero   0x000d64    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                  jNotInf   0x000d6a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                    jLoop   0x000d7a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                jLoopExit   0x000d8a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+                    jExit   0x000d9a    program     static C:\MCC18\v3_39\src\traditional\math\castFP16.asm
+            __FpReturnNaN   0x000d9c    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                 __FpExit   0x000da8    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnSignInf   0x000daa    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+         __FpReturnNegInf   0x000dae    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+         __FpReturnPosInf   0x000db4    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+           jReturnPosInf0   0x000db8    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+               jZero1and2   0x000dbc    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+       __FpReturnSignZero   0x000dc2    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnNegZero   0x000dc6    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+        __FpReturnPosZero   0x000dce    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                 __FpPack   0x000dd4    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+                  jPkLoop   0x000de2    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+             jPkShiftDone   0x000dfe    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+               jPkRoundIt   0x000e14    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+             jPkRoundDone   0x000e2c    program     static C:\MCC18\v3_39\src\traditional\math\packFP.asm
+              __FpReturnW   0x000e2c    program     extern C:\MCC18\v3_39\src\traditional\math\packFP.asm
+              __FpUnPackA   0x000e4c    program     extern C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkA1   0x000e56    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkANZ   0x000e64    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkA2   0x000e6e    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkNaN   0x000e78    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+              __FpUnPackB   0x000e7c    program     extern C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkB1   0x000e86    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 jUnpkBNZ   0x000e94    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                  jUnpkB2   0x000e9e    program     static C:\MCC18\v3_39\src\traditional\math\UnpackFP.asm
+                 Settings   0x000ea8    program     extern /Users/guiott/Dropbox/Lino/QuadSonar/settings.c
+                _do_cinit   0x000fae    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                     test   0x000fc8    program     static                          
+                copy_loop   0x001020    program     static                          
+            copy_one_byte   0x001026    program     static                          
+             done_copying   0x001034    program     static                          
+                     done   0x00104a    program     static                          
+       ___return_lbl00002   0x00104a    program     static                          
+                SetDCPWM1   0x00104c    program     extern C:\MCC18\v3_39\src\pmc_common\PWM\pw1setdc.c
+                 FXD1616U   0x0010aa    program     extern C:\MCC18\v3_39\src\traditional\math\fxd1616u.c
+                     loop   0x0010b4    program     static                          
+                  endloop   0x0010d0    program     static                          
+       ___return_lbl00000   0x0010d4    program     static                          
+            __zero_memory   0x0010d6    program     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   loop_h   0x0010e4    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               zero_block   0x0010e4    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                compare_l   0x0010ec    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   loop_l   0x0010ee    program     static C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 _startup   0x0010f6    program     extern C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                     loop   0x001106    program     static                          
+       ___return_lbl00001   0x001110    program     static                          
+               __string_1   0x001112    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __string_0   0x00111d    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_0   0x300001    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_1   0x300002    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_2   0x300003    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_3   0x300005    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+               __config_4   0x300006    program     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                     SIGN   0x000000       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+            __FPFLAGSbits   0x000001       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+                __FPFLAGS   0x000001       data     extern C:\MCC18\v3_39\src\traditional\math\cmath18.asm
+                  __REMB3   0x000002       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB7   0x000002       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB2   0x000003       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB6   0x000003       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB1   0x000004       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB5   0x000004       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB4   0x000005       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                  __REMB0   0x000005       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB3   0x000006       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB2   0x000007       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB1   0x000008       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __AARGB0   0x000009       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                   __AEXP   0x00000a       data     extern C:\MCC18\v3_39\src\traditional\math\aarg.asm
+                 __BARGB3   0x00000b       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB2   0x00000c       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB1   0x00000d       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __BARGB0   0x00000e       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                   __BEXP   0x00000f       data     extern C:\MCC18\v3_39\src\traditional\math\barg.asm
+                 __TEMPB3   0x000010       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB2   0x000011       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB1   0x000012       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                 __TEMPB0   0x000013       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                   __TEMP   0x000013       data     extern C:\MCC18\v3_39\src\traditional\math\temparg.asm
+                  __tmp_0   0x000014       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                  __tmp_0   0x000014       data     static C:\MCC18\v3_39\src\pmc_common\PWM\pw1setdc.c
+                  __tmp_2   0x00001e       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                  __tmp_1   0x000024       data     static /Users/guiott/Dropbox/Lino/QuadSonar/quadSonar.c
+                 VARbits1   0x000080       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+             Timer0_150us   0x000081       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+             Timer0_850us   0x000083       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+              Timer0_49ms   0x000085       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                     Dist   0x000087       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+               Ccpr2HBuff   0x00008f       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+               Ccpr2LBuff   0x000090       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   TxBuff   0x000091       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                TxBuffLen   0x0000b1       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+               TxBuffIndx   0x0000b2       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   CmTick   0x0000b3       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                I2cRegPtr   0x0000b7       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                        i   0x0000b8       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                        j   0x0000ba       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+              TimerStatus   0x0000bc       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                   UsIndx   0x0000bd       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                 I2cRegTx   0x0000be       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                 I2cRegRx   0x0000c5       data     extern /Users/guiott/Dropbox/Lino/QuadSonar/definition.h
+                     prom   0x0000cc       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                curr_byte   0x0000cf       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+               curr_entry   0x0000d1       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                 data_ptr   0x0000d3       data     static C:\MCC18\v3_39\src\traditional\startup\c018i.c
+                    PORTA   0x000f80       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTAbits   0x000f80       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTB   0x000f81       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTBbits   0x000f81       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTC   0x000f82       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTCbits   0x000f82       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                PORTEbits   0x000f84       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PORTE   0x000f84       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATAbits   0x000f89       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATA   0x000f89       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATBbits   0x000f8a       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATB   0x000f8a       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     LATC   0x000f8b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 LATCbits   0x000f8b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISA   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISAbits   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     DDRA   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRAbits   0x000f92       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     DDRB   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRBbits   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISBbits   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISB   0x000f93       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     DDRC   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 DDRCbits   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TRISCbits   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TRISC   0x000f94       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              OSCTUNEbits   0x000f9b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  OSCTUNE   0x000f9b       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIE1   0x000f9d       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIE1bits   0x000f9d       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIR1bits   0x000f9e       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIR1   0x000f9e       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 IPR1bits   0x000f9f       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     IPR1   0x000f9f       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIE2bits   0x000fa0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIE2   0x000fa0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 PIR2bits   0x000fa1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PIR2   0x000fa1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 IPR2bits   0x000fa2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     IPR2   0x000fa2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               EECON1bits   0x000fa6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EECON1   0x000fa6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EECON2   0x000fa7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EEDATA   0x000fa8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    EEADR   0x000fa9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   EEADRH   0x000faa       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    RCSTA   0x000fab       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                RCSTAbits   0x000fab       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TXSTA   0x000fac       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                TXSTAbits   0x000fac       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TXREG   0x000fad       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    RCREG   0x000fae       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    SPBRG   0x000faf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SPBRGH   0x000fb0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T3CON   0x000fb1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T3CONbits   0x000fb1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR3L   0x000fb2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR3H   0x000fb3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CMCON   0x000fb4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                CMCONbits   0x000fb4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CVRCON   0x000fb5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               CVRCONbits   0x000fb5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  ECCP1AS   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              ECCP1ASbits   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ECCPASbits   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ECCPAS   0x000fb6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 ECCP1DEL   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              PWM1CONbits   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PWM1CON   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+             ECCP1DELbits   0x000fb7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              BAUDCTLbits   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  BAUDCTL   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              BAUDCONbits   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  BAUDCON   0x000fb8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              CCP2CONbits   0x000fba       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  CCP2CON   0x000fba       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CCPR2   0x000fbb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR2L   0x000fbb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR2H   0x000fbc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              CCP1CONbits   0x000fbd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  CCP1CON   0x000fbd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR1L   0x000fbe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    CCPR1   0x000fbe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   CCPR1H   0x000fbf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON2   0x000fc0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON2bits   0x000fc0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON1   0x000fc1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON1bits   0x000fc1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADCON0   0x000fc2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               ADCON0bits   0x000fc2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    ADRES   0x000fc3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADRESL   0x000fc3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   ADRESH   0x000fc4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPCON2   0x000fc5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPCON2bits   0x000fc5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPCON1   0x000fc6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPCON1bits   0x000fc6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  SSPSTAT   0x000fc7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              SSPSTATbits   0x000fc7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SSPADD   0x000fc8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   SSPBUF   0x000fc9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T2CON   0x000fca       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T2CONbits   0x000fca       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      PR2   0x000fcb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TMR2   0x000fcc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T1CONbits   0x000fcd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T1CON   0x000fcd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR1L   0x000fce       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR1H   0x000fcf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     RCON   0x000fd0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 RCONbits   0x000fd0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   WDTCON   0x000fd1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               WDTCONbits   0x000fd1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               LVDCONbits   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  HLVDCON   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              HLVDCONbits   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   LVDCON   0x000fd2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               OSCCONbits   0x000fd3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   OSCCON   0x000fd3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    T0CON   0x000fd5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                T0CONbits   0x000fd5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR0L   0x000fd6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    TMR0H   0x000fd7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               STATUSbits   0x000fd8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   STATUS   0x000fd8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR2L   0x000fd9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR2   0x000fd9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR2H   0x000fda       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW2   0x000fdb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC2   0x000fdc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC2   0x000fdd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC2   0x000fde       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    INDF2   0x000fdf       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      BSR   0x000fe0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR1L   0x000fe1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR1   0x000fe1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR1H   0x000fe2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW1   0x000fe3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC1   0x000fe4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC1   0x000fe5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC1   0x000fe6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    INDF1   0x000fe7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     WREG   0x000fe8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                        W   0x000fe8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     FSR0   0x000fe9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR0L   0x000fe9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    FSR0H   0x000fea       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PLUSW0   0x000feb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  PREINC0   0x000fec       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTDEC0   0x000fed       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                 POSTINC0   0x000fee       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    INDF0   0x000fef       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  INTCON3   0x000ff0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              INTCON3bits   0x000ff0       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+              INTCON2bits   0x000ff1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  INTCON2   0x000ff1       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   INTCON   0x000ff2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               INTCONbits   0x000ff2       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     PROD   0x000ff3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PRODL   0x000ff3       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                    PRODH   0x000ff4       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   TABLAT   0x000ff5       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRL   0x000ff6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   TBLPTR   0x000ff6       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRH   0x000ff7       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                  TBLPTRU   0x000ff8       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                       PC   0x000ff9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      PCL   0x000ff9       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PCLATH   0x000ffa       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   PCLATU   0x000ffb       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                   STKPTR   0x000ffc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+               STKPTRbits   0x000ffc       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                      TOS   0x000ffd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSL   0x000ffd       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSH   0x000ffe       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+                     TOSU   0x000fff       data     extern C:\MCC18\v3_39\src\traditional\proc\p18F2620.asm
+
+
