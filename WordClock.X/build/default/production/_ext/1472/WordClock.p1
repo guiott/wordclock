@@ -37,6 +37,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _I2cSettings `(v ~T0 @X0 0 ef ]
 "18
 [v _SetTimer3 `(v ~T0 @X0 0 ef1`i ]
+"29
+[v _RtcInit `(v ~T0 @X0 0 ef ]
 "34 ../comm.h
 [v _CommSetting `(v ~T0 @X0 0 ef ]
 "30 ../prototypes.h
@@ -77,6 +79,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _T1CONbits `VS303 ~T0 @X0 0 e@4045 ]
 "37 ../comm.h
 [v _CommFsmSched `(v ~T0 @X0 0 ef1`*S364 ]
+"22 ../prototypes.h
+[v _I2cService `(v ~T0 @X0 0 ef ]
 "6223 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
 [v _TMR0H `Vuc ~T0 @X0 0 e@4055 ]
 "6217
@@ -89,6 +93,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "3927
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
+"49 /Applications/microchip/xc8/v1.31/include/string.h
+[v _strcspn `(ui ~T0 @X0 0 ef2`*Cuc`*Cuc ]
+"67 /Applications/microchip/xc8/v1.31/include/stdlib.h
+[v _atoi `(i ~T0 @X0 0 ef1`*Cuc ]
 [s S149 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S149 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF PSPIF ]
 [s S150 :5 `uc 1 :1 `uc 1 ]
@@ -97,20 +105,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S151 . . TX1IF ]
 [u S148 `S149 1 `S150 1 `S151 1 ]
 [n S148 . . . . ]
-"2846
+"2846 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
 [v _PIR1bits `VS148 ~T0 @X0 0 e@3998 ]
-"3769
-[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
-[s S145 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S145 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
-[s S146 :5 `uc 1 :1 `uc 1 ]
-[n S146 . . RC1IE ]
-[s S147 :4 `uc 1 :1 `uc 1 ]
-[n S147 . . TX1IE ]
-[u S144 `S145 1 `S146 1 `S147 1 ]
-[n S144 . . . . ]
-"2767
-[v _PIE1bits `VS144 ~T0 @X0 0 e@3997 ]
 [s S334 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S334 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
 [s S335 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
@@ -139,13 +135,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _RCSTAbits `VS168 ~T0 @X0 0 e@4011 ]
 "52 /Applications/microchip/xc8/v1.31/include/string.h
 [v _strstr `(*uc ~T0 @X0 0 ef2`*Cuc`*Cuc ]
+[s S145 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S145 . TMR1IE TMR2IE CCP1IE SSPIE TXIE RCIE ADIE PSPIE ]
+[s S146 :5 `uc 1 :1 `uc 1 ]
+[n S146 . . RC1IE ]
+[s S147 :4 `uc 1 :1 `uc 1 ]
+[n S147 . . TX1IE ]
+[u S144 `S145 1 `S146 1 `S147 1 ]
+[n S144 . . . . ]
+"2767 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
+[v _PIE1bits `VS144 ~T0 @X0 0 e@3997 ]
+"3769
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+[s S183 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S183 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
+[s S184 :2 `uc 1 :1 `uc 1 ]
+[n S184 . . BRGH1 ]
+[s S185 :7 `uc 1 :1 `uc 1 ]
+[n S185 . . CSRC1 ]
+[s S186 :3 `uc 1 :1 `uc 1 ]
+[n S186 . . SENDB1 ]
+[s S187 :4 `uc 1 :1 `uc 1 ]
+[n S187 . . SYNC1 ]
+[s S188 :1 `uc 1 :1 `uc 1 ]
+[n S188 . . TRMT1 ]
+[s S189 :6 `uc 1 :1 `uc 1 ]
+[n S189 . . TX91 ]
+[s S190 :1 `uc 1 ]
+[n S190 . TX9D1 ]
+[s S191 :5 `uc 1 :1 `uc 1 ]
+[n S191 . . TXEN1 ]
+[s S192 :6 `uc 1 :1 `uc 1 ]
+[n S192 . . TX8_9 ]
+[s S193 :1 `uc 1 ]
+[n S193 . TXD8 ]
+[u S182 `S183 1 `S184 1 `S185 1 `S186 1 `S187 1 `S188 1 `S189 1 `S190 1 `S191 1 `S192 1 `S193 1 ]
+[n S182 . . . . . . . . . . . . ]
+"3532
+[v _TXSTAbits `VS182 ~T0 @X0 0 e@4012 ]
 [s S160 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S160 . CCP2IF TMR3IF HLVDIF BCLIF EEIF . CMIF OSCFIF ]
 [s S161 :2 `uc 1 :1 `uc 1 ]
 [n S161 . . LVDIF ]
 [u S159 `S160 1 `S161 1 ]
 [n S159 . . . ]
-"3065 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
+"3065
 [v _PIR2bits `VS159 ~T0 @X0 0 e@4001 ]
 [s S72 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S72 . LATB0 LATB1 LATB2 LATB3 LATB4 LATB5 LATB6 LATB7 ]
@@ -3351,14 +3385,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _DutyCycle `ui ~T0 @X0 1 e ]
 [; ;definition.h: 33: unsigned int DutyCycle;
 "36
-[v _Sec `uc ~T0 @X0 1 e ]
-[; ;definition.h: 36: unsigned char Sec;
+[v _Sec `ui ~T0 @X0 1 e ]
+[; ;definition.h: 36: unsigned int Sec;
 "37
-[v _Min `uc ~T0 @X0 1 e ]
-[; ;definition.h: 37: unsigned char Min;
+[v _Min `ui ~T0 @X0 1 e ]
+[; ;definition.h: 37: unsigned int Min;
 "38
-[v _Hour `uc ~T0 @X0 1 e ]
-[; ;definition.h: 38: unsigned char Hour;
+[v _Hour `ui ~T0 @X0 1 e ]
+[; ;definition.h: 38: unsigned int Hour;
 "41
 [v _NtpSec `uc ~T0 @X0 1 e ]
 [; ;definition.h: 41: unsigned char NtpSec;
@@ -3529,653 +3563,672 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;comm.h: 59: struct FsmTable ReadTimeFsm[] =
 [; ;comm.h: 60: {
-[; ;comm.h: 63: {FsmTx, "$$$\n", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 63: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 [; ;comm.h: 64: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
 [; ;comm.h: 65: {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 66: {FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+[; ;comm.h: 66: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
 [; ;comm.h: 67: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 [; ;comm.h: 68: };
-"52 ../WordClock.c
+"51 ../WordClock.c
 [v _main `(v ~T0 @X0 1 ef ]
-"53
+"52
 {
-[; ;WordClock.c: 52: void main (void)
-[; ;WordClock.c: 53: {
+[; ;WordClock.c: 51: void main (void)
+[; ;WordClock.c: 52: {
 [e :U _main ]
 [f ]
-[; ;WordClock.c: 55: INTCONbits.GIEH=0;
-"55
+[; ;WordClock.c: 54: INTCONbits.GIEH=0;
+"54
 [e = . . _INTCONbits 2 7 -> -> 0 `i `uc ]
-[; ;WordClock.c: 56: INTCONbits.GIEL=0;
-"56
+[; ;WordClock.c: 55: INTCONbits.GIEL=0;
+"55
 [e = . . _INTCONbits 2 6 -> -> 0 `i `uc ]
-[; ;WordClock.c: 58: Settings();
-"58
+[; ;WordClock.c: 57: Settings();
+"57
 [e ( _Settings ..  ]
-[; ;WordClock.c: 59: I2cSettings();
-"59
+[; ;WordClock.c: 58: I2cSettings();
+"58
 [e ( _I2cSettings ..  ]
-[; ;WordClock.c: 62: INTCONbits.GIEH=1;
-"62
+[; ;WordClock.c: 61: INTCONbits.GIEH=1;
+"61
 [e = . . _INTCONbits 2 7 -> -> 1 `i `uc ]
-[; ;WordClock.c: 63: INTCONbits.GIEL=1;
-"63
+[; ;WordClock.c: 62: INTCONbits.GIEL=1;
+"62
 [e = . . _INTCONbits 2 6 -> -> 1 `i `uc ]
-[; ;WordClock.c: 65: SetTimer3(Timer3_ms);
-"65
+[; ;WordClock.c: 64: SetTimer3(Timer3_ms);
+"64
 [e ( _SetTimer3 (1 -> _Timer3_ms `i ]
-[; ;WordClock.c: 67: VARbits1.bit1=0;
-"67
+[; ;WordClock.c: 66: VARbits1.bit1=0;
+"66
 [e = . _VARbits1 1 -> -> 0 `i `uc ]
-[; ;WordClock.c: 70: CommSetting();
-"70
+[; ;WordClock.c: 68: RtcInit();
+"68
+[e ( _RtcInit ..  ]
+[; ;WordClock.c: 69: CommSetting();
+"69
 [e ( _CommSetting ..  ]
-[; ;WordClock.c: 71: InterruptSettings();
-"71
+[; ;WordClock.c: 70: InterruptSettings();
+"70
 [e ( _InterruptSettings ..  ]
-[; ;WordClock.c: 80: StartCommFsmSched(ReadTimeFsm);
-"80
-[e ( _StartCommFsmSched (1 &U _ReadTimeFsm ]
-[; ;WordClock.c: 89: while (1)
-"89
+[; ;WordClock.c: 72: while (1)
+"72
 [e :U 367 ]
+[; ;WordClock.c: 73: {
+"73
+{
+[; ;WordClock.c: 74: if(VARbits1.bit1)
+"74
+[e $ ! != -> . _VARbits1 1 `i -> -> -> 0 `i `uc `i 369  ]
+[; ;WordClock.c: 75: {
+"75
+{
+[; ;WordClock.c: 76: OneHzTick ++;
+"76
+[e ++ _OneHzTick -> -> 1 `i `ui ]
+[; ;WordClock.c: 77: if(!(OneHzTick % 900))
+"77
+[e $ ! ! != % _OneHzTick -> -> 900 `i `ui -> -> 0 `i `ui 370  ]
+[; ;WordClock.c: 78: {
+"78
+{
+[; ;WordClock.c: 79: StartCommFsmSched(ReadTimeFsm);
+"79
+[e ( _StartCommFsmSched (1 &U _ReadTimeFsm ]
+[; ;WordClock.c: 80: RtcWriteTime();
+"80
+[e ( _RtcWriteTime ..  ]
+"81
+}
+[; ;WordClock.c: 81: }
+[e $U 371  ]
+"82
+[e :U 370 ]
+[; ;WordClock.c: 82: else if(I2cBuffChk(0))
+[e $ ! != -> ( _I2cBuffChk (1 -> -> 0 `i `uc `i -> -> -> 0 `i `uc `i 372  ]
+[; ;WordClock.c: 83: {
+"83
+{
+[; ;WordClock.c: 84: I2cData(0,1,0,0,0,0,3);
+"84
+[e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 3 `i `uc ]
+"85
+}
+[e :U 372 ]
+"87
+[e :U 371 ]
+[; ;WordClock.c: 85: }
+[; ;WordClock.c: 87: VARbits1.bit1=0;
+[e = . _VARbits1 1 -> -> 0 `i `uc ]
+"88
+}
+[; ;WordClock.c: 88: }
+[e $U 373  ]
+"89
+[e :U 369 ]
+[; ;WordClock.c: 89: else if(I2c[0].Done == 1)
+[e $ ! == -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 374  ]
 [; ;WordClock.c: 90: {
 "90
 {
-[; ;WordClock.c: 93: asm(" clrwdt");
+[; ;WordClock.c: 91: RtcReadTime();
+"91
+[e ( _RtcReadTime ..  ]
+[; ;WordClock.c: 92: I2c[0].Done = 0;
+"92
+[e = . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 -> -> 0 `i `uc ]
 "93
-[; <"  clrwdt ;# ">
-[; ;WordClock.c: 95: if(VARbits1.bit1)
+}
+[e :U 374 ]
 "95
-[e $ ! != -> . _VARbits1 1 `i -> -> -> 0 `i `uc `i 369  ]
+[e :U 373 ]
+[; ;WordClock.c: 93: }
+[; ;WordClock.c: 95: if(VARbits1.bit2)
+[e $ ! != -> . _VARbits1 2 `i -> -> -> 0 `i `uc `i 375  ]
 [; ;WordClock.c: 96: {
 "96
 {
-[; ;WordClock.c: 97: OneHzTick ++;
-"97
-[e ++ _OneHzTick -> -> 1 `i `ui ]
-[; ;WordClock.c: 98: if(!(OneHzTick % 900))
-"98
-[e $ ! ! != % _OneHzTick -> -> 900 `i `ui -> -> 0 `i `ui 370  ]
-[; ;WordClock.c: 99: {
-"99
-{
-[; ;WordClock.c: 100: StartCommFsmSched(ReadTimeFsm);
-"100
-[e ( _StartCommFsmSched (1 &U _ReadTimeFsm ]
-[; ;WordClock.c: 101: RtcWriteTime();
-"101
-[e ( _RtcWriteTime ..  ]
-"102
-}
-[; ;WordClock.c: 102: }
-[e $U 371  ]
-"103
-[e :U 370 ]
-[; ;WordClock.c: 103: else if(I2cBuffChk(0))
-[e $ ! != -> ( _I2cBuffChk (1 -> -> 0 `i `uc `i -> -> -> 0 `i `uc `i 372  ]
-[; ;WordClock.c: 104: {
-"104
-{
-[; ;WordClock.c: 105: I2cData(0,1,0,0,0,0,3);
-"105
-[e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 3 `i `uc ]
-"106
-}
-[e :U 372 ]
-"108
-[e :U 371 ]
-[; ;WordClock.c: 106: }
-[; ;WordClock.c: 108: VARbits1.bit1=0;
-[e = . _VARbits1 1 -> -> 0 `i `uc ]
-"109
-}
-[; ;WordClock.c: 109: }
-[e $U 373  ]
-"110
-[e :U 369 ]
-[; ;WordClock.c: 110: else if(I2c[0].Done == 1)
-[e $ ! == -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 374  ]
-[; ;WordClock.c: 111: {
-"111
-{
-[; ;WordClock.c: 112: RtcReadTime();
+[; ;WordClock.c: 112: SetTimer1(DutyCycle);
 "112
-[e ( _RtcReadTime ..  ]
-[; ;WordClock.c: 113: I2c[0].Done = 0;
-"113
-[e = . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 -> -> 0 `i `uc ]
-"114
-}
-[e :U 374 ]
-"116
-[e :U 373 ]
-[; ;WordClock.c: 114: }
-[; ;WordClock.c: 116: if(VARbits1.bit2)
-[e $ ! != -> . _VARbits1 2 `i -> -> -> 0 `i `uc `i 375  ]
-[; ;WordClock.c: 117: {
-"117
-{
-[; ;WordClock.c: 133: SetTimer1(DutyCycle);
-"133
 [e ( _SetTimer1 (1 -> _DutyCycle `i ]
-[; ;WordClock.c: 134: T1CONbits.TMR1ON=1;
-"134
+[; ;WordClock.c: 113: T1CONbits.TMR1ON=1;
+"113
 [e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-[; ;WordClock.c: 136: VARbits1.bit2=0;
-"136
+[; ;WordClock.c: 115: VARbits1.bit2=0;
+"115
 [e = . _VARbits1 2 -> -> 0 `i `uc ]
-[; ;WordClock.c: 137: asm(" clrwdt");
-"137
+[; ;WordClock.c: 116: asm(" clrwdt");
+"116
 [; <"  clrwdt ;# ">
-"138
+"117
 }
 [e :U 375 ]
-[; ;WordClock.c: 138: }
-[; ;WordClock.c: 140: if(CommFsmFlag)
-"140
+[; ;WordClock.c: 117: }
+[; ;WordClock.c: 119: if(CommFsmFlag)
+"119
 [e $ ! != -> _CommFsmFlag `i -> -> -> 0 `i `uc `i 376  ]
-[; ;WordClock.c: 141: {
-"141
+[; ;WordClock.c: 120: {
+"120
 {
-[; ;WordClock.c: 142: CommFsmSched(FsmStructActive);
-"142
+[; ;WordClock.c: 121: CommFsmSched(FsmStructActive);
+"121
 [e ( _CommFsmSched (1 _FsmStructActive ]
-"143
+"122
 }
 [e :U 376 ]
-"147
+[; ;WordClock.c: 122: }
+[; ;WordClock.c: 124: I2cService();
+"124
+[e ( _I2cService ..  ]
+"126
 }
 [e :U 366 ]
-"89
+"72
 [e $U 367  ]
 [e :U 368 ]
-[; ;WordClock.c: 143: }
-[; ;WordClock.c: 147: }
-[; ;WordClock.c: 148: }
-"148
+[; ;WordClock.c: 126: }
+[; ;WordClock.c: 127: }
+"127
 [e :UE 365 ]
 }
-"155
+"134
 [v _SetTimer0 `(v ~T0 @X0 1 ef1`i ]
-"156
+"135
 {
-[; ;WordClock.c: 155: void SetTimer0(int Count)
-[; ;WordClock.c: 156: {
+[; ;WordClock.c: 134: void SetTimer0(int Count)
+[; ;WordClock.c: 135: {
 [e :U _SetTimer0 ]
-"155
+"134
 [v _Count `i ~T0 @X0 1 r1 ]
-"156
+"135
 [f ]
-[; ;WordClock.c: 162: TMR0H = Count >> 8;
-"162
+[; ;WordClock.c: 141: TMR0H = Count >> 8;
+"141
 [e = _TMR0H -> >> _Count -> 8 `i `uc ]
-[; ;WordClock.c: 163: TMR0L = Count;
-"163
+[; ;WordClock.c: 142: TMR0L = Count;
+"142
 [e = _TMR0L -> _Count `uc ]
-[; ;WordClock.c: 164: }
-"164
+[; ;WordClock.c: 143: }
+"143
 [e :UE 377 ]
 }
-"166
+"145
 [v _SetTimer1 `(v ~T0 @X0 1 ef1`i ]
-"167
+"146
 {
-[; ;WordClock.c: 166: void SetTimer1(int Count)
-[; ;WordClock.c: 167: {
+[; ;WordClock.c: 145: void SetTimer1(int Count)
+[; ;WordClock.c: 146: {
 [e :U _SetTimer1 ]
-"166
+"145
 [v _Count `i ~T0 @X0 1 r1 ]
-"167
+"146
 [f ]
-[; ;WordClock.c: 170: TMR1H = Count >> 8;
-"170
+[; ;WordClock.c: 149: TMR1H = Count >> 8;
+"149
 [e = _TMR1H -> >> _Count -> 8 `i `uc ]
-[; ;WordClock.c: 171: TMR1L = Count;
-"171
+[; ;WordClock.c: 150: TMR1L = Count;
+"150
 [e = _TMR1L -> _Count `uc ]
-[; ;WordClock.c: 172: }
-"172
+[; ;WordClock.c: 151: }
+"151
 [e :UE 378 ]
 }
-"174
+"153
 [v _SetTimer3 `(v ~T0 @X0 1 ef1`i ]
-"175
+"154
 {
-[; ;WordClock.c: 174: void SetTimer3(int Count)
-[; ;WordClock.c: 175: {
+[; ;WordClock.c: 153: void SetTimer3(int Count)
+[; ;WordClock.c: 154: {
 [e :U _SetTimer3 ]
-"174
+"153
 [v _Count `i ~T0 @X0 1 r1 ]
-"175
+"154
 [f ]
-[; ;WordClock.c: 181: TMR3H = Count >> 8;
-"181
+[; ;WordClock.c: 160: TMR3H = Count >> 8;
+"160
 [e = _TMR3H -> >> _Count -> 8 `i `uc ]
-[; ;WordClock.c: 182: TMR3L = Count;
-"182
+[; ;WordClock.c: 161: TMR3L = Count;
+"161
 [e = _TMR3L -> _Count `uc ]
-[; ;WordClock.c: 183: }
-"183
+[; ;WordClock.c: 162: }
+"162
 [e :UE 379 ]
 }
-"185
+"164
 [v _RtcReadTime `(v ~T0 @X0 1 ef ]
-"186
+"165
 {
-[; ;WordClock.c: 185: void RtcReadTime(void)
-[; ;WordClock.c: 186: {
+[; ;WordClock.c: 164: void RtcReadTime(void)
+[; ;WordClock.c: 165: {
 [e :U _RtcReadTime ]
 [f ]
-"189
+"168
 [v _Units `uc ~T0 @X0 1 a ]
-"190
+"169
 [v _Tens `uc ~T0 @X0 1 a ]
-[; ;WordClock.c: 189: unsigned char Units;
-[; ;WordClock.c: 190: unsigned char Tens;
-[; ;WordClock.c: 192: Units=I2c[0].RxBuff[0]&0b00001111;
-"192
+[; ;WordClock.c: 168: unsigned char Units;
+[; ;WordClock.c: 169: unsigned char Tens;
+[; ;WordClock.c: 171: Units=I2c[0].RxBuff[0]&0b00001111;
+"171
 [e = _Units -> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 15 `i `uc ]
-[; ;WordClock.c: 193: Tens=((I2c[0].RxBuff[0]&0b01110000)>>4)*10;
-"193
+[; ;WordClock.c: 172: Tens=((I2c[0].RxBuff[0]&0b01110000)>>4)*10;
+"172
 [e = _Tens -> * >> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
-[; ;WordClock.c: 194: Sec=Units + Tens;
-"194
-[e = _Sec -> + -> _Units `i -> _Tens `i `uc ]
-[; ;WordClock.c: 196: Units=I2c[0].RxBuff[1]&0b00001111;
-"196
+[; ;WordClock.c: 173: Sec=Units + Tens;
+"173
+[e = _Sec -> + -> _Units `i -> _Tens `i `ui ]
+[; ;WordClock.c: 175: Units=I2c[0].RxBuff[1]&0b00001111;
+"175
 [e = _Units -> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 15 `i `uc ]
-[; ;WordClock.c: 197: Tens=((I2c[0].RxBuff[1]&0b01110000)>>4)*10;
-"197
+[; ;WordClock.c: 176: Tens=((I2c[0].RxBuff[1]&0b01110000)>>4)*10;
+"176
 [e = _Tens -> * >> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 1 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 112 `i -> 4 `i -> 10 `i `uc ]
-[; ;WordClock.c: 198: Min=Units + Tens;
-"198
-[e = _Min -> + -> _Units `i -> _Tens `i `uc ]
-[; ;WordClock.c: 200: Units=I2c[0].RxBuff[2]&0b00001111;
-"200
+[; ;WordClock.c: 177: Min=Units + Tens;
+"177
+[e = _Min -> + -> _Units `i -> _Tens `i `ui ]
+[; ;WordClock.c: 179: Units=I2c[0].RxBuff[2]&0b00001111;
+"179
 [e = _Units -> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 15 `i `uc ]
-[; ;WordClock.c: 201: Tens=((I2c[0].RxBuff[2]&0b00010000)>>4)*10;
-"201
+[; ;WordClock.c: 180: Tens=((I2c[0].RxBuff[2]&0b00010000)>>4)*10;
+"180
 [e = _Tens -> * >> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 2 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 16 `i -> 4 `i -> 10 `i `uc ]
-[; ;WordClock.c: 202: Hour=Units + Tens;
-"202
-[e = _Hour -> + -> _Units `i -> _Tens `i `uc ]
-[; ;WordClock.c: 203: }
-"203
+[; ;WordClock.c: 181: Hour=Units + Tens;
+"181
+[e = _Hour -> + -> _Units `i -> _Tens `i `ui ]
+[; ;WordClock.c: 182: }
+"182
 [e :UE 380 ]
 }
-"205
+"184
 [v _RtcWriteTime `(v ~T0 @X0 1 ef ]
-"206
+"185
 {
-[; ;WordClock.c: 205: void RtcWriteTime(void)
-[; ;WordClock.c: 206: {
+[; ;WordClock.c: 184: void RtcWriteTime(void)
+[; ;WordClock.c: 185: {
 [e :U _RtcWriteTime ]
 [f ]
-"207
+"186
 [v _Units `uc ~T0 @X0 1 a ]
-"208
+"187
 [v _Tens `uc ~T0 @X0 1 a ]
-[; ;WordClock.c: 207: unsigned char Units;
-[; ;WordClock.c: 208: unsigned char Tens;
-[; ;WordClock.c: 210: Tens = NtpSec / 10;
-"210
+[; ;WordClock.c: 186: unsigned char Units;
+[; ;WordClock.c: 187: unsigned char Tens;
+[; ;WordClock.c: 189: Tens = NtpSec / 10;
+"189
 [e = _Tens -> / -> _NtpSec `i -> 10 `i `uc ]
-[; ;WordClock.c: 211: Units = NtpSec - (Tens * 10);
-"211
+[; ;WordClock.c: 190: Units = NtpSec - (Tens * 10);
+"190
 [e = _Units -> - -> _NtpSec `i * -> _Tens `i -> 10 `i `uc ]
-[; ;WordClock.c: 212: Sec = (Tens << 4) | Units;
-"212
-[e = _Sec -> | << -> _Tens `i -> 4 `i -> _Units `i `uc ]
-[; ;WordClock.c: 215: Tens = NtpMin / 10;
-"215
+[; ;WordClock.c: 191: Sec = (Tens << 4) | Units;
+"191
+[e = _Sec -> | << -> _Tens `i -> 4 `i -> _Units `i `ui ]
+[; ;WordClock.c: 194: Tens = NtpMin / 10;
+"194
 [e = _Tens -> / -> _NtpMin `i -> 10 `i `uc ]
-[; ;WordClock.c: 216: Units = NtpMin - (Tens * 10);
-"216
+[; ;WordClock.c: 195: Units = NtpMin - (Tens * 10);
+"195
 [e = _Units -> - -> _NtpMin `i * -> _Tens `i -> 10 `i `uc ]
-[; ;WordClock.c: 217: Min = (Tens << 4) | Units;
-"217
-[e = _Min -> | << -> _Tens `i -> 4 `i -> _Units `i `uc ]
-[; ;WordClock.c: 219: Tens = NtpHour / 10;
-"219
+[; ;WordClock.c: 196: Min = (Tens << 4) | Units;
+"196
+[e = _Min -> | << -> _Tens `i -> 4 `i -> _Units `i `ui ]
+[; ;WordClock.c: 198: Tens = NtpHour / 10;
+"198
 [e = _Tens -> / -> _NtpHour `i -> 10 `i `uc ]
-[; ;WordClock.c: 220: Units = NtpHour - (Tens * 10);
-"220
+[; ;WordClock.c: 199: Units = NtpHour - (Tens * 10);
+"199
 [e = _Units -> - -> _NtpHour `i * -> _Tens `i -> 10 `i `uc ]
-[; ;WordClock.c: 221: Hour = (Tens<<4) | Units;
-"221
-[e = _Hour -> | << -> _Tens `i -> 4 `i -> _Units `i `uc ]
-[; ;WordClock.c: 223: if(I2cBuffChk(0))
-"223
+[; ;WordClock.c: 200: Hour = (Tens<<4) | Units;
+"200
+[e = _Hour -> | << -> _Tens `i -> 4 `i -> _Units `i `ui ]
+[; ;WordClock.c: 202: if(I2cBuffChk(0))
+"202
 [e $ ! != -> ( _I2cBuffChk (1 -> -> 0 `i `uc `i -> -> -> 0 `i `uc `i 382  ]
-[; ;WordClock.c: 224: {
-"224
+[; ;WordClock.c: 203: {
+"203
 {
-[; ;WordClock.c: 225: I2cData(0, 4, 0, Sec, Min, Hour, 0);
-"225
-[e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 4 `i `uc -> -> 0 `i `uc _Sec _Min _Hour -> -> 0 `i `uc ]
-"226
+[; ;WordClock.c: 204: I2cData(0, 4, 0, Sec, Min, Hour, 0);
+"204
+[e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 4 `i `uc -> -> 0 `i `uc -> _Sec `uc -> _Min `uc -> _Hour `uc -> -> 0 `i `uc ]
+"205
 }
 [e :U 382 ]
-[; ;WordClock.c: 226: }
-[; ;WordClock.c: 227: }
-"227
+[; ;WordClock.c: 205: }
+[; ;WordClock.c: 206: }
+"206
 [e :UE 381 ]
 }
-"229
+"208
 [v _TimeDecode `(uc ~T0 @X0 1 ef ]
-"230
+"209
 {
-[; ;WordClock.c: 229: char TimeDecode(void)
-[; ;WordClock.c: 230: {
+[; ;WordClock.c: 208: char TimeDecode(void)
+[; ;WordClock.c: 209: {
 [e :U _TimeDecode ]
 [f ]
-[; ;WordClock.c: 231: return '0';
-"231
+"212
+[v _TimePoint `i ~T0 @X0 1 a ]
+[; ;WordClock.c: 212: int TimePoint;
+[; ;WordClock.c: 214: TimePoint = strcspn(RXbuff, ":" );
+"214
+[e = _TimePoint -> ( _strcspn (2 , -> &U _RXbuff `*Cuc :s 6C `i ]
+[; ;WordClock.c: 216: Hour = atoi(RXbuff+TimePoint-2);
+"216
+[e = _Hour -> ( _atoi (1 -> - + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x * -> -> 2 `i `x -> -> # *U + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x `i `x `*Cuc `ui ]
+[; ;WordClock.c: 217: Min = atoi(RXbuff+TimePoint+1);
+"217
+[e = _Min -> ( _atoi (1 -> + + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x * -> -> 1 `i `x -> -> # *U + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x `i `x `*Cuc `ui ]
+[; ;WordClock.c: 218: Sec = atoi(RXbuff+TimePoint+4);
+"218
+[e = _Sec -> ( _atoi (1 -> + + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x * -> -> 4 `i `x -> -> # *U + &U _RXbuff * -> _TimePoint `x -> -> # *U &U _RXbuff `i `x `i `x `*Cuc `ui ]
+[; ;WordClock.c: 219: return '0';
+"219
 [e ) -> -> 48 `ui `uc ]
 [e $UE 383  ]
-[; ;WordClock.c: 232: }
-"232
+[; ;WordClock.c: 220: }
+"220
 [e :UE 383 ]
 }
-[v F3695 `(v ~T0 @X0 1 tf ]
-"236
-[v _low_isr `ILF3695 ~T0 @X0 1 e ]
-"237
+[v F3696 `(v ~T0 @X0 1 tf ]
+"224
+[v _low_isr `ILF3696 ~T0 @X0 1 e ]
+"225
 {
-[; ;WordClock.c: 236: void interrupt low_priority low_isr (void)
-[; ;WordClock.c: 237: {
+[; ;WordClock.c: 224: void interrupt low_priority low_isr (void)
+[; ;WordClock.c: 225: {
 [e :U _low_isr ]
 [f ]
-[; ;WordClock.c: 238: if (PIR1bits.TXIF)
+[; ;WordClock.c: 226: if (PIR1bits.RCIF)
+"226
+[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 385  ]
+[; ;WordClock.c: 227: {
+"227
+{
+[; ;WordClock.c: 228: if (RxBuffIndx >= 64)
+"228
+[e $ ! >= -> _RxBuffIndx `i -> 64 `i 386  ]
+[; ;WordClock.c: 229: {
+"229
+{
+[; ;WordClock.c: 230: RXerr = 3;
+"230
+[e = _RXerr -> -> 3 `i `ui ]
+[; ;WordClock.c: 231: RxFlag = 1;
+"231
+[e = _RxFlag -> -> 1 `i `uc ]
+[; ;WordClock.c: 232: INTCONbits.TMR0IE=0;
+"232
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[; ;WordClock.c: 233: T0CONbits.TMR0ON=0;
+"233
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+"234
+}
+[; ;WordClock.c: 234: }
+[e $U 387  ]
+"235
+[e :U 386 ]
+[; ;WordClock.c: 235: else
+[; ;WordClock.c: 236: {
+"236
+{
+[; ;WordClock.c: 237: RXbuff[RxBuffIndx] = ReadUSART();
+"237
+[e = *U + &U _RXbuff * -> _RxBuffIndx `ux -> -> # *U &U _RXbuff `ui `ux ( _ReadUSART ..  ]
+[; ;WordClock.c: 238: if(RCSTAbits.OERR || RCSTAbits.FERR)
 "238
-[e $ ! != -> . . _PIR1bits 0 4 `i -> -> -> 0 `i `Vuc `i 385  ]
+[e $ ! || != -> . . _RCSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i != -> . . _RCSTAbits 0 2 `i -> -> -> 0 `i `Vuc `i 388  ]
 [; ;WordClock.c: 239: {
 "239
 {
-[; ;WordClock.c: 240: TXREG = TxBuff[TxBuffIndx];
+[; ;WordClock.c: 240: RXerr = 1;
 "240
-[e = _TXREG *U + &U _TxBuff * -> _TxBuffIndx `ux -> -> # *U &U _TxBuff `ui `ux ]
-[; ;WordClock.c: 241: TxBuffIndx++;
+[e = _RXerr -> -> 1 `i `ui ]
+[; ;WordClock.c: 241: RxFlag = 1;
 "241
-[e ++ _TxBuffIndx -> -> 1 `i `uc ]
-[; ;WordClock.c: 242: if(TxBuffIndx>=TxBuffLen)
+[e = _RxFlag -> -> 1 `i `uc ]
+[; ;WordClock.c: 242: INTCONbits.TMR0IE=0;
 "242
-[e $ ! >= -> _TxBuffIndx `i -> _TxBuffLen `i 386  ]
-[; ;WordClock.c: 243: {
+[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
+[; ;WordClock.c: 243: T0CONbits.TMR0ON=0;
 "243
-{
-[; ;WordClock.c: 244: PIE1bits.TXIE=0;
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
 "244
-[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;WordClock.c: 245: TxFsmFlag=1;
-"245
-[e = _TxFsmFlag -> -> 1 `i `uc ]
-[; ;WordClock.c: 246: CommFsmFlag=1;
-"246
-[e = _CommFsmFlag -> -> 1 `i `uc ]
-"247
 }
-[e :U 386 ]
+[; ;WordClock.c: 244: }
+[e $U 389  ]
+"245
+[e :U 388 ]
+[; ;WordClock.c: 245: else
+[; ;WordClock.c: 246: {
+"246
+{
+[; ;WordClock.c: 247: if(strstr(RXbuff, FsmStructActive[FsmIndx].Str))
+"247
+[e $ ! != ( _strstr (2 , -> &U _RXbuff `*Cuc . *U + _FsmStructActive * -> _FsmIndx `ux -> -> # *U _FsmStructActive `ui `ux 1 -> -> 0 `i `*uc 390  ]
+[; ;WordClock.c: 248: {
 "248
+{
+[; ;WordClock.c: 249: PIE1bits.RCIE=0;
+"249
+[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
+[; ;WordClock.c: 250: RxFsmFlag=1;
+"250
+[e = _RxFsmFlag -> -> 1 `i `uc ]
+[; ;WordClock.c: 251: CommFsmFlag=1;
+"251
+[e = _CommFsmFlag -> -> 1 `i `uc ]
+"252
+}
+[; ;WordClock.c: 252: }
+[e $U 391  ]
+"253
+[e :U 390 ]
+[; ;WordClock.c: 253: else
+[; ;WordClock.c: 254: {
+"254
+{
+[; ;WordClock.c: 255: RxBuffIndx ++;
+"255
+[e ++ _RxBuffIndx -> -> 1 `i `uc ]
+[; ;WordClock.c: 256: SetTimer0(Timer0_ms);
+"256
+[e ( _SetTimer0 (1 -> _Timer0_ms `i ]
+[; ;WordClock.c: 257: INTCONbits.TMR0IF = 0;
+"257
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;WordClock.c: 258: INTCONbits.TMR0IE=1;
+"258
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;WordClock.c: 259: T0CONbits.TMR0ON=1;
+"259
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+"260
+}
+[e :U 391 ]
+"261
+}
+[e :U 389 ]
+"262
+}
+[e :U 387 ]
+"263
 }
 [e :U 385 ]
-[; ;WordClock.c: 247: }
-[; ;WordClock.c: 248: }
-[; ;WordClock.c: 250: if (PIR1bits.RCIF)
-"250
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 387  ]
-[; ;WordClock.c: 251: {
-"251
-{
-[; ;WordClock.c: 252: if (RxBuffIndx >= 64)
-"252
-[e $ ! >= -> _RxBuffIndx `i -> 64 `i 388  ]
-[; ;WordClock.c: 253: {
-"253
-{
-[; ;WordClock.c: 254: RXerr = 3;
-"254
-[e = _RXerr -> -> 3 `i `ui ]
-[; ;WordClock.c: 255: RxFlag = 1;
-"255
-[e = _RxFlag -> -> 1 `i `uc ]
-[; ;WordClock.c: 256: INTCONbits.TMR0IE=0;
-"256
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-[; ;WordClock.c: 257: T0CONbits.TMR0ON=0;
-"257
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"258
-}
-[; ;WordClock.c: 258: }
-[e $U 389  ]
-"259
-[e :U 388 ]
-[; ;WordClock.c: 259: else
-[; ;WordClock.c: 260: {
-"260
-{
-[; ;WordClock.c: 261: RXbuff[RxBuffIndx] = ReadUSART();
-"261
-[e = *U + &U _RXbuff * -> _RxBuffIndx `ux -> -> # *U &U _RXbuff `ui `ux ( _ReadUSART ..  ]
-[; ;WordClock.c: 262: if(RCSTAbits.OERR || RCSTAbits.FERR)
-"262
-[e $ ! || != -> . . _RCSTAbits 0 1 `i -> -> -> 0 `i `Vuc `i != -> . . _RCSTAbits 0 2 `i -> -> -> 0 `i `Vuc `i 390  ]
-[; ;WordClock.c: 263: {
-"263
-{
-[; ;WordClock.c: 264: RXerr = 1;
-"264
-[e = _RXerr -> -> 1 `i `ui ]
-[; ;WordClock.c: 265: RxFlag = 1;
+[; ;WordClock.c: 260: }
+[; ;WordClock.c: 261: }
+[; ;WordClock.c: 262: }
+[; ;WordClock.c: 263: }
+[; ;WordClock.c: 265: if (PIR1bits.TXIF)
 "265
-[e = _RxFlag -> -> 1 `i `uc ]
-[; ;WordClock.c: 266: INTCONbits.TMR0IE=0;
+[e $ ! != -> . . _PIR1bits 0 4 `i -> -> -> 0 `i `Vuc `i 392  ]
+[; ;WordClock.c: 266: {
 "266
-[e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-[; ;WordClock.c: 267: T0CONbits.TMR0ON=0;
+{
+[; ;WordClock.c: 267: TXREG = TxBuff[TxBuffIndx];
 "267
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+[e = _TXREG *U + &U _TxBuff * -> _TxBuffIndx `ux -> -> # *U &U _TxBuff `ui `ux ]
+[; ;WordClock.c: 268: TxBuffIndx++;
 "268
-}
-[; ;WordClock.c: 268: }
-[e $U 391  ]
+[e ++ _TxBuffIndx -> -> 1 `i `uc ]
+[; ;WordClock.c: 269: if(TxBuffIndx>=TxBuffLen)
 "269
-[e :U 390 ]
-[; ;WordClock.c: 269: else
+[e $ ! >= -> _TxBuffIndx `i -> _TxBuffLen `i 393  ]
 [; ;WordClock.c: 270: {
 "270
 {
-[; ;WordClock.c: 271: if(strstr(RXbuff, FsmStructActive[FsmIndx].Str))
+[; ;WordClock.c: 271: TXSTAbits.TXEN=0;
 "271
-[e $ ! != ( _strstr (2 , -> &U _RXbuff `*Cuc . *U + _FsmStructActive * -> _FsmIndx `ux -> -> # *U _FsmStructActive `ui `ux 1 -> -> 0 `i `*uc 392  ]
-[; ;WordClock.c: 272: {
+[e = . . _TXSTAbits 0 5 -> -> 0 `i `uc ]
+[; ;WordClock.c: 272: PIE1bits.TXIE=0;
 "272
-{
-[; ;WordClock.c: 273: PIE1bits.RCIE=0;
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
+[; ;WordClock.c: 273: TxFsmFlag=1;
 "273
-[e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-[; ;WordClock.c: 274: RxFsmFlag=1;
+[e = _TxFsmFlag -> -> 1 `i `uc ]
+[; ;WordClock.c: 274: CommFsmFlag=1;
 "274
-[e = _RxFsmFlag -> -> 1 `i `uc ]
-[; ;WordClock.c: 275: CommFsmFlag=1;
-"275
 [e = _CommFsmFlag -> -> 1 `i `uc ]
-"276
-}
-[; ;WordClock.c: 276: }
-[e $U 393  ]
-"277
-[e :U 392 ]
-[; ;WordClock.c: 277: else
-[; ;WordClock.c: 278: {
-"278
-{
-[; ;WordClock.c: 279: RxBuffIndx ++;
-"279
-[e ++ _RxBuffIndx -> -> 1 `i `uc ]
-[; ;WordClock.c: 280: SetTimer0(Timer0_ms);
-"280
-[e ( _SetTimer0 (1 -> _Timer0_ms `i ]
-[; ;WordClock.c: 281: INTCONbits.TMR0IF = 0;
-"281
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;WordClock.c: 282: INTCONbits.TMR0IE=1;
-"282
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;WordClock.c: 283: T0CONbits.TMR0ON=1;
-"283
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-"284
+"275
 }
 [e :U 393 ]
-"285
+"276
 }
-[e :U 391 ]
-"286
-}
-[e :U 389 ]
-"287
-}
-[e :U 387 ]
-[; ;WordClock.c: 284: }
-[; ;WordClock.c: 285: }
-[; ;WordClock.c: 286: }
-[; ;WordClock.c: 287: }
-[; ;WordClock.c: 289: if (INTCONbits.TMR0IF)
-"289
+[e :U 392 ]
+[; ;WordClock.c: 275: }
+[; ;WordClock.c: 276: }
+[; ;WordClock.c: 278: if (INTCONbits.TMR0IF)
+"278
 [e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 394  ]
-[; ;WordClock.c: 290: {
-"290
+[; ;WordClock.c: 279: {
+"279
 {
-[; ;WordClock.c: 291: INTCONbits.TMR0IE=0;
-"291
+[; ;WordClock.c: 280: INTCONbits.TMR0IE=0;
+"280
 [e = . . _INTCONbits 0 5 -> -> 0 `i `uc ]
-[; ;WordClock.c: 292: INTCONbits.TMR0IF=0;
-"292
+[; ;WordClock.c: 281: INTCONbits.TMR0IF=0;
+"281
 [e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;WordClock.c: 293: RXerr = 2;
-"293
+[; ;WordClock.c: 282: RXerr = 2;
+"282
 [e = _RXerr -> -> 2 `i `ui ]
-[; ;WordClock.c: 294: RxFlag = 1;
-"294
+[; ;WordClock.c: 283: RxFlag = 1;
+"283
 [e = _RxFlag -> -> 1 `i `uc ]
-"295
+"284
 }
 [e :U 394 ]
-[; ;WordClock.c: 295: }
-[; ;WordClock.c: 296: }
-"296
+[; ;WordClock.c: 284: }
+[; ;WordClock.c: 285: }
+"285
 [e :UE 384 ]
 }
-[v F3698 `(v ~T0 @X0 1 tf ]
-"300
-[v _high_isr `IF3698 ~T0 @X0 1 e ]
-"301
+[v F3699 `(v ~T0 @X0 1 tf ]
+"289
+[v _high_isr `IF3699 ~T0 @X0 1 e ]
+"290
 {
-[; ;WordClock.c: 300: void interrupt high_isr (void)
-[; ;WordClock.c: 301: {
+[; ;WordClock.c: 289: void interrupt high_isr (void)
+[; ;WordClock.c: 290: {
 [e :U _high_isr ]
 [f ]
-[; ;WordClock.c: 302: if (PIR2bits.TMR3IF)
-"302
+[; ;WordClock.c: 291: if (PIR2bits.TMR3IF)
+"291
 [e $ ! != -> . . _PIR2bits 0 1 `i -> -> -> 0 `i `Vuc `i 396  ]
-[; ;WordClock.c: 303: {
-"303
+[; ;WordClock.c: 292: {
+"292
 {
-[; ;WordClock.c: 304: VARbits1.bit2 = 1;
-"304
+[; ;WordClock.c: 293: VARbits1.bit2 = 1;
+"293
 [e = . _VARbits1 2 -> -> 1 `i `uc ]
-[; ;WordClock.c: 305: SetTimer3(Timer3_ms);
-"305
+[; ;WordClock.c: 294: SetTimer3(Timer3_ms);
+"294
 [e ( _SetTimer3 (1 -> _Timer3_ms `i ]
-[; ;WordClock.c: 306: PIR2bits.TMR3IF = 0;
-"306
+[; ;WordClock.c: 295: PIR2bits.TMR3IF = 0;
+"295
 [e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-"307
+"296
 }
 [e :U 396 ]
-[; ;WordClock.c: 307: }
-[; ;WordClock.c: 309: if (PIR1bits.TMR1IF)
-"309
+[; ;WordClock.c: 296: }
+[; ;WordClock.c: 298: if (PIR1bits.TMR1IF)
+"298
 [e $ ! != -> . . _PIR1bits 0 0 `i -> -> -> 0 `i `Vuc `i 397  ]
-[; ;WordClock.c: 310: {
-"310
+[; ;WordClock.c: 299: {
+"299
 {
-[; ;WordClock.c: 311: SetTimer3(Timer3_ms);
-"311
+[; ;WordClock.c: 300: SetTimer3(Timer3_ms);
+"300
 [e ( _SetTimer3 (1 -> _Timer3_ms `i ]
-[; ;WordClock.c: 318: T1CONbits.TMR1ON=0;
-"318
+[; ;WordClock.c: 307: T1CONbits.TMR1ON=0;
+"307
 [e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
-[; ;WordClock.c: 319: PIR1bits.TMR1IF = 0;
-"319
+[; ;WordClock.c: 308: PIR1bits.TMR1IF = 0;
+"308
 [e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-"320
+"309
 }
 [e :U 397 ]
-[; ;WordClock.c: 320: }
-[; ;WordClock.c: 322: if (INTCONbits.INT0IF)
-"322
+[; ;WordClock.c: 309: }
+[; ;WordClock.c: 311: if (INTCONbits.INT0IF)
+"311
 [e $ ! != -> . . _INTCONbits 0 1 `i -> -> -> 0 `i `Vuc `i 398  ]
-[; ;WordClock.c: 323: {
-"323
+[; ;WordClock.c: 312: {
+"312
 {
-[; ;WordClock.c: 324: LATBbits.LATB5 ^= 1;
-"324
+[; ;WordClock.c: 313: LATBbits.LATB5 ^= 1;
+"313
 [e =^ . . _LATBbits 0 5 -> -> 1 `i `uc ]
-[; ;WordClock.c: 325: VARbits1.bit1=1;
-"325
+[; ;WordClock.c: 314: VARbits1.bit1=1;
+"314
 [e = . _VARbits1 1 -> -> 1 `i `uc ]
-[; ;WordClock.c: 326: INTCONbits.INT0IF = 0;
-"326
+[; ;WordClock.c: 315: INTCONbits.INT0IF = 0;
+"315
 [e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"327
+"316
 }
 [e :U 398 ]
-[; ;WordClock.c: 327: }
-[; ;WordClock.c: 329: if (PIR1bits.SSPIF)
-"329
+[; ;WordClock.c: 316: }
+[; ;WordClock.c: 318: if (PIR1bits.SSPIF)
+"318
 [e $ ! != -> . . _PIR1bits 0 3 `i -> -> -> 0 `i `Vuc `i 399  ]
-[; ;WordClock.c: 330: {
-"330
+[; ;WordClock.c: 319: {
+"319
 {
-[; ;WordClock.c: 331: PIR1bits.SSPIF = 0;
-"331
+[; ;WordClock.c: 320: PIR1bits.SSPIF = 0;
+"320
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;WordClock.c: 332: I2cEventFlag = 1;
-"332
+[; ;WordClock.c: 321: I2cEventFlag = 1;
+"321
 [e = _I2cEventFlag -> -> 1 `i `uc ]
-"333
+"322
 }
 [e :U 399 ]
-[; ;WordClock.c: 333: }
-[; ;WordClock.c: 335: if (PIR2bits.BCLIF)
-"335
+[; ;WordClock.c: 322: }
+[; ;WordClock.c: 324: if (PIR2bits.BCLIF)
+"324
 [e $ ! != -> . . _PIR2bits 0 3 `i -> -> -> 0 `i `Vuc `i 400  ]
-[; ;WordClock.c: 336: {
-"336
+[; ;WordClock.c: 325: {
+"325
 {
-[; ;WordClock.c: 337: PIR2bits.BCLIF = 0;
-"337
+[; ;WordClock.c: 326: PIR2bits.BCLIF = 0;
+"326
 [e = . . _PIR2bits 0 3 -> -> 0 `i `uc ]
-[; ;WordClock.c: 338: I2cEventFlag = 1;
-"338
+[; ;WordClock.c: 327: I2cEventFlag = 1;
+"327
 [e = _I2cEventFlag -> -> 1 `i `uc ]
-[; ;WordClock.c: 339: I2cBusCollFlag = 1;
-"339
+[; ;WordClock.c: 328: I2cBusCollFlag = 1;
+"328
 [e = _I2cBusCollFlag -> -> 1 `i `uc ]
-"340
+"329
 }
 [e :U 400 ]
-[; ;WordClock.c: 340: }
-[; ;WordClock.c: 342: }
-"342
+[; ;WordClock.c: 329: }
+[; ;WordClock.c: 331: }
+"331
 [e :UE 395 ]
 }
 [a 2C 67 77 68 0 ]
-[a 4C 42 99 108 111 115 101 42 0 ]
+[a 6C 58 0 ]
+[a 4C 42 67 76 79 83 42 0 ]
+[a 1C 36 36 36 0 ]
 [a 3C 111 112 101 110 10 0 ]
-[a 1C 36 36 36 10 0 ]
 [a 5C 0 ]

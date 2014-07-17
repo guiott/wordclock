@@ -4171,9 +4171,9 @@ unsigned int Timer3_ms;
 unsigned int DutyCycle;
 
 
-unsigned char Sec;
-unsigned char Min;
-unsigned char Hour;
+unsigned int Sec;
+unsigned int Min;
+unsigned int Hour;
 
 
 unsigned char NtpSec;
@@ -4293,14 +4293,14 @@ struct FsmTable ReadTimeFsm[] =
 {
 
 # 63
-{FsmTx, "$$$\n", (FsmCallbackFunc)CommFsmIdle},
+{FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
 {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-{FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+{FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
 {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 };
 
-# 52 "../WordClock.c"
+# 51 "../WordClock.c"
 void main (void)
 {
 
@@ -4318,20 +4318,12 @@ SetTimer3(Timer3_ms);
 
 VARbits1.bit1=0;
 
-
+RtcInit();
 CommSetting();
 InterruptSettings();
 
-# 80
-StartCommFsmSched(ReadTimeFsm);
-
-# 89
 while (1)
 {
-
-
-asm(" clrwdt");
-
 if(VARbits1.bit1)
 {
 OneHzTick ++;
@@ -4356,7 +4348,7 @@ I2c[0].Done = 0;
 if(VARbits1.bit2)
 {
 
-# 133
+# 112
 SetTimer1(DutyCycle);
 T1CONbits.TMR1ON=1;
 
@@ -4369,16 +4361,16 @@ if(CommFsmFlag)
 CommFsmSched(FsmStructActive);
 }
 
-
+I2cService();
 
 }
 }
 
-# 155
+# 134
 void SetTimer0(int Count)
 {
 
-# 162
+# 141
 TMR0H = Count >> 8;
 TMR0L = Count;
 }
@@ -4394,7 +4386,7 @@ TMR1L = Count;
 void SetTimer3(int Count)
 {
 
-# 181
+# 160
 TMR3H = Count >> 8;
 TMR3L = Count;
 }
@@ -4402,7 +4394,7 @@ TMR3L = Count;
 void RtcReadTime(void)
 {
 
-# 189
+# 168
 unsigned char Units;
 unsigned char Tens;
 
@@ -4445,6 +4437,15 @@ I2cData(0, 4, 0, Sec, Min, Hour, 0);
 
 char TimeDecode(void)
 {
+
+
+int TimePoint;
+
+TimePoint = strcspn(RXbuff, ":" );
+
+Hour = atoi(RXbuff+TimePoint-2);
+Min = atoi(RXbuff+TimePoint+1);
+Sec = atoi(RXbuff+TimePoint+4);
 return '0';
 }
 
@@ -4452,18 +4453,6 @@ return '0';
 
 void interrupt low_priority low_isr (void)
 {
-if (PIR1bits.TXIF)
-{
-TXREG = TxBuff[TxBuffIndx];
-TxBuffIndx++;
-if(TxBuffIndx>=TxBuffLen)
-{
-PIE1bits.TXIE=0;
-TxFsmFlag=1;
-CommFsmFlag=1;
-}
-}
-
 if (PIR1bits.RCIF)
 {
 if (RxBuffIndx >= 64)
@@ -4503,6 +4492,19 @@ T0CONbits.TMR0ON=1;
 }
 }
 
+if (PIR1bits.TXIF)
+{
+TXREG = TxBuff[TxBuffIndx];
+TxBuffIndx++;
+if(TxBuffIndx>=TxBuffLen)
+{
+TXSTAbits.TXEN=0;
+PIE1bits.TXIE=0;
+TxFsmFlag=1;
+CommFsmFlag=1;
+}
+}
+
 if (INTCONbits.TMR0IF)
 {
 INTCONbits.TMR0IE=0;
@@ -4527,7 +4529,7 @@ if (PIR1bits.TMR1IF)
 {
 SetTimer3(Timer3_ms);
 
-# 318
+# 307
 T1CONbits.TMR1ON=0;
 PIR1bits.TMR1IF = 0;
 }

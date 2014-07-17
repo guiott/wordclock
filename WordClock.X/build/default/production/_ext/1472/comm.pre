@@ -4964,10 +4964,10 @@ struct FsmTable ReadTimeFsm[] =
 {
 
 # 63
-{FsmTx, "$$$\n", (FsmCallbackFunc)CommFsmIdle},
+{FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
 {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-{FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+{FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
 {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 };
 
@@ -5016,7 +5016,7 @@ RCSTAbits.SREN=0;
 TXSTAbits.TX9=0;
 RCSTAbits.RX9=0;
 TXSTAbits.TXEN=0;
-TXSTAbits.TXEN=1;
+TXSTAbits.TXEN=0;
 IPR1bits.TXIP=0;
 PIE1bits.TXIE=0;
 
@@ -5099,6 +5099,7 @@ CommFsmFlag = 0;
 TxBuffLen = strlen(TxStr);
 TxBuffIndx=0;
 memcpy(TxBuff, TxStr, TxBuffLen);
+TXSTAbits.TXEN=1;
 PIE1bits.TXIE=1;
 }
 

@@ -3894,10 +3894,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;comm.h: 59: struct FsmTable ReadTimeFsm[] =
 [; ;comm.h: 60: {
-[; ;comm.h: 63: {FsmTx, "$$$\n", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 63: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 [; ;comm.h: 64: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
 [; ;comm.h: 65: {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 66: {FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+[; ;comm.h: 66: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
 [; ;comm.h: 67: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 [; ;comm.h: 68: };
 [; ;common.h: 53: extern unsigned char I2cEventFlag;
@@ -3964,9 +3964,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;comm.c: 48: TXSTAbits.TXEN=0;
 "48
 [e = . . _TXSTAbits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 49: TXSTAbits.TXEN=1;
+[; ;comm.c: 49: TXSTAbits.TXEN=0;
 "49
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[e = . . _TXSTAbits 0 5 -> -> 0 `i `uc ]
 [; ;comm.c: 50: IPR1bits.TXIP=0;
 "50
 [e = . . _IPR1bits 0 4 -> -> 0 `i `uc ]
@@ -4197,39 +4197,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;comm.c: 141: memcpy(TxBuff, TxStr, TxBuffLen);
 "141
 [e ( _memcpy (3 , , -> &U _TxBuff `*v -> _TxStr `*Cv -> _TxBuffLen `ui ]
-[; ;comm.c: 142: PIE1bits.TXIE=1;
+[; ;comm.c: 142: TXSTAbits.TXEN=1;
 "142
-[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
-[; ;comm.c: 143: }
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;comm.c: 143: PIE1bits.TXIE=1;
 "143
+[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
+[; ;comm.c: 144: }
+"144
 [e :UE 408 ]
 }
-"145
+"146
 [v _StartRx `(v ~T0 @X0 1 ef1`*Cuc ]
-"146
-{
-[; ;comm.c: 145: void StartRx(const unsigned char * TxStr )
-[; ;comm.c: 146: {
-[e :U _StartRx ]
-"145
-[v _TxStr `*Cuc ~T0 @X0 1 r1 ]
-"146
-[f ]
-[; ;comm.c: 147: CommFsmFlag = 0;
 "147
-[e = _CommFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 148: RxBuffIndx=0;
+{
+[; ;comm.c: 146: void StartRx(const unsigned char * TxStr )
+[; ;comm.c: 147: {
+[e :U _StartRx ]
+"146
+[v _TxStr `*Cuc ~T0 @X0 1 r1 ]
+"147
+[f ]
+[; ;comm.c: 148: CommFsmFlag = 0;
 "148
-[e = _RxBuffIndx -> -> 0 `i `uc ]
-[; ;comm.c: 149: PIE1bits.RCIE=1;
+[e = _CommFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 149: RxBuffIndx=0;
 "149
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;comm.c: 150: }
+[e = _RxBuffIndx -> -> 0 `i `uc ]
+[; ;comm.c: 150: PIE1bits.RCIE=1;
 "150
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;comm.c: 151: }
+"151
 [e :UE 409 ]
 }
 [a 2C 67 77 68 0 ]
-[a 4C 42 99 108 111 115 101 42 0 ]
+[a 4C 42 67 76 79 83 42 0 ]
+[a 1C 36 36 36 0 ]
 [a 3C 111 112 101 110 10 0 ]
-[a 1C 36 36 36 10 0 ]
 [a 5C 0 ]

@@ -33,9 +33,9 @@ unsigned int Timer3_ms;
 unsigned int DutyCycle;
 
 //RTC time
-unsigned char Sec;
-unsigned char Min;
-unsigned char Hour;
+unsigned int Sec;
+unsigned int Min;
+unsigned int Hour;
 
 //Time server time
 unsigned char NtpSec;

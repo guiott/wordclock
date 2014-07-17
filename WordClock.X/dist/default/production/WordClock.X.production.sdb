@@ -37,7 +37,7 @@ FsmEnd 2
 [v _CommFsmSched CommFsmSched `(v  1 e 0 0 ]
 "136
 [v _StartTx StartTx `(v  1 e 0 0 ]
-"145
+"146
 [v _StartRx StartRx `(v  1 e 0 0 ]
 "84 /Users/guiott/Copy/WordClock/___Development/WordClock/myi2c.c
 [v _I2cSettings I2cSettings `(v  1 e 0 0 ]
@@ -57,24 +57,24 @@ FsmEnd 2
 [v _InterruptSettings InterruptSettings `(v  1 e 0 0 ]
 "128
 [v _RtcInit RtcInit `(v  1 e 0 0 ]
-"52 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"51 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _main main `(v  1 e 0 0 ]
-"155
+"134
 [v _SetTimer0 SetTimer0 `(v  1 e 0 0 ]
-"166
+"145
 [v _SetTimer1 SetTimer1 `(v  1 e 0 0 ]
-"174
+"153
 [v _SetTimer3 SetTimer3 `(v  1 e 0 0 ]
 [v i2_SetTimer3 SetTimer3 `(v  1 e 0 0 ]
-"185
+"164
 [v _RtcReadTime RtcReadTime `(v  1 e 0 0 ]
-"205
+"184
 [v _RtcWriteTime RtcWriteTime `(v  1 e 0 0 ]
-"229
+"208
 [v _TimeDecode TimeDecode `(uc  1 e 1 0 ]
-"236
+"224
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
-"300
+"289
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/abdiv.c
 [v ___abdiv __abdiv `(c  1 e 1 0 ]
@@ -96,6 +96,8 @@ FsmEnd 2
 [v ___atdiv __atdiv `(m  1 e 3 0 ]
 "8 /Applications/microchip/xc8/v1.31/sources/common/atmod.c
 [v ___atmod __atmod `(m  1 e 3 0 ]
+"5 /Applications/microchip/xc8/v1.31/sources/common/atoi.c
+[v _atoi atoi `(i  1 e 2 0 ]
 "37 /Applications/microchip/xc8/v1.31/sources/common/attofl.c
 [v ___attofl __attofl `(d  1 e 3 0 ]
 "37 /Applications/microchip/xc8/v1.31/sources/common/attoft.c
@@ -142,6 +144,8 @@ FsmEnd 2
 [v ___ftsub __ftsub `(f  1 e 3 0 ]
 "44 /Applications/microchip/xc8/v1.31/sources/common/fttol.c
 [v ___fttol __fttol `(l  1 e 4 0 ]
+"8 /Applications/microchip/xc8/v1.31/sources/common/isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/lbdiv.c
 [v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/lbmod.c
@@ -179,14 +183,17 @@ FsmEnd 2
 "11 /Applications/microchip/xc8/v1.31/sources/common/memcpy.c
 [v _memcpy memcpy `(*.39v  1 e 2 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/strchr.c
-[v _strchr strchr `(*.39uc  1 e 2 0 ]
+[v _strchr strchr `(*.34uc  1 e 2 0 ]
+[v i1_strchr strchr `(*.34uc  1 e 2 0 ]
+"4 /Applications/microchip/xc8/v1.31/sources/common/strcspn.c
+[v _strcspn strcspn `(ui  1 e 2 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/strlen.c
 [v _strlen strlen `(ui  1 e 2 0 ]
 [v i1_strlen strlen `(ui  1 e 2 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/strncmp.c
 [v _strncmp strncmp `(i  1 e 2 0 ]
 "4 /Applications/microchip/xc8/v1.31/sources/common/strstr.c
-[v _strstr strstr `(*.39uc  1 e 2 0 ]
+[v _strstr strstr `(*.34uc  1 e 2 0 ]
 "9 /Applications/microchip/xc8/v1.31/sources/common/tmul.c
 [v ___tmul __tmul `(um  1 e 3 0 ]
 "3 /Applications/microchip/xc8/v1.31/sources/common/wmul.c
@@ -262,11 +269,11 @@ FsmEnd 2
 "33
 [v _DutyCycle DutyCycle `ui  1 e 2 0 ]
 "36
-[v _Sec Sec `uc  1 e 1 0 ]
+[v _Sec Sec `ui  1 e 2 0 ]
 "37
-[v _Min Min `uc  1 e 1 0 ]
+[v _Min Min `ui  1 e 2 0 ]
 "38
-[v _Hour Hour `uc  1 e 1 0 ]
+[v _Hour Hour `ui  1 e 2 0 ]
 "41
 [v _NtpSec NtpSec `uc  1 e 1 0 ]
 "42
@@ -299,7 +306,7 @@ FsmEnd 2
 [v _Ptr Ptr `S571  1 e 1 0 ]
 "42
 [v _I2cStat I2cStat `uc  1 e 1 0 ]
-[s S973 . 1 `uc 1 LATB0 1 0 :1:0 
+[s S1073 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -309,38 +316,38 @@ FsmEnd 2
 `uc 1 LATB7 1 0 :1:7 
 ]
 "1181 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
-[s S982 . 1 `uc 1 LB0 1 0 :1:0 
+[s S1082 . 1 `uc 1 LB0 1 0 :1:0 
 ]
-[s S984 . 1 `uc 1 . 1 0 :1:0 
+[s S1084 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 LB1 1 0 :1:1 
 ]
-[s S987 . 1 `uc 1 . 1 0 :2:0 
+[s S1087 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LB2 1 0 :1:2 
 ]
-[s S990 . 1 `uc 1 . 1 0 :3:0 
+[s S1090 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 LB3 1 0 :1:3 
 ]
-[s S993 . 1 `uc 1 . 1 0 :4:0 
+[s S1093 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 LB4 1 0 :1:4 
 ]
-[s S996 . 1 `uc 1 . 1 0 :5:0 
+[s S1096 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 LB5 1 0 :1:5 
 ]
-[s S999 . 1 `uc 1 . 1 0 :6:0 
+[s S1099 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 LB6 1 0 :1:6 
 ]
-[s S1002 . 1 `uc 1 . 1 0 :7:0 
+[s S1102 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 LB7 1 0 :1:7 
 ]
-[u S1005 . 1 `S973 1 . 1 0 `S982 1 . 1 0 `S984 1 . 1 0 `S987 1 . 1 0 `S990 1 . 1 0 `S993 1 . 1 0 `S996 1 . 1 0 `S999 1 . 1 0 `S1002 1 . 1 0 ]
-[v _LATBbits LATBbits `VES1005  1 e 1 @3978 ]
+[u S1105 . 1 `S1073 1 . 1 0 `S1082 1 . 1 0 `S1084 1 . 1 0 `S1087 1 . 1 0 `S1090 1 . 1 0 `S1093 1 . 1 0 `S1096 1 . 1 0 `S1099 1 . 1 0 `S1102 1 . 1 0 ]
+[v _LATBbits LATBbits `VES1105  1 e 1 @3978 ]
 "1631
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "1852
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "2073
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S1687 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S1752 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -350,7 +357,7 @@ FsmEnd 2
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "2105
-[s S1696 . 1 `uc 1 RC0 1 0 :1:0 
+[s S1761 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -359,8 +366,8 @@ FsmEnd 2
 `uc 1 RC6 1 0 :1:6 
 `uc 1 RC7 1 0 :1:7 
 ]
-[u S1705 . 1 `S1687 1 . 1 0 `S1696 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES1705  1 e 1 @3988 ]
+[u S1770 . 1 `S1752 1 . 1 0 `S1761 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES1770  1 e 1 @3988 ]
 "2515
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
 [s S259 . 1 `uc 1 TMR1IF 1 0 :1:0 
@@ -404,7 +411,7 @@ FsmEnd 2
 [v _PIR2bits PIR2bits `VES367  1 e 1 @4001 ]
 "3130
 [v _IPR2bits IPR2bits `VES367  1 e 1 @4002 ]
-[s S897 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S889 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -414,23 +421,23 @@ FsmEnd 2
 `uc 1 SPEN 1 0 :1:7 
 ]
 "3304
-[s S906 . 1 `uc 1 . 1 0 :3:0 
+[s S898 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 ADEN 1 0 :1:3 
 ]
-[s S909 . 1 `uc 1 . 1 0 :5:0 
+[s S901 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SRENA 1 0 :1:5 
 ]
-[s S912 . 1 `uc 1 . 1 0 :6:0 
+[s S904 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[s S915 . 1 `uc 1 . 1 0 :6:0 
+[s S907 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S918 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S910 . 1 `uc 1 RCD8 1 0 :1:0 
 ]
-[u S920 . 1 `S897 1 . 1 0 `S906 1 . 1 0 `S909 1 . 1 0 `S912 1 . 1 0 `S915 1 . 1 0 `S918 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES920  1 e 1 @4011 ]
-[s S1360 . 1 `uc 1 TX9D 1 0 :1:0 
+[u S912 . 1 `S889 1 . 1 0 `S898 1 . 1 0 `S901 1 . 1 0 `S904 1 . 1 0 `S907 1 . 1 0 `S910 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES912  1 e 1 @4011 ]
+[s S970 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -440,36 +447,36 @@ FsmEnd 2
 `uc 1 CSRC 1 0 :1:7 
 ]
 "3532
-[s S1369 . 1 `uc 1 . 1 0 :2:0 
+[s S979 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 BRGH1 1 0 :1:2 
 ]
-[s S1372 . 1 `uc 1 . 1 0 :7:0 
+[s S982 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 CSRC1 1 0 :1:7 
 ]
-[s S1375 . 1 `uc 1 . 1 0 :3:0 
+[s S985 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SENDB1 1 0 :1:3 
 ]
-[s S1378 . 1 `uc 1 . 1 0 :4:0 
+[s S988 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 SYNC1 1 0 :1:4 
 ]
-[s S1381 . 1 `uc 1 . 1 0 :1:0 
+[s S991 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 TRMT1 1 0 :1:1 
 ]
-[s S1384 . 1 `uc 1 . 1 0 :6:0 
+[s S994 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX91 1 0 :1:6 
 ]
-[s S1387 . 1 `uc 1 TX9D1 1 0 :1:0 
+[s S997 . 1 `uc 1 TX9D1 1 0 :1:0 
 ]
-[s S1389 . 1 `uc 1 . 1 0 :5:0 
+[s S999 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 TXEN1 1 0 :1:5 
 ]
-[s S1392 . 1 `uc 1 . 1 0 :6:0 
+[s S1002 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[s S1395 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S1005 . 1 `uc 1 TXD8 1 0 :1:0 
 ]
-[u S1397 . 1 `S1360 1 . 1 0 `S1369 1 . 1 0 `S1372 1 . 1 0 `S1375 1 . 1 0 `S1378 1 . 1 0 `S1381 1 . 1 0 `S1384 1 . 1 0 `S1387 1 . 1 0 `S1389 1 . 1 0 `S1392 1 . 1 0 `S1395 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES1397  1 e 1 @4012 ]
+[u S1007 . 1 `S970 1 . 1 0 `S979 1 . 1 0 `S982 1 . 1 0 `S985 1 . 1 0 `S988 1 . 1 0 `S991 1 . 1 0 `S994 1 . 1 0 `S997 1 . 1 0 `S999 1 . 1 0 `S1002 1 . 1 0 `S1005 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES1007  1 e 1 @4012 ]
 "3769
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
 "3780
@@ -511,7 +518,7 @@ FsmEnd 2
 [v _TMR3L TMR3L `VEuc  1 e 1 @4018 ]
 "3933
 [v _TMR3H TMR3H `VEuc  1 e 1 @4019 ]
-[s S1447 . 1 `uc 1 ABDEN 1 0 :1:0 
+[s S1520 . 1 `uc 1 ABDEN 1 0 :1:0 
 `uc 1 WUE 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 BRG16 1 0 :1:3 
@@ -521,16 +528,16 @@ FsmEnd 2
 `uc 1 ABDOVF 1 0 :1:7 
 ]
 "4294
-[s S1456 . 1 `uc 1 . 1 0 :4:0 
+[s S1529 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 SCKP 1 0 :1:4 
 `uc 1 RXCKP 1 0 :1:5 
 `uc 1 RCMT 1 0 :1:6 
 ]
-[s S1461 . 1 `uc 1 . 1 0 :1:0 
+[s S1534 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 W4E 1 0 :1:1 
 ]
-[u S1464 . 1 `S1447 1 . 1 0 `S1456 1 . 1 0 `S1461 1 . 1 0 ]
-[v _BAUDCONbits BAUDCONbits `VES1464  1 e 1 @4024 ]
+[u S1537 . 1 `S1520 1 . 1 0 `S1529 1 . 1 0 `S1534 1 . 1 0 ]
+[v _BAUDCONbits BAUDCONbits `VES1537  1 e 1 @4024 ]
 [s S25 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 VCFG 1 0 :2:4 
 ]
@@ -555,7 +562,7 @@ FsmEnd 2
 [v _ADCON1bits ADCON1bits `VES44  1 e 1 @4033 ]
 "4943
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
-[s S1262 . 1 `uc 1 SEN 1 0 :1:0 
+[s S1372 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -565,8 +572,8 @@ FsmEnd 2
 `uc 1 GCEN 1 0 :1:7 
 ]
 "4960
-[u S1271 . 1 `S1262 1 . 1 0 ]
-[v _SSPCON2bits SSPCON2bits `VES1271  1 e 1 @4037 ]
+[u S1381 . 1 `S1372 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES1381  1 e 1 @4037 ]
 "5004
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
 "5073
@@ -720,19 +727,19 @@ FsmEnd 2
 [v _INTCONbits INTCONbits `VES159  1 e 1 @4082 ]
 "7886
 [v _START START `VEb  1 e 0 @32315 ]
-[s S1628 . 1 `uc 1 RX_NINE 1 0 :1:0 
+[s S1693 . 1 `uc 1 RX_NINE 1 0 :1:0 
 `uc 1 TX_NINE 1 0 :1:1 
 `uc 1 FRAME_ERROR 1 0 :1:2 
 `uc 1 OVERRUN_ERROR 1 0 :1:3 
 `uc 1 fill 1 0 :4:4 
 ]
 "5 /Applications/microchip/xc8/v1.31/sources/pic18/plib/USART/udefs.c
-[u S1634 USART 1 `uc 1 val 1 0 `S1628 1 . 1 0 ]
-[v _USART_Status USART_Status `S1634  1 e 1 0 ]
-"52 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+[u S1699 USART 1 `uc 1 val 1 0 `S1693 1 . 1 0 ]
+[v _USART_Status USART_Status `S1699  1 e 1 0 ]
+"51 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _main main `(v  1 e 0 0 ]
 {
-"148
+"127
 } 0
 "8 /Applications/microchip/xc8/v1.31/sources/common/lwmod.c
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
@@ -756,26 +763,26 @@ FsmEnd 2
 {
 "109
 } 0
-"174 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"153 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _SetTimer3 SetTimer3 `(v  1 e 0 0 ]
 {
 [v SetTimer3@Count Count `i  1 p 2 0 ]
-"183
+"162
 } 0
-"166
+"145
 [v _SetTimer1 SetTimer1 `(v  1 e 0 0 ]
 {
 [v SetTimer1@Count Count `i  1 p 2 0 ]
-"172
+"151
 } 0
-"205
+"184
 [v _RtcWriteTime RtcWriteTime `(v  1 e 0 0 ]
 {
-"208
+"187
 [v RtcWriteTime@Tens Tens `uc  1 a 1 13 ]
-"207
+"186
 [v RtcWriteTime@Units Units `uc  1 a 1 12 ]
-"227
+"206
 } 0
 "8 /Applications/microchip/xc8/v1.31/sources/common/awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
@@ -790,7 +797,47 @@ FsmEnd 2
 [v ___awdiv@divisor divisor `i  1 p 2 2 ]
 "42
 } 0
-"309 /Users/guiott/Copy/WordClock/___Development/WordClock/myi2c.c
+"304 /Users/guiott/Copy/WordClock/___Development/WordClock/myi2c.c
+[v _I2cBuffChk I2cBuffChk `(uc  1 e 1 0 ]
+{
+[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 wreg ]
+[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 wreg ]
+"306
+[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 2 ]
+"307
+} 0
+"164 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+[v _RtcReadTime RtcReadTime `(v  1 e 0 0 ]
+{
+"169
+[v RtcReadTime@Tens Tens `uc  1 a 1 1 ]
+"168
+[v RtcReadTime@Units Units `uc  1 a 1 0 ]
+"182
+} 0
+"128 /Users/guiott/Copy/WordClock/___Development/WordClock/settings.c
+[v _RtcInit RtcInit `(v  1 e 0 0 ]
+{
+"134
+[v RtcInit@Tmp Tmp `uc  1 a 1 14 ]
+"168
+} 0
+"259 /Users/guiott/Copy/WordClock/___Development/WordClock/myi2c.c
+[v _I2cService I2cService `(v  1 e 0 0 ]
+{
+"302
+} 0
+"118
+[v _I2cLowService I2cLowService `(v  1 e 0 0 ]
+{
+"237
+} 0
+"239
+[v _I2cHighService I2cHighService `(v  1 e 0 0 ]
+{
+"257
+} 0
+"309
 [v _I2cData I2cData `(v  1 e 0 0 ]
 {
 [v I2cData@DevPtr DevPtr `uc  1 a 1 wreg ]
@@ -807,24 +854,6 @@ FsmEnd 2
 [v I2cData@DevPtr DevPtr `uc  1 a 1 7 ]
 "320
 } 0
-"304
-[v _I2cBuffChk I2cBuffChk `(uc  1 e 1 0 ]
-{
-[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 wreg ]
-[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 wreg ]
-"306
-[v I2cBuffChk@I2cDevice I2cDevice `uc  1 a 1 2 ]
-"307
-} 0
-"185 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
-[v _RtcReadTime RtcReadTime `(v  1 e 0 0 ]
-{
-"190
-[v RtcReadTime@Tens Tens `uc  1 a 1 1 ]
-"189
-[v RtcReadTime@Units Units `uc  1 a 1 0 ]
-"203
-} 0
 "111 /Users/guiott/Copy/WordClock/___Development/WordClock/settings.c
 [v _InterruptSettings InterruptSettings `(v  1 e 0 0 ]
 {
@@ -834,16 +863,6 @@ FsmEnd 2
 [v _I2cSettings I2cSettings `(v  1 e 0 0 ]
 {
 "116
-} 0
-"3 /Applications/microchip/xc8/v1.31/sources/common/wmul.c
-[v ___wmul __wmul `(ui  1 e 2 0 ]
-{
-"5
-[v ___wmul@product product `ui  1 a 2 4 ]
-"3
-[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
-"41
 } 0
 "14 /Applications/microchip/xc8/v1.31/sources/pic18/plib/i2c/i2c_open.c
 [v _OpenI2C OpenI2C `(v  1 e 0 0 ]
@@ -864,10 +883,10 @@ FsmEnd 2
 [v _CommFsmSched CommFsmSched `(v  1 e 0 0 ]
 {
 "73
-[v CommFsmSched@FsmStat FsmStat `uc  1 a 1 17 ]
+[v CommFsmSched@FsmStat FsmStat `uc  1 a 1 23 ]
 [s S682 FsmTable 5 `uc 1 Stat 1 0 `*.32Cuc 1 Str 2 1 `*.37(uc 1 pCallback 2 3 ]
 "71
-[v CommFsmSched@FsmStruct FsmStruct `*.39S682  1 p 2 13 ]
+[v CommFsmSched@FsmStruct FsmStruct `*.39S682  1 p 2 19 ]
 "134
 } 0
 "57
@@ -875,16 +894,65 @@ FsmEnd 2
 {
 "60
 } 0
-"229 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"208 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _TimeDecode TimeDecode `(uc  1 e 1 0 ]
 {
-"232
+"212
+[v TimeDecode@TimePoint TimePoint `i  1 a 2 17 ]
+"220
+} 0
+"4 /Applications/microchip/xc8/v1.31/sources/common/strcspn.c
+[v _strcspn strcspn `(ui  1 e 2 0 ]
+{
+"6
+[v strcspn@i i `ui  1 a 2 11 ]
+"4
+[v strcspn@s1 s1 `*.39Cuc  1 p 2 6 ]
+[v strcspn@s2 s2 `*.32Cuc  1 p 2 8 ]
+"14
+} 0
+"4 /Applications/microchip/xc8/v1.31/sources/common/strchr.c
+[v _strchr strchr `(*.34uc  1 e 2 0 ]
+{
+[v strchr@ptr ptr `*.34Cuc  1 p 2 0 ]
+[v strchr@chr chr `i  1 p 2 2 ]
+"11
+} 0
+"5 /Applications/microchip/xc8/v1.31/sources/common/atoi.c
+[v _atoi atoi `(i  1 e 2 0 ]
+{
+"7
+[v atoi@a a `i  1 a 2 11 ]
+"8
+[v atoi@sign sign `uc  1 a 1 10 ]
+"5
+[v atoi@s s `*.39Cuc  1 p 2 6 ]
+"24
+} 0
+"8 /Applications/microchip/xc8/v1.31/sources/common/isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
+{
+[v isdigit@c c `uc  1 a 1 wreg ]
+[v isdigit@c c `uc  1 a 1 wreg ]
+"14
+[v isdigit@c c `uc  1 a 1 2 ]
+"15
+} 0
+"3 /Applications/microchip/xc8/v1.31/sources/common/wmul.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"5
+[v ___wmul@product product `ui  1 a 2 4 ]
+"3
+[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+"41
 } 0
 "136 /Users/guiott/Copy/WordClock/___Development/WordClock/comm.c
 [v _StartTx StartTx `(v  1 e 0 0 ]
 {
 [v StartTx@TxStr TxStr `*.32Cuc  1 p 2 10 ]
-"143
+"144
 } 0
 "4 /Applications/microchip/xc8/v1.31/sources/common/strlen.c
 [v _strlen strlen `(ui  1 e 2 0 ]
@@ -908,21 +976,21 @@ FsmEnd 2
 [v memcpy@n n `ui  1 p 2 4 ]
 "32
 } 0
-"145 /Users/guiott/Copy/WordClock/___Development/WordClock/comm.c
+"146 /Users/guiott/Copy/WordClock/___Development/WordClock/comm.c
 [v _StartRx StartRx `(v  1 e 0 0 ]
 {
 [v StartRx@TxStr TxStr `*.32Cuc  1 p 2 0 ]
-"150
+"151
 } 0
-"236 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"224 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _low_isr low_isr `IIL(v  1 e 0 0 ]
 {
-"296
+"285
 } 0
 "4 /Applications/microchip/xc8/v1.31/sources/common/strstr.c
-[v _strstr strstr `(*.39uc  1 e 2 0 ]
+[v _strstr strstr `(*.34uc  1 e 2 0 ]
 {
-[v strstr@s1 s1 `*.39Cuc  1 p 2 34 ]
+[v strstr@s1 s1 `*.34Cuc  1 p 2 34 ]
 [v strstr@s2 s2 `*.32Cuc  1 p 2 36 ]
 "12
 } 0
@@ -933,26 +1001,26 @@ FsmEnd 2
 [v i1strlen@s s `*.32Cuc  1 p 2 19 ]
 "13
 } 0
+"4 /Applications/microchip/xc8/v1.31/sources/common/strchr.c
+[v i1_strchr strchr `(*.34uc  1 e 2 0 ]
+{
+[v i1strchr@ptr ptr `*.34Cuc  1 p 2 19 ]
+[v i1strchr@chr chr `i  1 p 2 21 ]
+"11
+} 0
 "4 /Applications/microchip/xc8/v1.31/sources/common/strncmp.c
 [v _strncmp strncmp `(i  1 e 2 0 ]
 {
-[v strncmp@s1 s1 `*.39Cuc  1 p 2 25 ]
+[v strncmp@s1 s1 `*.34Cuc  1 p 2 25 ]
 [v strncmp@s2 s2 `*.32Cuc  1 p 2 27 ]
 [v strncmp@len len `ui  1 p 2 29 ]
 "14
 } 0
-"4 /Applications/microchip/xc8/v1.31/sources/common/strchr.c
-[v _strchr strchr `(*.39uc  1 e 2 0 ]
-{
-[v strchr@ptr ptr `*.39Cuc  1 p 2 19 ]
-[v strchr@chr chr `i  1 p 2 21 ]
-"11
-} 0
-"155 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"134 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _SetTimer0 SetTimer0 `(v  1 e 0 0 ]
 {
 [v SetTimer0@Count Count `i  1 p 2 19 ]
-"164
+"143
 } 0
 "15 /Applications/microchip/xc8/v1.31/sources/pic18/plib/USART/uread.c
 [v _ReadUSART ReadUSART `(uc  1 e 1 0 ]
@@ -961,14 +1029,14 @@ FsmEnd 2
 [v ReadUSART@data data `uc  1 a 1 19 ]
 "37
 } 0
-"300 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
+"289 /Users/guiott/Copy/WordClock/___Development/WordClock/WordClock.c
 [v _high_isr high_isr `II(v  1 e 0 0 ]
 {
-"342
+"331
 } 0
-"174
+"153
 [v i2_SetTimer3 SetTimer3 `(v  1 e 0 0 ]
 {
 [v i2SetTimer3@Count Count `i  1 p 2 0 ]
-"183
+"162
 } 0
