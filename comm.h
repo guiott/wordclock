@@ -60,9 +60,9 @@ struct FsmTable ReadTimeFsm[] =
 {/* scheduler used for comm protocol with WiFLy
   this reads time from http://www.inrim.it
  */
-    {FsmTx, "$$$\n", (FsmCallbackFunc)CommFsmIdle},
+    {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
     {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
     {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-    {FsmRx, "*close*", (FsmCallbackFunc)TimeDecode},
+    {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
     {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 };

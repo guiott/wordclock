@@ -62,7 +62,7 @@ void Settings(void)
     // only AN0 is an analog ports
     ADCON1bits.PCFG=0b1110;
 
-    //-------TIMER0
+    //-------TIMER0 used for RX timeout
     T0CONbits.TMR0ON=0;     //TMR0 off
     T0CONbits.T08BIT=0;     //16 bit Timer
     T0CONbits.T0CS=0;       //Timer on internal clock
@@ -78,7 +78,7 @@ void Settings(void)
     TIMER0_FLAG = 0;
     INTCONbits.TMR0IF = 0;// reset of interrupt flag
 
-    //-------TIMER1
+    //-------TIMER1 used for PWM LED light dimming
     T1CONbits.TMR1ON=0;     //TMR1 off
     T1CONbits.TMR1CS=0;     //Internal clock (Fosc/4)
     T1CONbits.RD16=1;       //16 bit Timer
@@ -93,7 +93,7 @@ void Settings(void)
     #endif
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
 
-     //-------TIMER3
+     //-------TIMER3 used for LED matrix scan
     T3CONbits.TMR3ON=0;     //TMR0 off
     T3CONbits.RD16=1;       //16 bit Timer
     T3CONbits.TMR3CS=0;     //Timer on internal clock

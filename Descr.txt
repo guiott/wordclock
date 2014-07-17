@@ -59,5 +59,6 @@ the next step. Each FSM operation has two phases, the first one calls the main
 operation, the second one the callback function.
 
 
-
+*OPEN*15 OCT 2012 22:44:39 CEST
+*CLOS*
 

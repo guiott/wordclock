@@ -46,7 +46,7 @@ void CommSetting(void)
     TXSTAbits.TX9=0;    //8-bit transmission
     RCSTAbits.RX9=0;    //8-bit reception
     TXSTAbits.TXEN=0;   //reset transmitter
-    TXSTAbits.TXEN=1;   //enable the transmitter
+    TXSTAbits.TXEN=0;   //disable the transmitter
     IPR1bits.TXIP=0;    //TX interrupt low priority
     PIE1bits.TXIE=0;    //disable TX interrupts
 
@@ -139,6 +139,7 @@ void StartTx(const unsigned char * TxStr )
     TxBuffLen = strlen(TxStr);
     TxBuffIndx=0;
     memcpy(TxBuff, TxStr, TxBuffLen);
+    TXSTAbits.TXEN=1;   //enable the transmitter
     PIE1bits.TXIE=1; //enable TX interrupts
 }
 
