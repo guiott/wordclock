@@ -29,5 +29,5 @@ void RtcWriteTime(void);
 void RtcInit(void);
 void InterruptSettings(void);
 char TimeDecode(void);
-
+void ScanMatrix(void);
 #endif

@@ -50,6 +50,8 @@
     #define RTC_PTR 0
     #define I2C_MAX_DEV 1                // how many I2C devices present on bus
 
+    #define MAX_RX_BUFFER 64                // RX buffer size
+
     extern unsigned char I2cEventFlag;   // SSP port interrupt flag
     extern unsigned char I2cBusCollFlag; // SSP collision flag
     extern unsigned char I2cBusyFlag;    // I2C communication process flag

@@ -28,19 +28,10 @@ int j = 0; // contatore generico
 char TimerStatus = 0;
 
 unsigned int Timer0_ms;
+unsigned int Timer1_ms;
 unsigned int Timer3_ms;
 
 unsigned int DutyCycle;
-
-//RTC time
-unsigned int Sec;
-unsigned int Min;
-unsigned int Hour;
-
-//Time server time
-unsigned char NtpSec;
-unsigned char NtpMin;
-unsigned char NtpHour;
 
 unsigned int OneHzTick;
 

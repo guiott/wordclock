@@ -19,10 +19,9 @@ extern "C" {
 }
 #endif
 
-#endif	/* COMM_H */
-
 #include "prototypes.h"
 #include <string.h>
+#include "common.h"
 
 unsigned char RxFlag;         // RX procedure status
 unsigned char CommFsmFlag=0;  // FSM active flag
@@ -41,7 +40,6 @@ unsigned char TxBuff[32];
 unsigned char TxBuffLen;
 unsigned char TxBuffIndx;
 unsigned int RXerr;
-#define MAX_RX_BUFFER 64                // RX buffer size
 unsigned char RXbuff[MAX_RX_BUFFER];	// RX buffer
 unsigned char RxBuffIndx;               // RX buffer pointer
 unsigned char FsmIndx;
@@ -66,3 +64,5 @@ struct FsmTable ReadTimeFsm[] =
     {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
     {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 };
+
+#endif	/* COMM_H */

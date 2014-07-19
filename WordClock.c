@@ -62,7 +62,7 @@ INTCONbits.GIEH=1;	// enable interrupt high
 INTCONbits.GIEL=1;	// enable interrupt low
 
 SetTimer3(Timer3_ms);
-//??????????????  T3CONbits.TMR3ON=1;     //TMR3 on ??????????????????????????????????????????
+T3CONbits.TMR3ON=1; 
 SQW_FLAG=0;
 
 RtcInit();
@@ -161,63 +161,6 @@ TMR3H = Count >> 8; // byte High
 TMR3L = Count;      // byte Low
 }
 
-void RtcReadTime(void)
-{/*convert the BCD time read from RTC registers to decimal values
-    Hour is in 12H mode without AM/PM
-  */
-    unsigned char Units;
-    unsigned char Tens;
-
-    Units=I2c[RTC_PTR].RxBuff[0]&0b00001111;
-    Tens=((I2c[RTC_PTR].RxBuff[0]&0b01110000)>>4)*10;
-    Sec=Units + Tens;
-
-    Units=I2c[RTC_PTR].RxBuff[1]&0b00001111;
-    Tens=((I2c[RTC_PTR].RxBuff[1]&0b01110000)>>4)*10;
-    Min=Units + Tens;
-
-    Units=I2c[RTC_PTR].RxBuff[2]&0b00001111;
-    Tens=((I2c[RTC_PTR].RxBuff[2]&0b00010000)>>4)*10;
-    Hour=Units + Tens;
-}
-
-void RtcWriteTime(void)
-{
-    unsigned char Units;
-    unsigned char Tens;
-
-    Tens = NtpSec / 10;
-    Units = NtpSec - (Tens * 10);
-    Sec = (Tens << 4) | Units;
-
-
-    Tens = NtpMin / 10;
-    Units = NtpMin - (Tens * 10);
-    Min = (Tens << 4) | Units;
-
-    Tens = NtpHour / 10;
-    Units = NtpHour - (Tens * 10);
-    Hour = (Tens<<4) | Units;
-
-    if(I2cBuffChk(RTC_PTR))
-    {// if previous operations are over, start a new one
-        I2cData(RTC_PTR, 4, 0, Sec, Min, Hour, 0);
-    }
-}
-
-char TimeDecode(void)
-{// decode the current time from http://www.inrim.it
- //Example: *OPEN*15 OCT 2012 22:44:39 CEST\n*CLOS*
-
-    int TimePoint;
-
-    TimePoint = strcspn(RXbuff, ":" );
-
-    Hour = atoi(RXbuff+TimePoint-2);
-    Min  = atoi(RXbuff+TimePoint+1);
-    Sec  = atoi(RXbuff+TimePoint+4);
-    return '0';
-}
 
 /*===========================================================================*/
 // Low priority interrupt vector
@@ -289,16 +232,16 @@ void interrupt low_priority low_isr (void)
 void interrupt high_isr (void)
 {
  if (PIR2bits.TMR3IF)   // timer 3 overflow?
- {
+ {// used for LED matrix scan
+    PIR2bits.TMR3IF = 0;    // reset of interrupt flag
     TIMER3_FLAG = 1;
     SetTimer3(Timer3_ms);
-    PIR2bits.TMR3IF = 0;// reset of interrupt flag
+    SetTimer1(Timer1_ms);   // set Timer 1 in order to dimm LED light ??????????????????? compute Timer1_ms in advance
+    ScanMatrix();
  }
 
- if (PIR1bits.TMR1IF)   // timer 1 overflow?
- {
-    SetTimer3(Timer3_ms);
-
+ if (PIR1bits.TMR1IF)       // timer 1 overflow?
+ {// used for PWM LED light dimming
 
 
     //reset row enable to partialize the ON period e reduce light????????????????????????????????????
@@ -308,24 +251,24 @@ void interrupt high_isr (void)
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
  }
 
- if (INTCONbits.INT0IF)   // External interrupt on iNT0 -> RTC 1Hz clock
+ if (INTCONbits.INT0IF)     // External interrupt on iNT0 -> RTC 1Hz clock
  {
-    LED ^= 1;   // blink yellow led at 0.5Hz
+    LED ^= 1;               // blink yellow led at 0.5Hz
     SQW_FLAG=1;
-    INTCONbits.INT0IF = 0;// reset of interrupt flag
+    INTCONbits.INT0IF = 0;  // reset of interrupt flag
  }
 
-if (PIR1bits.SSPIF)     // an I2C event is over
+if (PIR1bits.SSPIF)         // an I2C event is over
 {
-    PIR1bits.SSPIF = 0;	// reset I2c interrupt flag
-    I2cEventFlag = 1;   // I2cLowService will be executed
+    PIR1bits.SSPIF = 0;     // reset I2c interrupt flag
+    I2cEventFlag = 1;       // I2cLowService will be executed
 }
 
-if (PIR2bits.BCLIF)     // I2c bus collision
+if (PIR2bits.BCLIF)         // I2c bus collision
 {
-    PIR2bits.BCLIF = 0; // interrupt flag reset
-    I2cEventFlag = 1;   // execute I2cLowService
-    I2cBusCollFlag = 1;	// a collision occurred
+    PIR2bits.BCLIF = 0;     // interrupt flag reset
+    I2cEventFlag = 1;       // execute I2cLowService
+    I2cBusCollFlag = 1;     // a collision occurred
 }
 
 }   
