@@ -4894,6 +4894,11 @@ void RtcWriteTime(void);
 void RtcInit(void);
 void InterruptSettings(void);
 char TimeDecode(void);
+void ScanMatrix(void);
+void MatrixSetting(void);
+void SetColB(void);
+void SetRow(char Row);
+void SetRowOff(void);
 
 # 22 "/Applications/microchip/xc8/v1.31/include/string.h"
 extern void * memcpy(void *, const void *, size_t);
@@ -4927,50 +4932,6 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 27 "../comm.h"
-unsigned char RxFlag;
-unsigned char CommFsmFlag=0;
-unsigned char TxFsmFlag;
-unsigned char RxFsmFlag = 0;
-
-typedef char (*FsmCallbackFunc)(void);
-char CommFsmIdle(void);
-void CommSetting(void);
-void StartTx(const unsigned char * TxStr );
-void StartRx(const unsigned char * TxStr );
-void CommFsmSched(struct FsmTable * FsmStruct);
-void StartCommFsmSched(struct FsmTable * FsmStruct);
-
-unsigned char TxBuff[32];
-unsigned char TxBuffLen;
-unsigned char TxBuffIndx;
-unsigned int RXerr;
-
-unsigned char RXbuff[64];
-unsigned char RxBuffIndx;
-unsigned char FsmIndx;
-struct FsmTable * FsmStructActive;
-
-struct FsmTable
-{
-unsigned char Stat;
-const unsigned char * Str;
-FsmCallbackFunc pCallback;
-};
-
-enum Fsm{FsmRx, FsmTx, FsmEnd};
-
-struct FsmTable ReadTimeFsm[] =
-{
-
-# 63
-{FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
-{FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
-{FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-{FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
-{FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
-};
-
 # 53 "../common.h"
 extern unsigned char I2cEventFlag;
 extern unsigned char I2cBusCollFlag;
@@ -4993,6 +4954,49 @@ unsigned char TxBuff[4];
 
 extern struct I2cS I2c[1];
 extern unsigned char I2cAdr[];
+
+# 26 "../comm.h"
+unsigned char RxFlag;
+unsigned char CommFsmFlag=0;
+unsigned char TxFsmFlag;
+unsigned char RxFsmFlag = 0;
+
+typedef char (*FsmCallbackFunc)(void);
+char CommFsmIdle(void);
+void CommSetting(void);
+void StartTx(const unsigned char * TxStr );
+void StartRx(const unsigned char * TxStr );
+void CommFsmSched(struct FsmTable * FsmStruct);
+void StartCommFsmSched(struct FsmTable * FsmStruct);
+
+unsigned char TxBuff[32];
+unsigned char TxBuffLen;
+unsigned char TxBuffIndx;
+unsigned int RXerr;
+unsigned char RXbuff[64];
+unsigned char RxBuffIndx;
+unsigned char FsmIndx;
+struct FsmTable * FsmStructActive;
+
+struct FsmTable
+{
+unsigned char Stat;
+const unsigned char * Str;
+FsmCallbackFunc pCallback;
+};
+
+enum Fsm{FsmRx, FsmTx, FsmEnd};
+
+struct FsmTable ReadTimeFsm[] =
+{
+
+# 61
+{FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
+{FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
+{FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
+{FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
+{FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+};
 
 # 5 "../comm.c"
 char (*CommFsmState )(void) = &CommFsmIdle ;

@@ -1,19 +1,19 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"37 ../comm.h
-[s S391 ]
-[n S391 FsmTable ]
-[v F4156 `(uc ~T0 @X0 0 tf ]
-"50
-[s S391 `uc 1 `*Cuc 1 `*F4156 1 ]
-[n S391 FsmTable Stat Str pCallback ]
-"63
-[c E4182 0 1 2 .. ]
-[n E4182 Fsm FsmRx FsmTx FsmEnd  ]
-"33
+"36 ../comm.h
+[s S393 ]
+[n S393 FsmTable ]
+[v F4179 `(uc ~T0 @X0 0 tf ]
+"48
+[s S393 `uc 1 `*Cuc 1 `*F4179 1 ]
+[n S393 FsmTable Stat Str pCallback ]
+"61
+[c E4205 0 1 2 .. ]
+[n E4205 Fsm FsmRx FsmTx FsmEnd  ]
+"32
 [v _CommFsmIdle `(uc ~T0 @X0 0 ef ]
 "31 ../prototypes.h
 [v _TimeDecode `(uc ~T0 @X0 0 ef ]
-[v F4211 `(uc ~T0 @X0 0 tf ]
+[v F4221 `(uc ~T0 @X0 0 tf ]
 "3802 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
 [v _SPBRGH `Vuc ~T0 @X0 0 e@4016 ]
 "3791
@@ -90,9 +90,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S140 . . . . ]
 "2767
 [v _PIE1bits `VS140 ~T0 @X0 0 e@3997 ]
-"36 ../comm.h
+"35 ../comm.h
 [v _StartRx `(v ~T0 @X0 0 ef1`*Cuc ]
-"35
+"34
 [v _StartTx `(v ~T0 @X0 0 ef1`*Cuc ]
 "55 /Applications/microchip/xc8/v1.31/include/string.h
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
@@ -3774,6 +3774,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;prototypes.h: 29: void RtcInit(void);
 [; ;prototypes.h: 30: void InterruptSettings(void);
 [; ;prototypes.h: 31: char TimeDecode(void);
+[; ;prototypes.h: 32: void ScanMatrix(void);
+[; ;prototypes.h: 33: void MatrixSetting(void);
+[; ;prototypes.h: 34: void SetColB(void);
+[; ;prototypes.h: 35: void SetRow(char Row);
+[; ;prototypes.h: 36: void SetRowOff(void);
 [; ;string.h: 22: extern void * memcpy(void *, const void *, size_t);
 [; ;string.h: 23: extern void * memmove(void *, const void *, size_t);
 [; ;string.h: 24: extern void * memset(void *, int, size_t);
@@ -3800,106 +3805,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;string.h: 57: extern char * strichr(const char *, int);
 [; ;string.h: 58: extern char * strrchr(const char *, int);
 [; ;string.h: 59: extern char * strrichr(const char *, int);
-"27 ../comm.h
-[v _RxFlag `uc ~T0 @X0 1 e ]
-[; ;comm.h: 27: unsigned char RxFlag;
-"28
-[v _CommFsmFlag `uc ~T0 @X0 1 e ]
-[i _CommFsmFlag
--> -> 0 `i `uc
-]
-[; ;comm.h: 28: unsigned char CommFsmFlag=0;
-"29
-[v _TxFsmFlag `uc ~T0 @X0 1 e ]
-[; ;comm.h: 29: unsigned char TxFsmFlag;
-"30
-[v _RxFsmFlag `uc ~T0 @X0 1 e ]
-[i _RxFsmFlag
--> -> 0 `i `uc
-]
-[; ;comm.h: 30: unsigned char RxFsmFlag = 0;
-[; ;comm.h: 32: typedef char (*FsmCallbackFunc)(void);
-[; ;comm.h: 33: char CommFsmIdle(void);
-[; ;comm.h: 34: void CommSetting(void);
-[; ;comm.h: 35: void StartTx(const unsigned char * TxStr );
-[; ;comm.h: 36: void StartRx(const unsigned char * TxStr );
-[; ;comm.h: 37: void CommFsmSched(struct FsmTable * FsmStruct);
-[; ;comm.h: 38: void StartCommFsmSched(struct FsmTable * FsmStruct);
-"40
-[v _TxBuff `uc ~T0 @X0 -> 32 `i e ]
-[; ;comm.h: 40: unsigned char TxBuff[32];
-"41
-[v _TxBuffLen `uc ~T0 @X0 1 e ]
-[; ;comm.h: 41: unsigned char TxBuffLen;
-"42
-[v _TxBuffIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 42: unsigned char TxBuffIndx;
-"43
-[v _RXerr `ui ~T0 @X0 1 e ]
-[; ;comm.h: 43: unsigned int RXerr;
-"45
-[v _RXbuff `uc ~T0 @X0 -> 64 `i e ]
-[; ;comm.h: 45: unsigned char RXbuff[64];
-"46
-[v _RxBuffIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 46: unsigned char RxBuffIndx;
-"47
-[v _FsmIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 47: unsigned char FsmIndx;
-"48
-[v _FsmStructActive `*S391 ~T0 @X0 1 e ]
-[; ;comm.h: 48: struct FsmTable * FsmStructActive;
-[; ;comm.h: 50: struct FsmTable
-[; ;comm.h: 51: {
-[; ;comm.h: 52: unsigned char Stat;
-[; ;comm.h: 53: const unsigned char * Str;
-[; ;comm.h: 54: FsmCallbackFunc pCallback;
-[; ;comm.h: 55: };
-[; ;comm.h: 57: enum Fsm{FsmRx, FsmTx, FsmEnd};
-"59
-[v _ReadTimeFsm `S391 ~T0 @X0 -> 0 `x e ]
-[i _ReadTimeFsm
-:U ..
-:U ..
-"63
--> . `E4182 1 `uc
-:s 1C
-&U _CommFsmIdle
-..
-:U ..
-"64
--> . `E4182 0 `uc
-:s 2C
-&U _CommFsmIdle
-..
-:U ..
-"65
--> . `E4182 1 `uc
-:s 3C
-&U _CommFsmIdle
-..
-:U ..
-"66
--> . `E4182 0 `uc
-:s 4C
-&U _TimeDecode
-..
-:U ..
-"67
--> . `E4182 2 `uc
-:s 5C
-&U _CommFsmIdle
-..
-..
-]
-[; ;comm.h: 59: struct FsmTable ReadTimeFsm[] =
-[; ;comm.h: 60: {
-[; ;comm.h: 63: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 64: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 65: {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 66: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
-[; ;comm.h: 67: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
-[; ;comm.h: 68: };
 [; ;common.h: 53: extern unsigned char I2cEventFlag;
 [; ;common.h: 54: extern unsigned char I2cBusCollFlag;
 [; ;common.h: 55: extern unsigned char I2cBusyFlag;
@@ -3917,8 +3822,108 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 70: };
 [; ;common.h: 72: extern struct I2cS I2c[1];
 [; ;common.h: 73: extern unsigned char I2cAdr[];
+"26 ../comm.h
+[v _RxFlag `uc ~T0 @X0 1 e ]
+[; ;comm.h: 26: unsigned char RxFlag;
+"27
+[v _CommFsmFlag `uc ~T0 @X0 1 e ]
+[i _CommFsmFlag
+-> -> 0 `i `uc
+]
+[; ;comm.h: 27: unsigned char CommFsmFlag=0;
+"28
+[v _TxFsmFlag `uc ~T0 @X0 1 e ]
+[; ;comm.h: 28: unsigned char TxFsmFlag;
+"29
+[v _RxFsmFlag `uc ~T0 @X0 1 e ]
+[i _RxFsmFlag
+-> -> 0 `i `uc
+]
+[; ;comm.h: 29: unsigned char RxFsmFlag = 0;
+[; ;comm.h: 31: typedef char (*FsmCallbackFunc)(void);
+[; ;comm.h: 32: char CommFsmIdle(void);
+[; ;comm.h: 33: void CommSetting(void);
+[; ;comm.h: 34: void StartTx(const unsigned char * TxStr );
+[; ;comm.h: 35: void StartRx(const unsigned char * TxStr );
+[; ;comm.h: 36: void CommFsmSched(struct FsmTable * FsmStruct);
+[; ;comm.h: 37: void StartCommFsmSched(struct FsmTable * FsmStruct);
+"39
+[v _TxBuff `uc ~T0 @X0 -> 32 `i e ]
+[; ;comm.h: 39: unsigned char TxBuff[32];
+"40
+[v _TxBuffLen `uc ~T0 @X0 1 e ]
+[; ;comm.h: 40: unsigned char TxBuffLen;
+"41
+[v _TxBuffIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 41: unsigned char TxBuffIndx;
+"42
+[v _RXerr `ui ~T0 @X0 1 e ]
+[; ;comm.h: 42: unsigned int RXerr;
+"43
+[v _RXbuff `uc ~T0 @X0 -> 64 `i e ]
+[; ;comm.h: 43: unsigned char RXbuff[64];
+"44
+[v _RxBuffIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 44: unsigned char RxBuffIndx;
+"45
+[v _FsmIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 45: unsigned char FsmIndx;
+"46
+[v _FsmStructActive `*S393 ~T0 @X0 1 e ]
+[; ;comm.h: 46: struct FsmTable * FsmStructActive;
+[; ;comm.h: 48: struct FsmTable
+[; ;comm.h: 49: {
+[; ;comm.h: 50: unsigned char Stat;
+[; ;comm.h: 51: const unsigned char * Str;
+[; ;comm.h: 52: FsmCallbackFunc pCallback;
+[; ;comm.h: 53: };
+[; ;comm.h: 55: enum Fsm{FsmRx, FsmTx, FsmEnd};
+"57
+[v _ReadTimeFsm `S393 ~T0 @X0 -> 0 `x e ]
+[i _ReadTimeFsm
+:U ..
+:U ..
+"61
+-> . `E4205 1 `uc
+:s 1C
+&U _CommFsmIdle
+..
+:U ..
+"62
+-> . `E4205 0 `uc
+:s 2C
+&U _CommFsmIdle
+..
+:U ..
+"63
+-> . `E4205 1 `uc
+:s 3C
+&U _CommFsmIdle
+..
+:U ..
+"64
+-> . `E4205 0 `uc
+:s 4C
+&U _TimeDecode
+..
+:U ..
+"65
+-> . `E4205 2 `uc
+:s 5C
+&U _CommFsmIdle
+..
+..
+]
+[; ;comm.h: 57: struct FsmTable ReadTimeFsm[] =
+[; ;comm.h: 58: {
+[; ;comm.h: 61: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 62: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 63: {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 64: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
+[; ;comm.h: 65: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+[; ;comm.h: 66: };
 "5 ../comm.c
-[v _CommFsmState `*F4211 ~T0 @X0 1 e ]
+[v _CommFsmState `*F4221 ~T0 @X0 1 e ]
 [i _CommFsmState
 &U _CommFsmIdle
 ]
@@ -4000,14 +4005,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 395 ]
 }
 "62
-[v _StartCommFsmSched `(v ~T0 @X0 1 ef1`*S391 ]
+[v _StartCommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
 "63
 {
 [; ;comm.c: 62: void StartCommFsmSched(struct FsmTable * FsmStruct)
 [; ;comm.c: 63: {
 [e :U _StartCommFsmSched ]
 "62
-[v _FsmStruct `*S391 ~T0 @X0 1 r1 ]
+[v _FsmStruct `*S393 ~T0 @X0 1 r1 ]
 "63
 [f ]
 [; ;comm.c: 64: FsmIndx = 0;
@@ -4030,14 +4035,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 396 ]
 }
 "71
-[v _CommFsmSched `(v ~T0 @X0 1 ef1`*S391 ]
+[v _CommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
 "72
 {
 [; ;comm.c: 71: void CommFsmSched(struct FsmTable * FsmStruct)
 [; ;comm.c: 72: {
 [e :U _CommFsmSched ]
 "71
-[v _FsmStruct `*S391 ~T0 @X0 1 r1 ]
+[v _FsmStruct `*S393 ~T0 @X0 1 r1 ]
 "72
 [f ]
 "73
@@ -4164,9 +4169,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 398  ]
 "77
 [e :U 399 ]
-[e [\ _FsmStat , $ -> . `E4182 0 `uc 400
- , $ -> . `E4182 1 `uc 403
- , $ -> . `E4182 2 `uc 406
+[e [\ _FsmStat , $ -> . `E4205 0 `uc 400
+ , $ -> . `E4205 1 `uc 403
+ , $ -> . `E4205 2 `uc 406
  407 ]
 "133
 [e :U 398 ]

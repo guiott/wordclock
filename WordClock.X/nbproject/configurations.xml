@@ -11,6 +11,8 @@
       <itemPath>../statusBits.h</itemPath>
       <itemPath>../myi2c.h</itemPath>
       <itemPath>../comm.h</itemPath>
+      <itemPath>../matrix.h</itemPath>
+      <itemPath>../timeProc.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LibraryFiles"
                    displayName="Library Files"
@@ -31,6 +33,8 @@
       <itemPath>../WordClock.c</itemPath>
       <itemPath>../myi2c.c</itemPath>
       <itemPath>../comm.c</itemPath>
+      <itemPath>../matrix.c</itemPath>
+      <itemPath>../timeProc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

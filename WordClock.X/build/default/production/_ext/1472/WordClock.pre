@@ -4167,18 +4167,8 @@ char TimerStatus = 0;
 
 unsigned int Timer0_ms;
 unsigned int Timer3_ms;
-
-unsigned int DutyCycle;
-
-
-unsigned int Sec;
-unsigned int Min;
-unsigned int Hour;
-
-
-unsigned char NtpSec;
-unsigned char NtpMin;
-unsigned char NtpHour;
+extern const int DutyTab[];
+unsigned int DutyCycle = DutyTab[10];
 
 unsigned int OneHzTick;
 
@@ -4211,6 +4201,11 @@ void RtcWriteTime(void);
 void RtcInit(void);
 void InterruptSettings(void);
 char TimeDecode(void);
+void ScanMatrix(void);
+void MatrixSetting(void);
+void SetColB(void);
+void SetRow(char Row);
+void SetRowOff(void);
 
 
 # 13 "../statusBits.h"
@@ -4256,7 +4251,7 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 27 "../comm.h"
+# 26 "../comm.h"
 unsigned char RxFlag;
 unsigned char CommFsmFlag=0;
 unsigned char TxFsmFlag;
@@ -4274,7 +4269,6 @@ unsigned char TxBuff[32];
 unsigned char TxBuffLen;
 unsigned char TxBuffIndx;
 unsigned int RXerr;
-
 unsigned char RXbuff[64];
 unsigned char RxBuffIndx;
 unsigned char FsmIndx;
@@ -4292,7 +4286,7 @@ enum Fsm{FsmRx, FsmTx, FsmEnd};
 struct FsmTable ReadTimeFsm[] =
 {
 
-# 63
+# 61
 {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
 {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
@@ -4315,16 +4309,21 @@ INTCONbits.GIEH=1;
 INTCONbits.GIEL=1;
 
 SetTimer3(Timer3_ms);
+T3CONbits.TMR3ON=1;
+VARbits1.bit0=0;
 
-VARbits1.bit1=0;
 
-RtcInit();
 CommSetting();
+MatrixSetting();
 InterruptSettings();
+
+SetColB();
+
+
 
 while (1)
 {
-if(VARbits1.bit1)
+if(VARbits1.bit0)
 {
 OneHzTick ++;
 if(!(OneHzTick % 900))
@@ -4337,23 +4336,12 @@ else if(I2cBuffChk(0))
 I2cData(0,1,0,0,0,0,3);
 }
 
-VARbits1.bit1=0;
+VARbits1.bit0=0;
 }
 else if(I2c[0].Done == 1)
 {
 RtcReadTime();
 I2c[0].Done = 0;
-}
-
-if(VARbits1.bit2)
-{
-
-# 112
-SetTimer1(DutyCycle);
-T1CONbits.TMR1ON=1;
-
-VARbits1.bit2=0;
-asm(" clrwdt");
 }
 
 if(CommFsmFlag)
@@ -4366,11 +4354,11 @@ I2cService();
 }
 }
 
-# 134
+# 114
 void SetTimer0(int Count)
 {
 
-# 141
+# 121
 TMR0H = Count >> 8;
 TMR0L = Count;
 }
@@ -4378,76 +4366,19 @@ TMR0L = Count;
 void SetTimer1(int Count)
 {
 
-
 TMR1H = Count >> 8;
 TMR1L = Count;
+T1CONbits.TMR1ON=1;
 }
 
 void SetTimer3(int Count)
 {
 
-# 160
+# 140
 TMR3H = Count >> 8;
 TMR3L = Count;
 }
 
-void RtcReadTime(void)
-{
-
-# 168
-unsigned char Units;
-unsigned char Tens;
-
-Units=I2c[0].RxBuff[0]&0b00001111;
-Tens=((I2c[0].RxBuff[0]&0b01110000)>>4)*10;
-Sec=Units + Tens;
-
-Units=I2c[0].RxBuff[1]&0b00001111;
-Tens=((I2c[0].RxBuff[1]&0b01110000)>>4)*10;
-Min=Units + Tens;
-
-Units=I2c[0].RxBuff[2]&0b00001111;
-Tens=((I2c[0].RxBuff[2]&0b00010000)>>4)*10;
-Hour=Units + Tens;
-}
-
-void RtcWriteTime(void)
-{
-unsigned char Units;
-unsigned char Tens;
-
-Tens = NtpSec / 10;
-Units = NtpSec - (Tens * 10);
-Sec = (Tens << 4) | Units;
-
-
-Tens = NtpMin / 10;
-Units = NtpMin - (Tens * 10);
-Min = (Tens << 4) | Units;
-
-Tens = NtpHour / 10;
-Units = NtpHour - (Tens * 10);
-Hour = (Tens<<4) | Units;
-
-if(I2cBuffChk(0))
-{
-I2cData(0, 4, 0, Sec, Min, Hour, 0);
-}
-}
-
-char TimeDecode(void)
-{
-
-
-int TimePoint;
-
-TimePoint = strcspn(RXbuff, ":" );
-
-Hour = atoi(RXbuff+TimePoint-2);
-Min = atoi(RXbuff+TimePoint+1);
-Sec = atoi(RXbuff+TimePoint+4);
-return '0';
-}
 
 
 
@@ -4520,16 +4451,16 @@ void interrupt high_isr (void)
 {
 if (PIR2bits.TMR3IF)
 {
-VARbits1.bit2 = 1;
-SetTimer3(Timer3_ms);
 PIR2bits.TMR3IF = 0;
+SetTimer3(Timer3_ms);
+SetTimer1(DutyCycle);
+ScanMatrix();
+asm(" clrwdt");
 }
 
 if (PIR1bits.TMR1IF)
 {
-SetTimer3(Timer3_ms);
-
-# 307
+SetRowOff();
 T1CONbits.TMR1ON=0;
 PIR1bits.TMR1IF = 0;
 }
@@ -4537,7 +4468,7 @@ PIR1bits.TMR1IF = 0;
 if (INTCONbits.INT0IF)
 {
 LATBbits.LATB5 ^= 1;
-VARbits1.bit1=1;
+VARbits1.bit0=1;
 INTCONbits.INT0IF = 0;
 }
 
