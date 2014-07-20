@@ -71,5 +71,4 @@
 
     extern struct I2cS I2c[I2C_MAX_DEV];
     extern unsigned char I2cAdr[];  //I2C addresses
-
 #endif

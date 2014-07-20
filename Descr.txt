@@ -58,6 +58,11 @@ itself and enables the CommFsmFlag to call the FSM scheduler in order to perform
 the next step. Each FSM operation has two phases, the first one calls the main
 operation, the second one the callback function.
 
+*OPEN*15 OCT 2012 22:44:39 CEST
+*CLOS*
+
+===========================================
+
 1ms timer
 matrix refresh every Xms
 start Timer1 to PWM the LEDs light
@@ -72,7 +77,7 @@ Example:
 beacause the time required to scan the column matrix for every 1ms row scanning
 is 36us, the minimum duty cycle can be approx 4%
 
+===========================================
 
-*OPEN*15 OCT 2012 22:44:39 CEST
-*CLOS*
+
 

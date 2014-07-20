@@ -34,4 +34,6 @@ void MatrixSetting(void);
 void SetColB(void);
 void SetRow(char Row);
 void SetRowOff(void);
+void WordSetting();
+
 #endif

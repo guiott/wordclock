@@ -80,8 +80,6 @@ while (1)  // main loop
         {//every 60*15 = 900 seconds read Time Server via WiFly and update RTC
             StartCommFsmSched(ReadTimeFsm); //read time from http://www.inrim.it
             RtcWriteTime();
-
-    //        if time changed more then 1 minute set Matrix and start SetColB(); ???????????????????????????????????????????????
         }
         else if(I2cBuffChk(RTC_PTR))
         {// if previous operations are over, start a new one
@@ -94,6 +92,12 @@ while (1)  // main loop
     {// I2C operation terminated. Data have been read from RTC
         RtcReadTime();
         I2c[RTC_PTR].Done = 0;      // data used. Wait for next reading
+
+        if(Min != PrevMin)
+        {// if time changed set a new Matrix
+            WordSetting();
+            PrevMin = Min;
+        }
     }
     
     if(CommFsmFlag)

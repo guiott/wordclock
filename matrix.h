@@ -83,6 +83,8 @@ void SetCol(char Row);
 void SetRowOff(void);
 void MatrixSetting(void);
 void SetColB(void);
+void WordSetting();
+
 int Matrix[MAXROW+1];
 int MatrixB[MAXROW+1][MAXCOL -64];    // use bytes instead of bits to save time
 unsigned int BitMask[MAXCOL -64];
@@ -113,5 +115,9 @@ const int DutyTab[]=
     56035,          // 95%
     55635           // 99%  to avoid overlap with TMR3 cycle
 };
+
+extern unsigned int Sec;
+extern unsigned int Min;
+extern unsigned int Hour;
 #endif	/* MATRIX_H */
 

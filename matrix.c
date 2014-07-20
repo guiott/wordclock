@@ -155,3 +155,143 @@ void SetRowOff(void)
     Row8 = OFF;
     Row9 = OFF;
 }
+
+void WordSetting()
+{// set the matrix with the words according to the new time
+    int i;
+
+    for(i=0; i<=MAXROW; i++)
+    {// reset the matrix
+        Matrix[i]=0;
+    }
+
+    if(Min / 30)
+    {// after hal hour the word is "to" the next hour, before is "after"
+        Hour++;
+        Matrix[6]=0b000000011110;                   // E
+    }
+    else
+    {
+        Matrix[7]=0b100000000000;                   // MENO
+    }
+
+    switch(Min / 5)
+    {
+        case 1:
+        case 11:
+            Matrix[8] = Matrix[8] | 0b000001111110;// CINQUE
+            break;
+
+        case 2:
+        case 10:
+            Matrix[9] = Matrix[9] | 0b111100000000;// DIECI
+            break;
+
+        case 3:
+        case 9:
+            Matrix[7] = Matrix[7] | 0b001101111110;// UN QUARTO
+            break;
+
+        case 4:
+        case 8:
+            Matrix[8] = Matrix[8] | 0b111110000000;// VENTI
+            break;
+
+        case 5:
+        case 7:
+            Matrix[8] = Matrix[8] | 0b111111111110;// VENTICINQUE
+            break;
+
+        case 6:
+            Matrix[9] = Matrix[9] | 0b000000111110;// MEZZA
+            break;
+
+        default:
+            break;
+    }
+
+    switch(Min % 5)
+    {
+        case 1:
+            Matrix[0] = Matrix[0] | 0b000000000001;// first point
+
+        case 2:
+            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+
+        case 3:
+            Matrix[2] = Matrix[2] | 0b000000000001;// add third point
+
+        case 4:
+            Matrix[3] = Matrix[3] | 0b000000000001;// add fourth point
+            break;
+
+        default:
+            break;
+    }
+
+    Hour = Hour % 12;
+
+    if(Hour == 1)
+    {
+        Matrix[1] = Matrix[1] | 0b101000000000;// E' L'
+    }
+    else
+    {
+        Matrix[0] = Matrix[0] | 0b111101101110;// SONO LE ORE
+    }
+
+    switch(Hour)
+    {
+        case 1:
+            Matrix[1] = Matrix[1] | 0b000111000000;// UNA
+            break;
+
+        case 2:
+            Matrix[1] = Matrix[1] | 0b000000011000;// DUE
+            break;
+
+        case 3:
+            Matrix[2] = Matrix[2] | 0b111000000000;// TRE
+            break;
+
+        case 4:
+            Matrix[5] = Matrix[5] | 0b111111100000;// QUATTRO
+            break;
+
+        case 5:
+            Matrix[6] = Matrix[6] | 0b111111000000;// CINQUE
+            break;
+
+        case 6:
+            Matrix[5] = Matrix[5] | 0b000000001110;// SEI
+            break;
+
+        case 7:
+            Matrix[4] = Matrix[4] | 0b000000111110;// SETTE
+            break;
+
+        case 8:
+            Matrix[2] = Matrix[2] | 0b000111100000;// OTTO
+            break;
+
+        case 9:
+            Matrix[2] = Matrix[2] | 0b000000011110;// NOVE
+            break;
+
+        case 10:
+            Matrix[3] = Matrix[3] | 0b111110000000;// DIECI
+            break;
+
+        case 11:
+            Matrix[3] = Matrix[3] | 0b000001111110;// UNDICI
+            break;
+
+        case 0:
+            Matrix[4] = Matrix[4] | 0b111111000000;// DODICI
+            break;
+
+        default:
+            break;
+    }
+
+}

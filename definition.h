@@ -42,7 +42,10 @@ extern unsigned char RxFlag;                // RX procedure status
 extern unsigned char TxBuff[];
 extern unsigned char TxBuffLen;
 extern unsigned char TxBuffIndx;
+extern unsigned int Min;
 
 #define  LED LATBbits.LATB5
+
+unsigned int PrevMin;       // to compare the time elapsed
 
 #endif
