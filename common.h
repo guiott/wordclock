@@ -15,7 +15,7 @@
     #ifdef PLL  // 40MHz
         #define XTAL_FREQ  40000000    //crystal frequency
         #define PRESCALER0 256          //TIMER0 selected prescaler
-        #define PRESCALER1 8            //TIMER1 selected prescaler
+        #define PRESCALER1 1            //TIMER1 selected prescaler
         #define PRESCALER3 8            //TIMER3 selected prescaler
 
     #else
@@ -32,9 +32,7 @@
     #define TMR1_TICK TCY*PRESCALER1    //TIMER1 tick duration
 
     //----- Flags
-    #define TIMER0_FLAG VARbits1.bit0	// Timer0 Interrupt occurred
-    #define SQW_FLAG VARbits1.bit1      // it's time to transmit
-    #define TIMER3_FLAG VARbits1.bit2	// Timer3 Interrupt occurred
+    #define SQW_FLAG VARbits1.bit0      // it's time to transmit
 
     //----- Macro
     #if !defined(MIN)

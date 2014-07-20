@@ -58,6 +58,20 @@ itself and enables the CommFsmFlag to call the FSM scheduler in order to perform
 the next step. Each FSM operation has two phases, the first one calls the main
 operation, the second one the callback function.
 
+1ms timer
+matrix refresh every Xms
+start Timer1 to PWM the LEDs light
+Example:
+  * time ON for each column = 1ms
+  * total time for 10 columns = 10ms = 100Hz frame refresh rate
+  * if TMR1 switches off the light after 0,3ms the lightness is 30%
+  * set the duration of TMR1 to partialize the cycle
+  * the DutyCycle value must be computed as a percentage of TMR0 duration
+  * according to the desired lightness
+  *     Timer1Count = 65535 - (DutyCycle * FCY / PRESCALER1);
+beacause the time required to scan the column matrix for every 1ms row scanning
+is 36us, the minimum duty cycle can be approx 4%
+
 
 *OPEN*15 OCT 2012 22:44:39 CEST
 *CLOS*

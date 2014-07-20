@@ -28,10 +28,9 @@ int j = 0; // contatore generico
 char TimerStatus = 0;
 
 unsigned int Timer0_ms;
-unsigned int Timer1_ms;
 unsigned int Timer3_ms;
-
-unsigned int DutyCycle;
+extern const int DutyTab[];
+extern unsigned char DutyCycle;
 
 unsigned int OneHzTick;
 

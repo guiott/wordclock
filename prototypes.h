@@ -14,7 +14,7 @@ void Settings(void);
 void InterruptHandlerHigh (void);
 void InterruptHandlerLow (void);
 void SetTimer0(int Count);
-void SetTimer1(int Count);
+void SetTimer1(unsigned char Count);
 void SetTimer3(int Count);
 void I2cHighService (void);
 void I2cLowService (void);
@@ -31,5 +31,7 @@ void InterruptSettings(void);
 char TimeDecode(void);
 void ScanMatrix(void);
 void MatrixSetting(void);
-
+void SetColB(void);
+void SetRow(char Row);
+void SetRowOff(void);
 #endif

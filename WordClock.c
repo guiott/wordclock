@@ -7,7 +7,7 @@
 * \mainpage WordClock.c
 * \author    Guido Ottaviani-->guido@guiott.com<--
 * \version 0.0.8
-* \date 05/14
+* \date 07/14
 * \details this is a study for the realization of a  somehow unusual word clock.
  * It's more a study for some special HW and SW techniques than a real
  * application.
@@ -65,16 +65,18 @@ SetTimer3(Timer3_ms);
 T3CONbits.TMR3ON=1; 
 SQW_FLAG=0;
 
-// RtcInit();
+// RtcInit();           //?????????????????????????????????????????????????????????????????
 CommSetting();
 MatrixSetting();
 InterruptSettings();
+DutyCycle = 10;     // preset LED PWM to 50%
 
-while (1)  // main loop
-{
-    ScanMatrix();
+    SetColB();          //?????????????????????????????????????????????????????????????????
+
 
     
+while (1)  // main loop
+{    
     if(SQW_FLAG)
     {// 1Hz interrupt from RTC
         OneHzTick ++;
@@ -95,31 +97,7 @@ while (1)  // main loop
         RtcReadTime();
         I2c[RTC_PTR].Done = 0;      // data used. Wait for next reading
     }
-
-    if(TIMER3_FLAG)
-    {// 1ms timer
-        /* matrix refresh every Xms ??????????????????????????????????????????????????????????
-         * increment ROW counter
-         * when counter is > 9 reset to 0
-         * increment Column pointer to get the word to set on CA-CL
-         * start Timer1 to PWM the LEDs light
-         * Example: 
-         * time ON for each column = 1ms
-         * total time for 10 columns = 10ms = 100Hz frame refresh rate
-         * if TMR1 switches off the light after 0,3ms the lightness is 30%
-         * set the duration of TMR1 to partialize the cycle
-         * the DutyCycle value must be computed as a percentage of TMR0 duration
-         * according to the desired lightness
-         *     Timer1Count = 65535 - (DutyCycle * FCY / PRESCALER1);
-        */
-
-        SetTimer1(DutyCycle);   //define the ON phase of the row cycle
-        T1CONbits.TMR1ON=1;     //TMR1 on
-
-        TIMER3_FLAG=0;
-        ClrWdt();
-    }
-
+    
     if(CommFsmFlag)
     {// execute the Communication Finite State Machine
         CommFsmSched(FsmStructActive);
@@ -134,7 +112,6 @@ while (1)  // main loop
 
 /* Functions *****************************************************************/
 
-
 void SetTimer0(int Count)
 {
 /**
@@ -146,12 +123,13 @@ TMR0H = Count >> 8; // byte High
 TMR0L = Count;      // byte Low
 }
 
-void SetTimer1(int Count)
+void SetTimer1(unsigned char DutyCicle)
 {
 //set both High and Low registers for Timer1
-
+int Count = DutyTab[DutyCycle];
 TMR1H = Count >> 8; // byte High
 TMR1L = Count;      // byte Low
+T1CONbits.TMR1ON=1;
 }
 
 void SetTimer3(int Count)
@@ -238,19 +216,15 @@ void interrupt high_isr (void)
  if (PIR2bits.TMR3IF)   // timer 3 overflow?
  {// used for LED matrix scan
     PIR2bits.TMR3IF = 0;    // reset of interrupt flag
-    TIMER3_FLAG = 1;
     SetTimer3(Timer3_ms);
-    SetTimer1(Timer1_ms);   // set Timer 1 in order to dimm LED light ??????????????????? compute Timer1_ms in advance
+    SetTimer1(DutyCycle);   // set Timer 1 in order to dimm LED light
     ScanMatrix();
+    ClrWdt();
  }
 
  if (PIR1bits.TMR1IF)       // timer 1 overflow?
  {// used for PWM LED light dimming
-
-
-    //reset row enable to partialize the ON period e reduce light????????????????????????????????????
-
-
+    SetRowOff();            // switch off all rows
     T1CONbits.TMR1ON=0;     //TMR1 off. It will be enabled at next cycle
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
  }

@@ -75,7 +75,6 @@ void Settings(void)
     #endif
     // period = CLKOUT * prescaler * TMR0
     Timer0_ms  = (int)(65535 - (1.5   * FCY / PRESCALER0)); // 1.5s
-    TIMER0_FLAG = 0;
     INTCONbits.TMR0IF = 0;// reset of interrupt flag
 
     //-------TIMER1 used for PWM LED light dimming
@@ -85,12 +84,8 @@ void Settings(void)
     T1CONbits.T1OSCEN=0;    //Timer1 osc off
     T1CONbits.T1RUN=0;      //Not Timer1 clock
     T1CONbits.T1SYNC=1;     //Do not synchronize external clock input
+    T1CONbits.T1CKPS=0;     //Prescaler 1:1
 
-    #ifdef PLL //	40MhZ
-        T1CONbits.T1CKPS=3; //Prescaler 1:8 clock = 40MHz
-    #else
-        T1CONbits.T1CKPS=2; //Prescaler 1:4 clock = 20MHz
-    #endif
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
 
      //-------TIMER3 used for LED matrix scan
@@ -104,7 +99,6 @@ void Settings(void)
     #endif
     // period = CLKOUT * prescaler * TMR3
     Timer3_ms  = (int)(65535 - (0.001   * FCY / PRESCALER3)); // 1ms
-    TIMER3_FLAG = 0;
     PIR2bits.TMR3IF = 0;// reset of interrupt flag
 }
 
@@ -123,6 +117,10 @@ void InterruptSettings(void)
     IPR1bits.TMR1IP=1;      //TMR1 interrupt high priority
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
     PIE1bits.TMR1IE=1;      //interrupt on TMR1 overflow enabled
+
+    IPR2bits.TMR3IP=1;      //TMR3 interrupt high priority
+    PIR2bits.TMR3IF = 0;    // reset of interrupt flag
+    PIE2bits.TMR3IE=1;      //interrupt on TMR3 overflow enabled
 }
 
 void RtcInit(void)
