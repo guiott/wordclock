@@ -165,13 +165,13 @@ void WordSetting()
         Matrix[i]=0;
     }
 
-    if(Min / 30)
+    if(Min <= 30)
     {// after hal hour the word is "to" the next hour, before is "after"
-        Hour++;
         Matrix[6]=0b000000011110;                   // E
     }
     else
     {
+        Hour++;
         Matrix[7]=0b100000000000;                   // MENO
     }
 
@@ -214,14 +214,23 @@ void WordSetting()
     {
         case 1:
             Matrix[0] = Matrix[0] | 0b000000000001;// first point
+            break;
 
         case 2:
+            Matrix[0] = Matrix[0] | 0b000000000001;// first point
             Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+            break;
 
         case 3:
+            Matrix[0] = Matrix[0] | 0b000000000001;// first point
+            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
             Matrix[2] = Matrix[2] | 0b000000000001;// add third point
+            break;
 
         case 4:
+            Matrix[0] = Matrix[0] | 0b000000000001;// first point
+            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+            Matrix[2] = Matrix[2] | 0b000000000001;// add third point
             Matrix[3] = Matrix[3] | 0b000000000001;// add fourth point
             break;
 
@@ -294,4 +303,5 @@ void WordSetting()
             break;
     }
 
+    SetColB();  
 }

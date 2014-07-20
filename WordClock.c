@@ -50,7 +50,6 @@ guido@guiott.com
 
 void main (void)	
 {	
-  
 INTCONbits.GIEH=0;	// disable interrupt high
 INTCONbits.GIEL=0;	// disable interrupt low
 
