@@ -4168,7 +4168,7 @@ char TimerStatus = 0;
 unsigned int Timer0_ms;
 unsigned int Timer3_ms;
 extern const int DutyTab[];
-unsigned int DutyCycle = DutyTab[10];
+extern unsigned char DutyCycle;
 
 unsigned int OneHzTick;
 
@@ -4180,13 +4180,18 @@ extern unsigned char RxFlag;
 extern unsigned char TxBuff[];
 extern unsigned char TxBuffLen;
 extern unsigned char TxBuffIndx;
+extern unsigned int Min;
+
+
+
+unsigned int PrevMin;
 
 # 13 "../prototypes.h"
 void Settings(void);
 void InterruptHandlerHigh (void);
 void InterruptHandlerLow (void);
 void SetTimer0(int Count);
-void SetTimer1(int Count);
+void SetTimer1(unsigned char Count);
 void SetTimer3(int Count);
 void I2cHighService (void);
 void I2cLowService (void);
@@ -4206,6 +4211,7 @@ void MatrixSetting(void);
 void SetColB(void);
 void SetRow(char Row);
 void SetRowOff(void);
+void WordSetting();
 
 
 # 13 "../statusBits.h"
@@ -4298,6 +4304,10 @@ struct FsmTable ReadTimeFsm[] =
 void main (void)
 {
 
+
+WordSetting();
+
+
 INTCONbits.GIEH=0;
 INTCONbits.GIEL=0;
 
@@ -4316,10 +4326,7 @@ VARbits1.bit0=0;
 CommSetting();
 MatrixSetting();
 InterruptSettings();
-
-SetColB();
-
-
+DutyCycle = 10;
 
 while (1)
 {
@@ -4342,6 +4349,12 @@ else if(I2c[0].Done == 1)
 {
 RtcReadTime();
 I2c[0].Done = 0;
+
+if(Min != PrevMin)
+{
+WordSetting();
+PrevMin = Min;
+}
 }
 
 if(CommFsmFlag)
@@ -4351,21 +4364,24 @@ CommFsmSched(FsmStructActive);
 
 I2cService();
 
+
+
 }
 }
 
-# 114
+# 123
 void SetTimer0(int Count)
 {
 
-# 121
+# 130
 TMR0H = Count >> 8;
 TMR0L = Count;
 }
 
-void SetTimer1(int Count)
+void SetTimer1(unsigned char DutyCicle)
 {
 
+int Count = DutyTab[DutyCycle];
 TMR1H = Count >> 8;
 TMR1L = Count;
 T1CONbits.TMR1ON=1;
@@ -4374,7 +4390,7 @@ T1CONbits.TMR1ON=1;
 void SetTimer3(int Count)
 {
 
-# 140
+# 150
 TMR3H = Count >> 8;
 TMR3L = Count;
 }

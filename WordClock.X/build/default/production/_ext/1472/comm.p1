@@ -2,18 +2,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "36 ../comm.h
 [s S393 ]
 [n S393 FsmTable ]
-[v F4179 `(uc ~T0 @X0 0 tf ]
+[v F4180 `(uc ~T0 @X0 0 tf ]
 "48
-[s S393 `uc 1 `*Cuc 1 `*F4179 1 ]
+[s S393 `uc 1 `*Cuc 1 `*F4180 1 ]
 [n S393 FsmTable Stat Str pCallback ]
 "61
-[c E4205 0 1 2 .. ]
-[n E4205 Fsm FsmRx FsmTx FsmEnd  ]
+[c E4206 0 1 2 .. ]
+[n E4206 Fsm FsmRx FsmTx FsmEnd  ]
 "32
 [v _CommFsmIdle `(uc ~T0 @X0 0 ef ]
 "31 ../prototypes.h
 [v _TimeDecode `(uc ~T0 @X0 0 ef ]
-[v F4221 `(uc ~T0 @X0 0 tf ]
+[v F4222 `(uc ~T0 @X0 0 tf ]
 "3802 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
 [v _SPBRGH `Vuc ~T0 @X0 0 e@4016 ]
 "3791
@@ -3759,7 +3759,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;prototypes.h: 14: void InterruptHandlerHigh (void);
 [; ;prototypes.h: 15: void InterruptHandlerLow (void);
 [; ;prototypes.h: 16: void SetTimer0(int Count);
-[; ;prototypes.h: 17: void SetTimer1(int Count);
+[; ;prototypes.h: 17: void SetTimer1(unsigned char Count);
 [; ;prototypes.h: 18: void SetTimer3(int Count);
 [; ;prototypes.h: 19: void I2cHighService (void);
 [; ;prototypes.h: 20: void I2cLowService (void);
@@ -3779,6 +3779,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;prototypes.h: 34: void SetColB(void);
 [; ;prototypes.h: 35: void SetRow(char Row);
 [; ;prototypes.h: 36: void SetRowOff(void);
+[; ;prototypes.h: 37: void WordSetting();
 [; ;string.h: 22: extern void * memcpy(void *, const void *, size_t);
 [; ;string.h: 23: extern void * memmove(void *, const void *, size_t);
 [; ;string.h: 24: extern void * memset(void *, int, size_t);
@@ -3884,31 +3885,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 :U ..
 "61
--> . `E4205 1 `uc
+-> . `E4206 1 `uc
 :s 1C
 &U _CommFsmIdle
 ..
 :U ..
 "62
--> . `E4205 0 `uc
+-> . `E4206 0 `uc
 :s 2C
 &U _CommFsmIdle
 ..
 :U ..
 "63
--> . `E4205 1 `uc
+-> . `E4206 1 `uc
 :s 3C
 &U _CommFsmIdle
 ..
 :U ..
 "64
--> . `E4205 0 `uc
+-> . `E4206 0 `uc
 :s 4C
 &U _TimeDecode
 ..
 :U ..
 "65
--> . `E4205 2 `uc
+-> . `E4206 2 `uc
 :s 5C
 &U _CommFsmIdle
 ..
@@ -3923,7 +3924,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;comm.h: 65: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
 [; ;comm.h: 66: };
 "5 ../comm.c
-[v _CommFsmState `*F4221 ~T0 @X0 1 e ]
+[v _CommFsmState `*F4222 ~T0 @X0 1 e ]
 [i _CommFsmState
 &U _CommFsmIdle
 ]
@@ -4169,9 +4170,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 398  ]
 "77
 [e :U 399 ]
-[e [\ _FsmStat , $ -> . `E4205 0 `uc 400
- , $ -> . `E4205 1 `uc 403
- , $ -> . `E4205 2 `uc 406
+[e [\ _FsmStat , $ -> . `E4206 0 `uc 400
+ , $ -> . `E4206 1 `uc 403
+ , $ -> . `E4206 2 `uc 406
  407 ]
 "133
 [e :U 398 ]

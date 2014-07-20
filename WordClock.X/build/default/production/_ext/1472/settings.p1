@@ -3865,7 +3865,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;prototypes.h: 14: void InterruptHandlerHigh (void);
 [; ;prototypes.h: 15: void InterruptHandlerLow (void);
 [; ;prototypes.h: 16: void SetTimer0(int Count);
-[; ;prototypes.h: 17: void SetTimer1(int Count);
+[; ;prototypes.h: 17: void SetTimer1(unsigned char Count);
 [; ;prototypes.h: 18: void SetTimer3(int Count);
 [; ;prototypes.h: 19: void I2cHighService (void);
 [; ;prototypes.h: 20: void I2cLowService (void);
@@ -3885,6 +3885,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;prototypes.h: 34: void SetColB(void);
 [; ;prototypes.h: 35: void SetRow(char Row);
 [; ;prototypes.h: 36: void SetRowOff(void);
+[; ;prototypes.h: 37: void WordSetting();
 "6 ../settings.c
 [v _Settings `(v ~T0 @X0 1 ef ]
 "7
