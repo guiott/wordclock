@@ -2,4 +2,17 @@
 
 .DS_Store
 
-WordClock.X/*
+WordClock.X/
+*.p1
+
+*.pre
+
+WordClock.X/funclist
+
+*.obj
+
+*.xml
+
+*.mk
+
+*.properties
