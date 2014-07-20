@@ -65,12 +65,16 @@ SetTimer3(Timer3_ms);
 T3CONbits.TMR3ON=1; 
 SQW_FLAG=0;
 
-RtcInit();
+// RtcInit();
 CommSetting();
+MatrixSetting();
 InterruptSettings();
 
 while (1)  // main loop
 {
+    ScanMatrix();
+
+    
     if(SQW_FLAG)
     {// 1Hz interrupt from RTC
         OneHzTick ++;
