@@ -21,6 +21,36 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S245 . . . . . . ]
 "4744
 [v _ADCON1bits `VS245 ~T0 @X0 0 e@4033 ]
+[s S243 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S243 . ADCS ACQT . ADFM ]
+[s S244 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S244 . ADCS0 ADCS1 ADCS2 ACQT0 ACQT1 ACQT2 ]
+[u S242 `S243 1 `S244 1 ]
+[n S242 . . . ]
+"4664
+[v _ADCON2bits `VS242 ~T0 @X0 0 e@4032 ]
+[s S252 :1 `uc 1 :1 `uc 1 ]
+[n S252 . . GO_NOT_DONE ]
+[s S253 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S253 . ADON GO_nDONE CHS ]
+[s S254 :1 `uc 1 :1 `uc 1 ]
+[n S254 . . GO_NOT_DONE ]
+[s S255 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S255 . . GO CHS0 CHS1 CHS2 CHS3 ]
+[s S256 :1 `uc 1 :1 `uc 1 ]
+[n S256 . . DONE ]
+[s S257 :1 `uc 1 :1 `uc 1 ]
+[n S257 . . NOT_DONE ]
+[s S258 :1 `uc 1 :1 `uc 1 ]
+[n S258 . . nDONE ]
+[s S259 :1 `uc 1 :1 `uc 1 ]
+[n S259 . . GO_DONE ]
+[s S260 :1 `uc 1 :1 `uc 1 ]
+[n S260 . . GODONE ]
+[u S251 `S252 1 `S253 1 `S254 1 `S255 1 `S256 1 `S257 1 `S258 1 `S259 1 `S260 1 ]
+[n S251 . . . . . . . . . . ]
+"4851
+[v _ADCON0bits `VS251 ~T0 @X0 0 e@4034 ]
 [s S331 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S331 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
 [s S332 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
@@ -143,22 +173,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S141 . . . . ]
 "2767
 [v _PIE1bits `VS141 ~T0 @X0 0 e@3997 ]
-[s S160 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S160 . CCP2IP TMR3IP HLVDIP BCLIP EEIP . CMIP OSCFIP ]
-[s S161 :2 `uc 1 :1 `uc 1 ]
-[n S161 . . LVDIP ]
-[u S159 `S160 1 `S161 1 ]
-[n S159 . . . ]
-"3130
-[v _IPR2bits `VS159 ~T0 @X0 0 e@4002 ]
-[s S154 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S154 . CCP2IE TMR3IE HLVDIE BCLIE EEIE . CMIE OSCFIE ]
-[s S155 :2 `uc 1 :1 `uc 1 ]
-[n S155 . . LVDIE ]
-[u S153 `S154 1 `S155 1 ]
-[n S153 . . . ]
-"3000
-[v _PIE2bits `VS153 ~T0 @X0 0 e@4000 ]
 "73 ../common.h
 [v _I2cAdr `uc ~T0 @X0 -> 0 `x e ]
 "24 ../prototypes.h
@@ -3909,231 +3923,252 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.c: 59: TRISE = 0b11111000;
 "59
 [e = _TRISE -> -> 248 `i `uc ]
-[; ;settings.c: 63: ADCON1bits.PCFG=0b1110;
-"63
+[; ;settings.c: 62: ADCON1bits.PCFG=0b1110;
+"62
 [e = . . _ADCON1bits 0 0 -> -> 14 `i `uc ]
-[; ;settings.c: 66: T0CONbits.TMR0ON=0;
-"66
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-[; ;settings.c: 67: T0CONbits.T08BIT=0;
+[; ;settings.c: 63: ADCON1bits.VCFG1=0;
+"63
+[e = . . _ADCON1bits 1 5 -> -> 0 `i `uc ]
+[; ;settings.c: 64: ADCON1bits.VCFG0=0;
+"64
+[e = . . _ADCON1bits 1 4 -> -> 0 `i `uc ]
+[; ;settings.c: 65: ADCON2bits.ADFM=0;
+"65
+[e = . . _ADCON2bits 0 3 -> -> 0 `i `uc ]
+[; ;settings.c: 67: ADCON2bits.ADCS=0b110;
 "67
-[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-[; ;settings.c: 68: T0CONbits.T0CS=0;
+[e = . . _ADCON2bits 0 0 -> -> 6 `i `uc ]
+[; ;settings.c: 68: ADCON2bits.ACQT=0b111;
 "68
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;settings.c: 69: T0CONbits.T0SE=0;
+[e = . . _ADCON2bits 0 1 -> -> 7 `i `uc ]
+[; ;settings.c: 69: ADCON0bits.CHS=0;
 "69
-[e = . . _T0CONbits 0 2 -> -> 0 `i `uc ]
-[; ;settings.c: 70: T0CONbits.PSA=0;
+[e = . . _ADCON0bits 1 2 -> -> 0 `i `uc ]
+[; ;settings.c: 70: ADCON0bits.ADON=1;
 "70
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;settings.c: 72: T0CONbits.T0PS=7;
-"72
-[e = . . _T0CONbits 0 0 -> -> 7 `i `uc ]
-[; ;settings.c: 77: Timer0_ms = (int)(65535 - (1.5 * (40000000 / 4) / 256));
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;settings.c: 74: T0CONbits.TMR0ON=0;
+"74
+[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
+[; ;settings.c: 75: T0CONbits.T08BIT=0;
+"75
+[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
+[; ;settings.c: 76: T0CONbits.T0CS=0;
+"76
+[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
+[; ;settings.c: 77: T0CONbits.T0SE=0;
 "77
-[e = _Timer0_ms -> -> - -> -> 65535 `l `d / * .1.5 -> / -> 40000000 `l -> -> 4 `i `l `d -> -> 256 `i `d `i `ui ]
-[; ;settings.c: 78: INTCONbits.TMR0IF = 0;
+[e = . . _T0CONbits 0 2 -> -> 0 `i `uc ]
+[; ;settings.c: 78: T0CONbits.PSA=0;
 "78
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;settings.c: 81: T1CONbits.TMR1ON=0;
-"81
-[e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
-[; ;settings.c: 82: T1CONbits.TMR1CS=0;
-"82
-[e = . . _T1CONbits 1 1 -> -> 0 `i `uc ]
-[; ;settings.c: 83: T1CONbits.RD16=1;
-"83
-[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
-[; ;settings.c: 84: T1CONbits.T1OSCEN=0;
-"84
-[e = . . _T1CONbits 1 3 -> -> 0 `i `uc ]
-[; ;settings.c: 85: T1CONbits.T1RUN=0;
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;settings.c: 80: T0CONbits.T0PS=7;
+"80
+[e = . . _T0CONbits 0 0 -> -> 7 `i `uc ]
+[; ;settings.c: 85: Timer0_ms = (int)(65535 - (1.5 * (40000000 / 4) / 256));
 "85
-[e = . . _T1CONbits 1 5 -> -> 0 `i `uc ]
-[; ;settings.c: 86: T1CONbits.T1SYNC=1;
+[e = _Timer0_ms -> -> - -> -> 65535 `l `d / * .1.5 -> / -> 40000000 `l -> -> 4 `i `l `d -> -> 256 `i `d `i `ui ]
+[; ;settings.c: 86: INTCONbits.TMR0IF = 0;
 "86
-[e = . . _T1CONbits 2 1 -> -> 1 `i `uc ]
-[; ;settings.c: 87: T1CONbits.T1CKPS=0;
-"87
-[e = . . _T1CONbits 1 4 -> -> 0 `i `uc ]
-[; ;settings.c: 89: PIR1bits.TMR1IF = 0;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;settings.c: 89: T1CONbits.TMR1ON=0;
 "89
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;settings.c: 92: T3CONbits.TMR3ON=0;
+[e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
+[; ;settings.c: 90: T1CONbits.TMR1CS=0;
+"90
+[e = . . _T1CONbits 1 1 -> -> 0 `i `uc ]
+[; ;settings.c: 91: T1CONbits.RD16=1;
+"91
+[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
+[; ;settings.c: 92: T1CONbits.T1OSCEN=0;
 "92
-[e = . . _T3CONbits 1 0 -> -> 0 `i `uc ]
-[; ;settings.c: 93: T3CONbits.RD16=1;
+[e = . . _T1CONbits 1 3 -> -> 0 `i `uc ]
+[; ;settings.c: 93: T1CONbits.T1RUN=0;
 "93
-[e = . . _T3CONbits 1 6 -> -> 1 `i `uc ]
-[; ;settings.c: 94: T3CONbits.TMR3CS=0;
+[e = . . _T1CONbits 1 5 -> -> 0 `i `uc ]
+[; ;settings.c: 94: T1CONbits.T1SYNC=1;
 "94
-[e = . . _T3CONbits 1 1 -> -> 0 `i `uc ]
-[; ;settings.c: 96: T3CONbits.T3CKPS=3;
-"96
-[e = . . _T3CONbits 1 4 -> -> 3 `i `uc ]
-[; ;settings.c: 101: Timer3_ms = (int)(65535 - (0.001 * (40000000 / 4) / 8));
+[e = . . _T1CONbits 2 1 -> -> 1 `i `uc ]
+[; ;settings.c: 97: T1CONbits.T1CKPS=3;
+"97
+[e = . . _T1CONbits 1 4 -> -> 3 `i `uc ]
+[; ;settings.c: 101: PIR1bits.TMR1IF = 0;
 "101
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;settings.c: 104: T3CONbits.TMR3ON=0;
+"104
+[e = . . _T3CONbits 1 0 -> -> 0 `i `uc ]
+[; ;settings.c: 105: T3CONbits.RD16=1;
+"105
+[e = . . _T3CONbits 1 6 -> -> 1 `i `uc ]
+[; ;settings.c: 106: T3CONbits.TMR3CS=0;
+"106
+[e = . . _T3CONbits 1 1 -> -> 0 `i `uc ]
+[; ;settings.c: 108: T3CONbits.T3CKPS=3;
+"108
+[e = . . _T3CONbits 1 4 -> -> 3 `i `uc ]
+[; ;settings.c: 113: Timer3_ms = (int)(65535 - (0.001 * (40000000 / 4) / 8));
+"113
 [e = _Timer3_ms -> -> - -> -> 65535 `l `d / * .0.001 -> / -> 40000000 `l -> -> 4 `i `l `d -> -> 8 `i `d `i `ui ]
-[; ;settings.c: 102: PIR2bits.TMR3IF = 0;
-"102
+[; ;settings.c: 114: PIR2bits.TMR3IF = 0;
+"114
 [e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-[; ;settings.c: 103: }
-"103
+[; ;settings.c: 115: }
+"115
 [e :UE 394 ]
 }
-"105
+"117
 [v _InterruptSettings `(v ~T0 @X0 1 ef ]
-"106
+"118
 {
-[; ;settings.c: 105: void InterruptSettings(void)
-[; ;settings.c: 106: {
+[; ;settings.c: 117: void InterruptSettings(void)
+[; ;settings.c: 118: {
 [e :U _InterruptSettings ]
 [f ]
-[; ;settings.c: 107: RCONbits.IPEN=1;
-"107
-[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
-[; ;settings.c: 109: INTCON2bits.TMR0IP=0;
-"109
-[e = . . _INTCON2bits 1 2 -> -> 0 `i `uc ]
-[; ;settings.c: 110: INTCONbits.TMR0IF = 0;
-"110
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;settings.c: 111: INTCONbits.TMR0IE=1;
-"111
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;settings.c: 113: INTCON2bits.INTEDG0=0;
-"113
-[e = . . _INTCON2bits 1 6 -> -> 0 `i `uc ]
-[; ;settings.c: 114: INTCONbits.INT0IF = 0;
-"114
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;settings.c: 115: INTCONbits.INT0IE=1;
-"115
-[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;settings.c: 117: IPR1bits.TMR1IP=1;
-"117
-[e = . . _IPR1bits 0 0 -> -> 1 `i `uc ]
-[; ;settings.c: 118: PIR1bits.TMR1IF = 0;
-"118
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;settings.c: 119: PIE1bits.TMR1IE=1;
+[; ;settings.c: 119: RCONbits.IPEN=1;
 "119
-[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;settings.c: 121: IPR2bits.TMR3IP=1;
+[e = . . _RCONbits 5 7 -> -> 1 `i `uc ]
+[; ;settings.c: 121: INTCON2bits.TMR0IP=0;
 "121
-[e = . . _IPR2bits 0 1 -> -> 1 `i `uc ]
-[; ;settings.c: 122: PIR2bits.TMR3IF = 0;
+[e = . . _INTCON2bits 1 2 -> -> 0 `i `uc ]
+[; ;settings.c: 122: INTCONbits.TMR0IF = 0;
 "122
-[e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-[; ;settings.c: 123: PIE2bits.TMR3IE=1;
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[; ;settings.c: 123: INTCONbits.TMR0IE=1;
 "123
-[e = . . _PIE2bits 0 1 -> -> 1 `i `uc ]
-[; ;settings.c: 124: }
-"124
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;settings.c: 125: INTCON2bits.INTEDG0=0;
+"125
+[e = . . _INTCON2bits 1 6 -> -> 0 `i `uc ]
+[; ;settings.c: 126: INTCONbits.INT0IF = 0;
+"126
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;settings.c: 127: INTCONbits.INT0IE=1;
+"127
+[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
+[; ;settings.c: 129: IPR1bits.TMR1IP=1;
+"129
+[e = . . _IPR1bits 0 0 -> -> 1 `i `uc ]
+[; ;settings.c: 130: PIR1bits.TMR1IF = 0;
+"130
+[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
+[; ;settings.c: 131: PIE1bits.TMR1IE=1;
+"131
+[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
+[; ;settings.c: 133: IPR1bits.ADIP=0;
+"133
+[e = . . _IPR1bits 0 6 -> -> 0 `i `uc ]
+[; ;settings.c: 134: PIR1bits.ADIF=0;
+"134
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;settings.c: 135: PIE1bits.ADIE=1;
+"135
+[e = . . _PIE1bits 0 6 -> -> 1 `i `uc ]
+[; ;settings.c: 136: }
+"136
 [e :UE 395 ]
 }
-"126
+"138
 [v _RtcInit `(v ~T0 @X0 1 ef ]
-"127
+"139
 {
-[; ;settings.c: 126: void RtcInit(void)
-[; ;settings.c: 127: {
+[; ;settings.c: 138: void RtcInit(void)
+[; ;settings.c: 139: {
 [e :U _RtcInit ]
 [f ]
-"132
+"144
 [v _Tmp `uc ~T0 @X0 1 a ]
-[; ;settings.c: 132: unsigned char Tmp;
-[; ;settings.c: 133: I2cAdr[0] = 0xD0;
-"133
+[; ;settings.c: 144: unsigned char Tmp;
+[; ;settings.c: 145: I2cAdr[0] = 0xD0;
+"145
 [e = *U + &U _I2cAdr * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2cAdr `ui `ux -> -> 208 `i `uc ]
-[; ;settings.c: 139: I2cData(0, 2, 7, 0b00010000, 0, 0, 0);
-"139
+[; ;settings.c: 151: I2cData(0, 2, 7, 0b00010000, 0, 0, 0);
+"151
 [e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 2 `i `uc -> -> 7 `i `uc -> -> 16 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;settings.c: 140: while(I2c[0].Done != 1)
-"140
+[; ;settings.c: 152: while(I2c[0].Done != 1)
+"152
 [e $U 397  ]
 [e :U 398 ]
-[; ;settings.c: 141: {
-"141
+[; ;settings.c: 153: {
+"153
 {
-[; ;settings.c: 142: I2cService();
-"142
+[; ;settings.c: 154: I2cService();
+"154
 [e ( _I2cService ..  ]
-"143
+"155
 }
 [e :U 397 ]
-"140
+"152
 [e $ != -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 398  ]
 [e :U 399 ]
-[; ;settings.c: 143: }
-[; ;settings.c: 145: I2cData(0, 1, 0, 0, 0, 0, 1);
-"145
+[; ;settings.c: 155: }
+[; ;settings.c: 157: I2cData(0, 1, 0, 0, 0, 0, 1);
+"157
 [e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;settings.c: 146: while(I2c[0].Done != 1)
-"146
+[; ;settings.c: 158: while(I2c[0].Done != 1)
+"158
 [e $U 400  ]
 [e :U 401 ]
-[; ;settings.c: 147: {
-"147
+[; ;settings.c: 159: {
+"159
 {
-[; ;settings.c: 148: I2cService();
-"148
+[; ;settings.c: 160: I2cService();
+"160
 [e ( _I2cService ..  ]
-"149
+"161
 }
 [e :U 400 ]
-"146
+"158
 [e $ != -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 401  ]
 [e :U 402 ]
-[; ;settings.c: 149: }
-[; ;settings.c: 151: Tmp = I2c[0].RxBuff[0] & 0b01111111;
-"151
+[; ;settings.c: 161: }
+[; ;settings.c: 163: Tmp = I2c[0].RxBuff[0] & 0b01111111;
+"163
 [e = _Tmp -> & -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 127 `i `uc ]
-[; ;settings.c: 153: I2cData(0, 1, 2, 0, 0, 0, 1);
-"153
+[; ;settings.c: 165: I2cData(0, 1, 2, 0, 0, 0, 1);
+"165
 [e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 1 `i `uc -> -> 2 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 1 `i `uc ]
-[; ;settings.c: 154: while(I2c[0].Done != 1)
-"154
+[; ;settings.c: 166: while(I2c[0].Done != 1)
+"166
 [e $U 403  ]
 [e :U 404 ]
-[; ;settings.c: 155: {
-"155
+[; ;settings.c: 167: {
+"167
 {
-[; ;settings.c: 156: I2cService();
-"156
+[; ;settings.c: 168: I2cService();
+"168
 [e ( _I2cService ..  ]
-"157
+"169
 }
 [e :U 403 ]
-"154
+"166
 [e $ != -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 404  ]
 [e :U 405 ]
-[; ;settings.c: 157: }
-[; ;settings.c: 159: Tmp = I2c[0].RxBuff[0] | 0b01000000;
-"159
+[; ;settings.c: 169: }
+[; ;settings.c: 171: Tmp = I2c[0].RxBuff[0] | 0b01000000;
+"171
 [e = _Tmp -> | -> *U + &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 * -> -> -> 0 `i `ui `ux -> -> # *U &U . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 2 `ui `ux `i -> 64 `i `uc ]
-[; ;settings.c: 161: I2cData(0, 2, 2, Tmp, 0, 0, 0);
-"161
+[; ;settings.c: 173: I2cData(0, 2, 2, Tmp, 0, 0, 0);
+"173
 [e ( _I2cData (4 , , , , , , -> -> 0 `i `uc -> -> 2 `i `uc -> -> 2 `i `uc _Tmp -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;settings.c: 162: while(I2c[0].Done != 1)
-"162
+[; ;settings.c: 174: while(I2c[0].Done != 1)
+"174
 [e $U 406  ]
 [e :U 407 ]
-[; ;settings.c: 163: {
-"163
+[; ;settings.c: 175: {
+"175
 {
-[; ;settings.c: 164: I2cService();
-"164
+[; ;settings.c: 176: I2cService();
+"176
 [e ( _I2cService ..  ]
-"165
+"177
 }
 [e :U 406 ]
-"162
+"174
 [e $ != -> . *U + &U _I2c * -> -> -> 0 `i `ui `ux -> -> # *U &U _I2c `ui `ux 1 `i -> 1 `i 407  ]
 [e :U 408 ]
-[; ;settings.c: 165: }
-[; ;settings.c: 166: }
-"166
+[; ;settings.c: 177: }
+[; ;settings.c: 178: }
+"178
 [e :UE 396 ]
 }

@@ -59,8 +59,16 @@ void Settings(void)
     TRISE = 0b11111000;
 
     //-------A/D converter
-    // only AN0 is an analog ports
-    ADCON1bits.PCFG=0b1110;
+    ADCON1bits.PCFG=0b1110; // only AN0 is an analog ports
+    ADCON1bits.VCFG1=0;     // VREF- source = Vss
+    ADCON1bits.VCFG0=0;     // VREF+ source = Vdd
+    ADCON2bits.ADFM=0;      // left justified. Only the most significant 8 bits
+                            // in ADRESH are going to be used
+    ADCON2bits.ADCS=0b110;	// A/D Conversion Clock, TAD = TOSC*64 = 1.6us
+    ADCON2bits.ACQT=0b111;	// A/D Acquisition Time = 20 TAD = 1.6*20 = 32us
+    ADCON0bits.CHS=0;       // AN0 is used
+    ADCON0bits.ADON=1;      // A/D on
+
 
     //-------TIMER0 used for RX timeout
     T0CONbits.TMR0ON=0;     //TMR0 off
@@ -84,8 +92,12 @@ void Settings(void)
     T1CONbits.T1OSCEN=0;    //Timer1 osc off
     T1CONbits.T1RUN=0;      //Not Timer1 clock
     T1CONbits.T1SYNC=1;     //Do not synchronize external clock input
-    T1CONbits.T1CKPS=0;     //Prescaler 1:1
 
+    #ifdef PLL //	40MhZ
+        T1CONbits.T1CKPS=3; //Prescaler 1:8 clock = 40MHz
+    #else
+        T1CONbits.T1CKPS=2; //Prescaler 1:4 clock = 20MHz
+    #endif
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
 
      //-------TIMER3 used for LED matrix scan
@@ -118,9 +130,9 @@ void InterruptSettings(void)
     PIR1bits.TMR1IF = 0;    // reset of interrupt flag
     PIE1bits.TMR1IE=1;      //interrupt on TMR1 overflow enabled
 
-    IPR2bits.TMR3IP=1;      //TMR3 interrupt high priority
-    PIR2bits.TMR3IF = 0;    // reset of interrupt flag
-    PIE2bits.TMR3IE=1;      //interrupt on TMR3 overflow enabled
+    IPR1bits.ADIP=0;        //AD interrupt low priority
+    PIR1bits.ADIF=0;        // reset of interrupt flag
+    PIE1bits.ADIE=1;        //interrupt on AD overflow enabled
 }
 
 void RtcInit(void)

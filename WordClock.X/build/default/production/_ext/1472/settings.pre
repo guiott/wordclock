@@ -4961,8 +4961,16 @@ TRISC = 0b00000000;
 TRISE = 0b11111000;
 
 
-
 ADCON1bits.PCFG=0b1110;
+ADCON1bits.VCFG1=0;
+ADCON1bits.VCFG0=0;
+ADCON2bits.ADFM=0;
+
+ADCON2bits.ADCS=0b110;
+ADCON2bits.ACQT=0b111;
+ADCON0bits.CHS=0;
+ADCON0bits.ADON=1;
+
 
 
 T0CONbits.TMR0ON=0;
@@ -4973,7 +4981,7 @@ T0CONbits.PSA=0;
 
 T0CONbits.T0PS=7;
 
-# 77
+# 85
 Timer0_ms = (int)(65535 - (1.5 * (40000000 / 4) / 256));
 INTCONbits.TMR0IF = 0;
 
@@ -4984,8 +4992,11 @@ T1CONbits.RD16=1;
 T1CONbits.T1OSCEN=0;
 T1CONbits.T1RUN=0;
 T1CONbits.T1SYNC=1;
-T1CONbits.T1CKPS=0;
 
+
+T1CONbits.T1CKPS=3;
+
+# 101
 PIR1bits.TMR1IF = 0;
 
 
@@ -4995,7 +5006,7 @@ T3CONbits.TMR3CS=0;
 
 T3CONbits.T3CKPS=3;
 
-# 101
+# 113
 Timer3_ms = (int)(65535 - (0.001 * (40000000 / 4) / 8));
 PIR2bits.TMR3IF = 0;
 }
@@ -5016,19 +5027,19 @@ IPR1bits.TMR1IP=1;
 PIR1bits.TMR1IF = 0;
 PIE1bits.TMR1IE=1;
 
-IPR2bits.TMR3IP=1;
-PIR2bits.TMR3IF = 0;
-PIE2bits.TMR3IE=1;
+IPR1bits.ADIP=0;
+PIR1bits.ADIF=0;
+PIE1bits.ADIE=1;
 }
 
 void RtcInit(void)
 {
 
-# 132
+# 144
 unsigned char Tmp;
 I2cAdr[0] = 0xD0;
 
-# 139
+# 151
 I2cData(0, 2, 7, 0b00010000, 0, 0, 0);
 while(I2c[0].Done != 1)
 {

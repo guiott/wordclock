@@ -4186,6 +4186,11 @@ extern unsigned int Min;
 
 unsigned int PrevMin;
 
+
+
+
+unsigned int LightIndx;
+
 # 13 "../prototypes.h"
 void Settings(void);
 void InterruptHandlerHigh (void);
@@ -4303,11 +4308,6 @@ struct FsmTable ReadTimeFsm[] =
 # 51 "../WordClock.c"
 void main (void)
 {
-
-
-WordSetting();
-
-
 INTCONbits.GIEH=0;
 INTCONbits.GIEL=0;
 
@@ -4326,6 +4326,7 @@ VARbits1.bit0=0;
 CommSetting();
 MatrixSetting();
 InterruptSettings();
+LightIndx=(int)((float)20/(255-0)*256);
 DutyCycle = 10;
 
 while (1)
@@ -4369,11 +4370,11 @@ I2cService();
 }
 }
 
-# 123
+# 119
 void SetTimer0(int Count)
 {
 
-# 130
+# 126
 TMR0H = Count >> 8;
 TMR0L = Count;
 }
@@ -4390,7 +4391,7 @@ T1CONbits.TMR1ON=1;
 void SetTimer3(int Count)
 {
 
-# 150
+# 146
 TMR3H = Count >> 8;
 TMR3L = Count;
 }
@@ -4459,6 +4460,14 @@ INTCONbits.TMR0IF=0;
 RXerr = 2;
 RxFlag = 1;
 }
+
+if (PIR1bits.ADIF)
+{
+PIR1bits.ADIF=0;
+DutyCycle=(ADRESH*LightIndx)>>8;
+
+}
+
 }
 
 
@@ -4486,6 +4495,7 @@ if (INTCONbits.INT0IF)
 LATBbits.LATB5 ^= 1;
 VARbits1.bit0=1;
 INTCONbits.INT0IF = 0;
+ADCON0bits.GO_DONE = 1;
 }
 
 if (PIR1bits.SSPIF)

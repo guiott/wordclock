@@ -68,10 +68,11 @@ SQW_FLAG=0;
 CommSetting();
 MatrixSetting();
 InterruptSettings();
+LightIndx=(int)((float)20/(MAX_LIGHT-MIN_LIGHT)*256);//duty cycle multiplier INT
 DutyCycle = 10;     // preset LED PWM to 50%
-    
+
 while (1)  // main loop
-{    
+{
     if(SQW_FLAG)
     {// 1Hz interrupt from RTC
         OneHzTick ++;
@@ -210,46 +211,54 @@ void interrupt low_priority low_isr (void)
          RXerr = 2;                     // RX timeout error
          RxFlag	= 1;                    // RX over
     }
+
+     if (PIR1bits.ADIF)
+    {// A new AD value has been read
+         PIR1bits.ADIF=0;               // reset flag di interrupt
+         DutyCycle=(ADRESH*LightIndx)>>8;//only the higest 8 bits are read
+                                         //>>8 to convert back index to int
+    }
+
 }
 
 /*===========================================================================*/
 // High priority interrupt vector
 void interrupt high_isr (void)
 {
- if (PIR2bits.TMR3IF)   // timer 3 overflow?
- {// used for LED matrix scan
-    PIR2bits.TMR3IF = 0;    // reset of interrupt flag
-    SetTimer3(Timer3_ms);
-    SetTimer1(DutyCycle);   // set Timer 1 in order to dimm LED light
-    ScanMatrix();
-    ClrWdt();
- }
+     if (PIR2bits.TMR3IF)   // timer 3 overflow?
+     {// used for LED matrix scan
+        PIR2bits.TMR3IF = 0;    // reset of interrupt flag
+        SetTimer3(Timer3_ms);
+        SetTimer1(DutyCycle);   // set Timer 1 in order to dimm LED light
+        ScanMatrix();
+        ClrWdt();
+     }
 
- if (PIR1bits.TMR1IF)       // timer 1 overflow?
- {// used for PWM LED light dimming
-    SetRowOff();            // switch off all rows
-    T1CONbits.TMR1ON=0;     //TMR1 off. It will be enabled at next cycle
-    PIR1bits.TMR1IF = 0;    // reset of interrupt flag
- }
+     if (PIR1bits.TMR1IF)       // timer 1 overflow?
+     {// used for PWM LED light dimming
+        SetRowOff();            // switch off all rows
+        T1CONbits.TMR1ON=0;     //TMR1 off. It will be enabled at next cycle
+        PIR1bits.TMR1IF = 0;    // reset of interrupt flag
+     }
 
- if (INTCONbits.INT0IF)     // External interrupt on iNT0 -> RTC 1Hz clock
- {
-    LED ^= 1;               // blink yellow led at 0.5Hz
-    SQW_FLAG=1;
-    INTCONbits.INT0IF = 0;  // reset of interrupt flag
- }
+     if (INTCONbits.INT0IF)     // External interrupt on iNT0 -> RTC 1Hz clock
+     {
+        LED ^= 1;               // blink yellow led at 0.5Hz
+        SQW_FLAG=1;
+        INTCONbits.INT0IF = 0;  // reset of interrupt flag
+        ADCON0bits.GO_DONE = 1; // start ambient light reading
+     }
 
-if (PIR1bits.SSPIF)         // an I2C event is over
-{
-    PIR1bits.SSPIF = 0;     // reset I2c interrupt flag
-    I2cEventFlag = 1;       // I2cLowService will be executed
-}
+    if (PIR1bits.SSPIF)         // an I2C event is over
+    {
+        PIR1bits.SSPIF = 0;     // reset I2c interrupt flag
+        I2cEventFlag = 1;       // I2cLowService will be executed
+    }
 
-if (PIR2bits.BCLIF)         // I2c bus collision
-{
-    PIR2bits.BCLIF = 0;     // interrupt flag reset
-    I2cEventFlag = 1;       // execute I2cLowService
-    I2cBusCollFlag = 1;     // a collision occurred
-}
-
+    if (PIR2bits.BCLIF)         // I2c bus collision
+    {
+        PIR2bits.BCLIF = 0;     // interrupt flag reset
+        I2cEventFlag = 1;       // execute I2cLowService
+        I2cBusCollFlag = 1;     // a collision occurred
+    }
 }   

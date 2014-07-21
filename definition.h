@@ -48,4 +48,9 @@ extern unsigned int Min;
 
 unsigned int PrevMin;       // to compare the time elapsed
 
+#define MAX_LIGHT  255
+#define MIN_LIGHT  0
+
+unsigned int LightIndx;//duty cycle multiplier
+
 #endif
