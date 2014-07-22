@@ -19,3 +19,19 @@ WordClock.X/nbproject/Makefile-genesis.properties
 WordClock.X/nbproject/Makefile-local-default.mk
 
 WordClock.X/nbproject/private/SuppressibleMessageMemo.properties
+
+.DS_Store
+
+WordClock.X/build/default/production/_ext/1472/settings.p1
+
+WordClock.X/build/default/production/_ext/1472/settings.p1.d
+
+WordClock.X/build/default/production/_ext/1472/settings.pre
+
+WordClock.X/build/default/production/_ext/1472/WordClock.pre
+
+WordClock.X/nbproject/Makefile-genesis.properties
+
+WordClock.X/nbproject/Makefile-local-default.mk
+
+WordClock.X/nbproject/private/SuppressibleMessageMemo.properties
