@@ -78,8 +78,8 @@ High and low level I2C procedures
 #include <plib/i2c.h>
 #include "myi2c.h"
 
-int i = 0;
-int j = 0;
+int i=0;
+int j=0;
 
 void I2cSettings(void)
 {

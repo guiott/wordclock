@@ -22,8 +22,8 @@ void I2cSettings(void);
 void I2cService (void);
 unsigned char I2cBuffChk (unsigned char I2cDevice);
 void I2cData (unsigned char DevPtr, unsigned char TxBytes,
-                unsigned char TX1, unsigned char TX2, unsigned char TX3,
-                unsigned char TX4, unsigned char RxBytes);
+               unsigned char TX1, unsigned char TX2, unsigned char TX3,
+               unsigned char TX4, unsigned char RxBytes);
 void RtcReadTime(void);
 void RtcWriteTime(void);
 void RtcInit(void);

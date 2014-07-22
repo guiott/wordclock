@@ -1,4 +1,4 @@
-*** COMMUNICATION FINITE STATE MACHINE
+*** COMMUNICATION FINITE STATE MACHINE ***
 
 When a new cycle need to be started in the communication Finite State Machine,
 to kick off the FSM execution call:

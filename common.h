@@ -26,13 +26,13 @@
 
     #endif
 
-    #define FCY   (XTAL_FREQ / 4)       //crystal divided by four
-    #define TCY   1 / (float)FCY        //single instruction period
+    #define FCY (XTAL_FREQ / 4)        //crystal divided by four
+    #define TCY 1 / (float)FCY         //single instruction period
 
-    #define TMR1_TICK TCY*PRESCALER1    //TIMER1 tick duration
+    #define TMR1_TICK TCY*PRESCALER1   //TIMER1 tick duration
 
     //----- Flags
-    #define SQW_FLAG VARbits1.bit0      // it's time to transmit
+    #define SQW_FLAG VARbits1.bit0     // it's time to transmit
 
     //----- Macro
     #if !defined(MIN)

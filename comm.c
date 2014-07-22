@@ -2,7 +2,7 @@
 #include "comm.h"
 #include "common.h"
 
-char (*CommFsmState )(void) = &CommFsmIdle ;
+char (*CommFsmState )(void) = &CommFsmIdle;
 
 void CommSetting(void)
 {
