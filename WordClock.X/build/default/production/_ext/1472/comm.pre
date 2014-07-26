@@ -4964,9 +4964,11 @@ unsigned char RxFsmFlag = 0;
 
 typedef char (*FsmCallbackFunc)(void);
 char CommFsmIdle(void);
+char CommFsmClear(void);
+char CommFsmWriteRTC(void);
 void CommSetting(void);
 void StartTx(const unsigned char * TxStr );
-void StartRx(const unsigned char * TxStr );
+void StartRx(const unsigned char * RxStr );
 void CommFsmSched(struct FsmTable * FsmStruct);
 void StartCommFsmSched(struct FsmTable * FsmStruct);
 
@@ -4986,42 +4988,42 @@ const unsigned char * Str;
 FsmCallbackFunc pCallback;
 };
 
-enum Fsm{FsmRx, FsmTx, FsmEnd};
+enum Fsm{FsmRx, FsmTx, FsmDo, FsmEnd};
 
 struct FsmTable ReadTimeFsm[] =
 {
 
-# 61
+# 69
 {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
 {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
-{FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
+{FsmTx, "open\r\n", (FsmCallbackFunc)CommFsmIdle},
 {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
-{FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+{FsmDo, "", (FsmCallbackFunc)CommFsmWriteRTC},
+{FsmEnd, "", (FsmCallbackFunc)CommFsmClear}
 };
 
 # 5 "../comm.c"
-char (*CommFsmState )(void) = &CommFsmIdle ;
+char (*CommFsmState )(void) = &CommFsmIdle;
 
 void CommSetting(void)
 {
 
-# 31
-SPBRGH=0;
-SPBRG=0x0411;
-
-# 38
-TXSTAbits.BRGH=1;
+# 29
 TXSTAbits.SYNC=0;
 BAUDCONbits.BRG16=1;
+TXSTAbits.BRGH=1;
 
 
+SPBRGH=0x04;
+SPBRG =0x11;
+
+# 41
 RCSTAbits.SPEN=1;
 RCSTAbits.CREN=1;
 RCSTAbits.SREN=0;
 TXSTAbits.TX9=0;
 RCSTAbits.RX9=0;
-TXSTAbits.TXEN=0;
-TXSTAbits.TXEN=0;
+TXSTAbits.TXEN=1;
 IPR1bits.TXIP=0;
 PIE1bits.TXIE=0;
 
@@ -5031,6 +5033,18 @@ PIE1bits.RCIE=0;
 
 char CommFsmIdle(void)
 {
+return '0' ;
+}
+
+char CommFsmClear(void)
+{
+memset(RXbuff,'\0',64);
+return '0' ;
+}
+
+char CommFsmWriteRTC(void)
+{
+RtcWriteTime();
 return '0' ;
 }
 
@@ -5065,7 +5079,7 @@ FsmIndx++;
 RxFsmFlag = 0;
 }
 
-# 104
+# 113
 break;
 
 case FsmTx:
@@ -5086,6 +5100,13 @@ TxFsmFlag = 0;
 
 break;
 
+case FsmDo:
+CommFsmState = (* FsmStruct[FsmIndx].pCallback);
+(* CommFsmState) () ;
+FsmIndx++;
+break;
+
+
 case FsmEnd:
 CommFsmState = (* FsmStruct[FsmIndx].pCallback);
 (* CommFsmState) () ;
@@ -5104,11 +5125,11 @@ CommFsmFlag = 0;
 TxBuffLen = strlen(TxStr);
 TxBuffIndx=0;
 memcpy(TxBuff, TxStr, TxBuffLen);
-TXSTAbits.TXEN=1;
+
 PIE1bits.TXIE=1;
 }
 
-void StartRx(const unsigned char * TxStr )
+void StartRx(const unsigned char * RxStr )
 {
 CommFsmFlag = 0;
 RxBuffIndx=0;

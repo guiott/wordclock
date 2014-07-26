@@ -1,23 +1,23 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"36 ../comm.h
+"38 ../comm.h
 [s S393 ]
 [n S393 FsmTable ]
 [v F4180 `(uc ~T0 @X0 0 tf ]
-"48
+"50
 [s S393 `uc 1 `*Cuc 1 `*F4180 1 ]
 [n S393 FsmTable Stat Str pCallback ]
-"61
-[c E4206 0 1 2 .. ]
-[n E4206 Fsm FsmRx FsmTx FsmEnd  ]
+"69
+[c E4210 0 1 2 3 .. ]
+[n E4210 Fsm FsmRx FsmTx FsmDo FsmEnd  ]
 "32
 [v _CommFsmIdle `(uc ~T0 @X0 0 ef ]
 "31 ../prototypes.h
 [v _TimeDecode `(uc ~T0 @X0 0 ef ]
-[v F4222 `(uc ~T0 @X0 0 tf ]
-"3802 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
-[v _SPBRGH `Vuc ~T0 @X0 0 e@4016 ]
-"3791
-[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
+"34 ../comm.h
+[v _CommFsmWriteRTC `(uc ~T0 @X0 0 ef ]
+"33
+[v _CommFsmClear `(uc ~T0 @X0 0 ef ]
+[v F4229 `(uc ~T0 @X0 0 tf ]
 [s S179 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S179 . TX9D TRMT BRGH SENDB SYNC TXEN TX9 CSRC ]
 [s S180 :2 `uc 1 :1 `uc 1 ]
@@ -42,7 +42,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S189 . TXD8 ]
 [u S178 `S179 1 `S180 1 `S181 1 `S182 1 `S183 1 `S184 1 `S185 1 `S186 1 `S187 1 `S188 1 `S189 1 ]
 [n S178 . . . . . . . . . . . . ]
-"3532
+"3532 /Applications/microchip/xc8/v1.31/include/pic18f4620.h
 [v _TXSTAbits `VS178 ~T0 @X0 0 e@4012 ]
 [s S226 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S226 . ABDEN WUE . BRG16 TXCKP RXDTP RCIDL ABDOVF ]
@@ -54,6 +54,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S225 . . . . ]
 "4294
 [v _BAUDCONbits `VS225 ~T0 @X0 0 e@4024 ]
+"3802
+[v _SPBRGH `Vuc ~T0 @X0 0 e@4016 ]
+"3791
+[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
 [s S165 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S165 . RX9D OERR FERR ADDEN CREN SREN RX9 SPEN ]
 [s S166 :3 `uc 1 :1 `uc 1 ]
@@ -90,9 +94,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S140 . . . . ]
 "2767
 [v _PIE1bits `VS140 ~T0 @X0 0 e@3997 ]
-"35 ../comm.h
+"24 /Applications/microchip/xc8/v1.31/include/string.h
+[v _memset `(*v ~T0 @X0 0 ef3`*v`i`ui ]
+"28 ../prototypes.h
+[v _RtcWriteTime `(v ~T0 @X0 0 ef ]
+"37 ../comm.h
 [v _StartRx `(v ~T0 @X0 0 ef1`*Cuc ]
-"34
+"36
 [v _StartTx `(v ~T0 @X0 0 ef1`*Cuc ]
 "55 /Applications/microchip/xc8/v1.31/include/string.h
 [v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
@@ -3843,92 +3851,101 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;comm.h: 29: unsigned char RxFsmFlag = 0;
 [; ;comm.h: 31: typedef char (*FsmCallbackFunc)(void);
 [; ;comm.h: 32: char CommFsmIdle(void);
-[; ;comm.h: 33: void CommSetting(void);
-[; ;comm.h: 34: void StartTx(const unsigned char * TxStr );
-[; ;comm.h: 35: void StartRx(const unsigned char * TxStr );
-[; ;comm.h: 36: void CommFsmSched(struct FsmTable * FsmStruct);
-[; ;comm.h: 37: void StartCommFsmSched(struct FsmTable * FsmStruct);
-"39
-[v _TxBuff `uc ~T0 @X0 -> 32 `i e ]
-[; ;comm.h: 39: unsigned char TxBuff[32];
-"40
-[v _TxBuffLen `uc ~T0 @X0 1 e ]
-[; ;comm.h: 40: unsigned char TxBuffLen;
+[; ;comm.h: 33: char CommFsmClear(void);
+[; ;comm.h: 34: char CommFsmWriteRTC(void);
+[; ;comm.h: 35: void CommSetting(void);
+[; ;comm.h: 36: void StartTx(const unsigned char * TxStr );
+[; ;comm.h: 37: void StartRx(const unsigned char * RxStr );
+[; ;comm.h: 38: void CommFsmSched(struct FsmTable * FsmStruct);
+[; ;comm.h: 39: void StartCommFsmSched(struct FsmTable * FsmStruct);
 "41
-[v _TxBuffIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 41: unsigned char TxBuffIndx;
+[v _TxBuff `uc ~T0 @X0 -> 32 `i e ]
+[; ;comm.h: 41: unsigned char TxBuff[32];
 "42
-[v _RXerr `ui ~T0 @X0 1 e ]
-[; ;comm.h: 42: unsigned int RXerr;
+[v _TxBuffLen `uc ~T0 @X0 1 e ]
+[; ;comm.h: 42: unsigned char TxBuffLen;
 "43
-[v _RXbuff `uc ~T0 @X0 -> 64 `i e ]
-[; ;comm.h: 43: unsigned char RXbuff[64];
+[v _TxBuffIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 43: unsigned char TxBuffIndx;
 "44
-[v _RxBuffIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 44: unsigned char RxBuffIndx;
+[v _RXerr `ui ~T0 @X0 1 e ]
+[; ;comm.h: 44: unsigned int RXerr;
 "45
-[v _FsmIndx `uc ~T0 @X0 1 e ]
-[; ;comm.h: 45: unsigned char FsmIndx;
+[v _RXbuff `uc ~T0 @X0 -> 64 `i e ]
+[; ;comm.h: 45: unsigned char RXbuff[64];
 "46
+[v _RxBuffIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 46: unsigned char RxBuffIndx;
+"47
+[v _FsmIndx `uc ~T0 @X0 1 e ]
+[; ;comm.h: 47: unsigned char FsmIndx;
+"48
 [v _FsmStructActive `*S393 ~T0 @X0 1 e ]
-[; ;comm.h: 46: struct FsmTable * FsmStructActive;
-[; ;comm.h: 48: struct FsmTable
-[; ;comm.h: 49: {
-[; ;comm.h: 50: unsigned char Stat;
-[; ;comm.h: 51: const unsigned char * Str;
-[; ;comm.h: 52: FsmCallbackFunc pCallback;
-[; ;comm.h: 53: };
-[; ;comm.h: 55: enum Fsm{FsmRx, FsmTx, FsmEnd};
-"57
+[; ;comm.h: 48: struct FsmTable * FsmStructActive;
+[; ;comm.h: 50: struct FsmTable
+[; ;comm.h: 51: {
+[; ;comm.h: 52: unsigned char Stat;
+[; ;comm.h: 53: const unsigned char * Str;
+[; ;comm.h: 54: FsmCallbackFunc pCallback;
+[; ;comm.h: 55: };
+[; ;comm.h: 57: enum Fsm{FsmRx, FsmTx, FsmDo, FsmEnd};
+"59
 [v _ReadTimeFsm `S393 ~T0 @X0 -> 0 `x e ]
 [i _ReadTimeFsm
 :U ..
 :U ..
-"61
--> . `E4206 1 `uc
+"69
+-> . `E4210 1 `uc
 :s 1C
 &U _CommFsmIdle
 ..
 :U ..
-"62
--> . `E4206 0 `uc
+"70
+-> . `E4210 0 `uc
 :s 2C
 &U _CommFsmIdle
 ..
 :U ..
-"63
--> . `E4206 1 `uc
+"71
+-> . `E4210 1 `uc
 :s 3C
 &U _CommFsmIdle
 ..
 :U ..
-"64
--> . `E4206 0 `uc
+"72
+-> . `E4210 0 `uc
 :s 4C
 &U _TimeDecode
 ..
 :U ..
-"65
--> . `E4206 2 `uc
+"73
+-> . `E4210 2 `uc
 :s 5C
-&U _CommFsmIdle
+&U _CommFsmWriteRTC
+..
+:U ..
+"74
+-> . `E4210 3 `uc
+:s 6C
+&U _CommFsmClear
 ..
 ..
 ]
-[; ;comm.h: 57: struct FsmTable ReadTimeFsm[] =
-[; ;comm.h: 58: {
-[; ;comm.h: 61: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 62: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 63: {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
-[; ;comm.h: 64: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
-[; ;comm.h: 65: {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
-[; ;comm.h: 66: };
+[; ;comm.h: 59: struct FsmTable ReadTimeFsm[] =
+[; ;comm.h: 60: {
+[; ;comm.h: 69: {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 70: {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 71: {FsmTx, "open\r\n", (FsmCallbackFunc)CommFsmIdle},
+[; ;comm.h: 72: {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
+[; ;comm.h: 73: {FsmDo, "", (FsmCallbackFunc)CommFsmWriteRTC},
+[; ;comm.h: 74: {FsmEnd, "", (FsmCallbackFunc)CommFsmClear}
+[; ;comm.h: 75: };
 "5 ../comm.c
-[v _CommFsmState `*F4222 ~T0 @X0 1 e ]
+[v _CommFsmState `*F4229 ~T0 @X0 1 e ]
 [i _CommFsmState
 &U _CommFsmIdle
 ]
-[; ;comm.c: 5: char (*CommFsmState )(void) = &CommFsmIdle ;
+[; ;comm.c: 5: char (*CommFsmState )(void) = &CommFsmIdle;
 "7
 [v _CommSetting `(v ~T0 @X0 1 ef ]
 "8
@@ -3937,308 +3954,357 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;comm.c: 8: {
 [e :U _CommSetting ]
 [f ]
-[; ;comm.c: 31: SPBRGH=0;
-"31
-[e = _SPBRGH -> -> 0 `i `uc ]
-[; ;comm.c: 32: SPBRG=0x0411;
-"32
-[e = _SPBRG -> -> 1041 `i `uc ]
-[; ;comm.c: 38: TXSTAbits.BRGH=1;
-"38
-[e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
-[; ;comm.c: 39: TXSTAbits.SYNC=0;
-"39
+[; ;comm.c: 29: TXSTAbits.SYNC=0;
+"29
 [e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;comm.c: 40: BAUDCONbits.BRG16=1;
-"40
+[; ;comm.c: 30: BAUDCONbits.BRG16=1;
+"30
 [e = . . _BAUDCONbits 0 3 -> -> 1 `i `uc ]
-[; ;comm.c: 43: RCSTAbits.SPEN=1;
-"43
+[; ;comm.c: 31: TXSTAbits.BRGH=1;
+"31
+[e = . . _TXSTAbits 0 2 -> -> 1 `i `uc ]
+[; ;comm.c: 34: SPBRGH=0x04;
+"34
+[e = _SPBRGH -> -> 4 `i `uc ]
+[; ;comm.c: 35: SPBRG =0x11;
+"35
+[e = _SPBRG -> -> 17 `i `uc ]
+[; ;comm.c: 41: RCSTAbits.SPEN=1;
+"41
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-[; ;comm.c: 44: RCSTAbits.CREN=1;
-"44
+[; ;comm.c: 42: RCSTAbits.CREN=1;
+"42
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;comm.c: 45: RCSTAbits.SREN=0;
-"45
+[; ;comm.c: 43: RCSTAbits.SREN=0;
+"43
 [e = . . _RCSTAbits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 46: TXSTAbits.TX9=0;
-"46
+[; ;comm.c: 44: TXSTAbits.TX9=0;
+"44
 [e = . . _TXSTAbits 0 6 -> -> 0 `i `uc ]
-[; ;comm.c: 47: RCSTAbits.RX9=0;
-"47
+[; ;comm.c: 45: RCSTAbits.RX9=0;
+"45
 [e = . . _RCSTAbits 0 6 -> -> 0 `i `uc ]
-[; ;comm.c: 48: TXSTAbits.TXEN=0;
-"48
-[e = . . _TXSTAbits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 49: TXSTAbits.TXEN=0;
-"49
-[e = . . _TXSTAbits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 50: IPR1bits.TXIP=0;
-"50
+[; ;comm.c: 46: TXSTAbits.TXEN=1;
+"46
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;comm.c: 47: IPR1bits.TXIP=0;
+"47
 [e = . . _IPR1bits 0 4 -> -> 0 `i `uc ]
-[; ;comm.c: 51: PIE1bits.TXIE=0;
-"51
+[; ;comm.c: 48: PIE1bits.TXIE=0;
+"48
 [e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;comm.c: 53: IPR1bits.RCIP=0;
-"53
+[; ;comm.c: 50: IPR1bits.RCIP=0;
+"50
 [e = . . _IPR1bits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 54: PIE1bits.RCIE=0;
-"54
+[; ;comm.c: 51: PIE1bits.RCIE=0;
+"51
 [e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
-[; ;comm.c: 55: }
-"55
+[; ;comm.c: 52: }
+"52
 [e :UE 394 ]
 }
-"57
+"54
 [v _CommFsmIdle `(uc ~T0 @X0 1 ef ]
-"58
+"55
 {
-[; ;comm.c: 57: char CommFsmIdle(void)
-[; ;comm.c: 58: {
+[; ;comm.c: 54: char CommFsmIdle(void)
+[; ;comm.c: 55: {
 [e :U _CommFsmIdle ]
 [f ]
-[; ;comm.c: 59: return '0' ;
-"59
+[; ;comm.c: 56: return '0' ;
+"56
 [e ) -> -> 48 `ui `uc ]
 [e $UE 395  ]
-[; ;comm.c: 60: }
-"60
+[; ;comm.c: 57: }
+"57
 [e :UE 395 ]
 }
-"62
-[v _StartCommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
-"63
+"59
+[v _CommFsmClear `(uc ~T0 @X0 1 ef ]
+"60
 {
-[; ;comm.c: 62: void StartCommFsmSched(struct FsmTable * FsmStruct)
-[; ;comm.c: 63: {
-[e :U _StartCommFsmSched ]
-"62
-[v _FsmStruct `*S393 ~T0 @X0 1 r1 ]
-"63
+[; ;comm.c: 59: char CommFsmClear(void)
+[; ;comm.c: 60: {
+[e :U _CommFsmClear ]
 [f ]
-[; ;comm.c: 64: FsmIndx = 0;
-"64
-[e = _FsmIndx -> -> 0 `i `uc ]
-[; ;comm.c: 65: CommFsmFlag = 1;
-"65
-[e = _CommFsmFlag -> -> 1 `i `uc ]
-[; ;comm.c: 66: TxFsmFlag = 0;
-"66
-[e = _TxFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 67: RxFsmFlag = 0;
-"67
-[e = _RxFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 68: FsmStructActive = FsmStruct;
-"68
-[e = _FsmStructActive _FsmStruct ]
-[; ;comm.c: 69: }
-"69
+[; ;comm.c: 61: memset(RXbuff,'\0',64);
+"61
+[e ( _memset (3 , , -> &U _RXbuff `*v -> -> 0 `ui `i -> -> 64 `i `ui ]
+[; ;comm.c: 62: return '0' ;
+"62
+[e ) -> -> 48 `ui `uc ]
+[e $UE 396  ]
+[; ;comm.c: 63: }
+"63
 [e :UE 396 ]
 }
+"65
+[v _CommFsmWriteRTC `(uc ~T0 @X0 1 ef ]
+"66
+{
+[; ;comm.c: 65: char CommFsmWriteRTC(void)
+[; ;comm.c: 66: {
+[e :U _CommFsmWriteRTC ]
+[f ]
+[; ;comm.c: 67: RtcWriteTime();
+"67
+[e ( _RtcWriteTime ..  ]
+[; ;comm.c: 68: return '0' ;
+"68
+[e ) -> -> 48 `ui `uc ]
+[e $UE 397  ]
+[; ;comm.c: 69: }
+"69
+[e :UE 397 ]
+}
 "71
-[v _CommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
+[v _StartCommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
 "72
 {
-[; ;comm.c: 71: void CommFsmSched(struct FsmTable * FsmStruct)
+[; ;comm.c: 71: void StartCommFsmSched(struct FsmTable * FsmStruct)
 [; ;comm.c: 72: {
-[e :U _CommFsmSched ]
+[e :U _StartCommFsmSched ]
 "71
 [v _FsmStruct `*S393 ~T0 @X0 1 r1 ]
 "72
 [f ]
+[; ;comm.c: 73: FsmIndx = 0;
 "73
-[v _FsmStat `uc ~T0 @X0 1 a ]
-[; ;comm.c: 73: unsigned char FsmStat;
-[; ;comm.c: 75: FsmStat = FsmStruct[FsmIndx].Stat;
+[e = _FsmIndx -> -> 0 `i `uc ]
+[; ;comm.c: 74: CommFsmFlag = 1;
+"74
+[e = _CommFsmFlag -> -> 1 `i `uc ]
+[; ;comm.c: 75: TxFsmFlag = 0;
 "75
-[e = _FsmStat . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 0 ]
-[; ;comm.c: 77: switch (FsmStat)
+[e = _TxFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 76: RxFsmFlag = 0;
+"76
+[e = _RxFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 77: FsmStructActive = FsmStruct;
 "77
-[e $U 399  ]
-[; ;comm.c: 78: {
+[e = _FsmStructActive _FsmStruct ]
+[; ;comm.c: 78: }
 "78
-{
-[; ;comm.c: 79: case FsmRx:
-"79
-[e :U 400 ]
-[; ;comm.c: 80: if(RxFsmFlag==0)
+[e :UE 398 ]
+}
 "80
-[e $ ! == -> _RxFsmFlag `i -> 0 `i 401  ]
-[; ;comm.c: 81: {
+[v _CommFsmSched `(v ~T0 @X0 1 ef1`*S393 ]
 "81
 {
-[; ;comm.c: 82: StartRx(FsmStruct[FsmIndx].Str);
+[; ;comm.c: 80: void CommFsmSched(struct FsmTable * FsmStruct)
+[; ;comm.c: 81: {
+[e :U _CommFsmSched ]
+"80
+[v _FsmStruct `*S393 ~T0 @X0 1 r1 ]
+"81
+[f ]
 "82
-[e ( _StartRx (1 . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 1 ]
-"83
-}
-[; ;comm.c: 83: }
-[e $U 402  ]
+[v _FsmStat `uc ~T0 @X0 1 a ]
+[; ;comm.c: 82: unsigned char FsmStat;
+[; ;comm.c: 84: FsmStat = FsmStruct[FsmIndx].Stat;
 "84
-[e :U 401 ]
-[; ;comm.c: 84: else
-[; ;comm.c: 85: {
-"85
-{
-[; ;comm.c: 87: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
+[e = _FsmStat . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 0 ]
+[; ;comm.c: 86: switch (FsmStat)
+"86
+[e $U 401  ]
+[; ;comm.c: 87: {
 "87
-[e = _CommFsmState &U *U . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 2 ]
-[; ;comm.c: 88: (* CommFsmState) () ;
+{
+[; ;comm.c: 88: case FsmRx:
 "88
-[e ( *U _CommFsmState ..  ]
-[; ;comm.c: 89: FsmIndx++;
-"89
-[e ++ _FsmIndx -> -> 1 `i `uc ]
-[; ;comm.c: 90: RxFsmFlag = 0;
-"90
-[e = _RxFsmFlag -> -> 0 `i `uc ]
-"91
-}
 [e :U 402 ]
-[; ;comm.c: 91: }
-[; ;comm.c: 104: break;
-"104
-[e $U 398  ]
-[; ;comm.c: 106: case FsmTx:
-"106
+[; ;comm.c: 89: if(RxFsmFlag==0)
+"89
+[e $ ! == -> _RxFsmFlag `i -> 0 `i 403  ]
+[; ;comm.c: 90: {
+"90
+{
+[; ;comm.c: 91: StartRx(FsmStruct[FsmIndx].Str);
+"91
+[e ( _StartRx (1 . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 1 ]
+"92
+}
+[; ;comm.c: 92: }
+[e $U 404  ]
+"93
 [e :U 403 ]
-[; ;comm.c: 109: if(TxFsmFlag==0)
-"109
-[e $ ! == -> _TxFsmFlag `i -> 0 `i 404  ]
-[; ;comm.c: 110: {
-"110
+[; ;comm.c: 93: else
+[; ;comm.c: 94: {
+"94
 {
-[; ;comm.c: 111: StartTx(FsmStruct[FsmIndx].Str);
-"111
-[e ( _StartTx (1 . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 1 ]
-"112
-}
-[; ;comm.c: 112: }
-[e $U 405  ]
-"113
-[e :U 404 ]
-[; ;comm.c: 113: else
-[; ;comm.c: 114: {
-"114
-{
-[; ;comm.c: 116: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
-"116
+[; ;comm.c: 96: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
+"96
 [e = _CommFsmState &U *U . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 2 ]
-[; ;comm.c: 117: (* CommFsmState) () ;
-"117
+[; ;comm.c: 97: (* CommFsmState) () ;
+"97
 [e ( *U _CommFsmState ..  ]
-[; ;comm.c: 118: FsmIndx++;
-"118
+[; ;comm.c: 98: FsmIndx++;
+"98
 [e ++ _FsmIndx -> -> 1 `i `uc ]
-[; ;comm.c: 119: TxFsmFlag = 0;
-"119
-[e = _TxFsmFlag -> -> 0 `i `uc ]
-"120
+[; ;comm.c: 99: RxFsmFlag = 0;
+"99
+[e = _RxFsmFlag -> -> 0 `i `uc ]
+"100
 }
+[e :U 404 ]
+[; ;comm.c: 100: }
+[; ;comm.c: 113: break;
+"113
+[e $U 400  ]
+[; ;comm.c: 115: case FsmTx:
+"115
 [e :U 405 ]
-[; ;comm.c: 120: }
-[; ;comm.c: 122: break;
+[; ;comm.c: 118: if(TxFsmFlag==0)
+"118
+[e $ ! == -> _TxFsmFlag `i -> 0 `i 406  ]
+[; ;comm.c: 119: {
+"119
+{
+[; ;comm.c: 120: StartTx(FsmStruct[FsmIndx].Str);
+"120
+[e ( _StartTx (1 . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 1 ]
+"121
+}
+[; ;comm.c: 121: }
+[e $U 407  ]
 "122
-[e $U 398  ]
-[; ;comm.c: 124: case FsmEnd:
-"124
 [e :U 406 ]
+[; ;comm.c: 122: else
+[; ;comm.c: 123: {
+"123
+{
 [; ;comm.c: 125: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
 "125
 [e = _CommFsmState &U *U . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 2 ]
 [; ;comm.c: 126: (* CommFsmState) () ;
 "126
 [e ( *U _CommFsmState ..  ]
-[; ;comm.c: 127: CommFsmFlag = 0;
+[; ;comm.c: 127: FsmIndx++;
 "127
-[e = _CommFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 128: break;
+[e ++ _FsmIndx -> -> 1 `i `uc ]
+[; ;comm.c: 128: TxFsmFlag = 0;
 "128
-[e $U 398  ]
-[; ;comm.c: 130: default:
-"130
+[e = _TxFsmFlag -> -> 0 `i `uc ]
+"129
+}
 [e :U 407 ]
-[; ;comm.c: 131: CommFsmFlag = 0;
+[; ;comm.c: 129: }
+[; ;comm.c: 131: break;
 "131
-[e = _CommFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 132: break;
-"132
-[e $U 398  ]
+[e $U 400  ]
+[; ;comm.c: 133: case FsmDo:
 "133
-}
-[; ;comm.c: 133: }
-[e $U 398  ]
-"77
-[e :U 399 ]
-[e [\ _FsmStat , $ -> . `E4206 0 `uc 400
- , $ -> . `E4206 1 `uc 403
- , $ -> . `E4206 2 `uc 406
- 407 ]
-"133
-[e :U 398 ]
-[; ;comm.c: 134: }
+[e :U 408 ]
+[; ;comm.c: 134: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
 "134
-[e :UE 397 ]
-}
+[e = _CommFsmState &U *U . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 2 ]
+[; ;comm.c: 135: (* CommFsmState) () ;
+"135
+[e ( *U _CommFsmState ..  ]
+[; ;comm.c: 136: FsmIndx++;
 "136
-[v _StartTx `(v ~T0 @X0 1 ef1`*Cuc ]
+[e ++ _FsmIndx -> -> 1 `i `uc ]
+[; ;comm.c: 137: break;
 "137
-{
-[; ;comm.c: 136: void StartTx(const unsigned char * TxStr )
-[; ;comm.c: 137: {
-[e :U _StartTx ]
-"136
-[v _TxStr `*Cuc ~T0 @X0 1 r1 ]
-"137
-[f ]
-[; ;comm.c: 138: CommFsmFlag = 0;
-"138
-[e = _CommFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 139: TxBuffLen = strlen(TxStr);
-"139
-[e = _TxBuffLen -> ( _strlen (1 _TxStr `uc ]
-[; ;comm.c: 140: TxBuffIndx=0;
+[e $U 400  ]
+[; ;comm.c: 140: case FsmEnd:
 "140
-[e = _TxBuffIndx -> -> 0 `i `uc ]
-[; ;comm.c: 141: memcpy(TxBuff, TxStr, TxBuffLen);
+[e :U 409 ]
+[; ;comm.c: 141: CommFsmState = (* FsmStruct[FsmIndx].pCallback);
 "141
-[e ( _memcpy (3 , , -> &U _TxBuff `*v -> _TxStr `*Cv -> _TxBuffLen `ui ]
-[; ;comm.c: 142: TXSTAbits.TXEN=1;
+[e = _CommFsmState &U *U . *U + _FsmStruct * -> _FsmIndx `ux -> -> # *U _FsmStruct `ui `ux 2 ]
+[; ;comm.c: 142: (* CommFsmState) () ;
 "142
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-[; ;comm.c: 143: PIE1bits.TXIE=1;
+[e ( *U _CommFsmState ..  ]
+[; ;comm.c: 143: CommFsmFlag = 0;
 "143
-[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
-[; ;comm.c: 144: }
-"144
-[e :UE 408 ]
-}
-"146
-[v _StartRx `(v ~T0 @X0 1 ef1`*Cuc ]
-"147
-{
-[; ;comm.c: 146: void StartRx(const unsigned char * TxStr )
-[; ;comm.c: 147: {
-[e :U _StartRx ]
-"146
-[v _TxStr `*Cuc ~T0 @X0 1 r1 ]
-"147
-[f ]
-[; ;comm.c: 148: CommFsmFlag = 0;
-"148
 [e = _CommFsmFlag -> -> 0 `i `uc ]
-[; ;comm.c: 149: RxBuffIndx=0;
+[; ;comm.c: 144: break;
+"144
+[e $U 400  ]
+[; ;comm.c: 146: default:
+"146
+[e :U 410 ]
+[; ;comm.c: 147: CommFsmFlag = 0;
+"147
+[e = _CommFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 148: break;
+"148
+[e $U 400  ]
 "149
-[e = _RxBuffIndx -> -> 0 `i `uc ]
-[; ;comm.c: 150: PIE1bits.RCIE=1;
+}
+[; ;comm.c: 149: }
+[e $U 400  ]
+"86
+[e :U 401 ]
+[e [\ _FsmStat , $ -> . `E4210 0 `uc 402
+ , $ -> . `E4210 1 `uc 405
+ , $ -> . `E4210 2 `uc 408
+ , $ -> . `E4210 3 `uc 409
+ 410 ]
+"149
+[e :U 400 ]
+[; ;comm.c: 150: }
 "150
+[e :UE 399 ]
+}
+"152
+[v _StartTx `(v ~T0 @X0 1 ef1`*Cuc ]
+"153
+{
+[; ;comm.c: 152: void StartTx(const unsigned char * TxStr )
+[; ;comm.c: 153: {
+[e :U _StartTx ]
+"152
+[v _TxStr `*Cuc ~T0 @X0 1 r1 ]
+"153
+[f ]
+[; ;comm.c: 154: CommFsmFlag = 0;
+"154
+[e = _CommFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 155: TxBuffLen = strlen(TxStr);
+"155
+[e = _TxBuffLen -> ( _strlen (1 _TxStr `uc ]
+[; ;comm.c: 156: TxBuffIndx=0;
+"156
+[e = _TxBuffIndx -> -> 0 `i `uc ]
+[; ;comm.c: 157: memcpy(TxBuff, TxStr, TxBuffLen);
+"157
+[e ( _memcpy (3 , , -> &U _TxBuff `*v -> _TxStr `*Cv -> _TxBuffLen `ui ]
+[; ;comm.c: 159: PIE1bits.TXIE=1;
+"159
+[e = . . _PIE1bits 0 4 -> -> 1 `i `uc ]
+[; ;comm.c: 160: }
+"160
+[e :UE 411 ]
+}
+"162
+[v _StartRx `(v ~T0 @X0 1 ef1`*Cuc ]
+"163
+{
+[; ;comm.c: 162: void StartRx(const unsigned char * RxStr )
+[; ;comm.c: 163: {
+[e :U _StartRx ]
+"162
+[v _RxStr `*Cuc ~T0 @X0 1 r1 ]
+"163
+[f ]
+[; ;comm.c: 164: CommFsmFlag = 0;
+"164
+[e = _CommFsmFlag -> -> 0 `i `uc ]
+[; ;comm.c: 165: RxBuffIndx=0;
+"165
+[e = _RxBuffIndx -> -> 0 `i `uc ]
+[; ;comm.c: 166: PIE1bits.RCIE=1;
+"166
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;comm.c: 151: }
-"151
-[e :UE 409 ]
+[; ;comm.c: 167: }
+"167
+[e :UE 412 ]
 }
 [a 2C 67 77 68 0 ]
 [a 4C 42 67 76 79 83 42 0 ]
 [a 1C 36 36 36 0 ]
-[a 3C 111 112 101 110 10 0 ]
+[a 3C 111 112 101 110 13 10 0 ]
 [a 5C 0 ]
+[a 6C 0 ]

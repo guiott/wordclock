@@ -3131,13 +3131,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _i
 -> 0 `i
 ]
-[; ;myi2c.c: 81: int i = 0;
+[; ;myi2c.c: 81: int i=0;
 "82
 [v _j `i ~T0 @X0 1 e ]
 [i _j
 -> 0 `i
 ]
-[; ;myi2c.c: 82: int j = 0;
+[; ;myi2c.c: 82: int j=0;
 "84
 [v _I2cSettings `(v ~T0 @X0 1 ef ]
 "85

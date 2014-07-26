@@ -4032,8 +4032,8 @@ char I2cStat;
 enum I2cBusStates{STRT, WRITE, ADRR, READ, ACK, NACK, RSTART, STP, FINE};
 
 # 81 "../myi2c.c"
-int i = 0;
-int j = 0;
+int i=0;
+int j=0;
 
 void I2cSettings(void)
 {
