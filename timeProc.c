@@ -29,22 +29,26 @@ void RtcWriteTime(void)
     unsigned char Units;
     unsigned char Tens;
 
+    unsigned int BcdSec;
+    unsigned int BcdMin;
+    unsigned int BcdHour;
+
     Tens = NtpSec / 10;
     Units = NtpSec - (Tens * 10);
-    Sec = (Tens << 4) | Units;
+    BcdSec = (Tens << 4) | Units;
 
 
     Tens = NtpMin / 10;
     Units = NtpMin - (Tens * 10);
-    Min = (Tens << 4) | Units;
+    BcdMin = (Tens << 4) | Units;
 
     Tens = NtpHour / 10;
     Units = NtpHour - (Tens * 10);
-    Hour = (Tens<<4) | Units;
+    BcdHour = (Tens<<4) | Units;
 
     if(I2cBuffChk(RTC_PTR))
     {// if previous operations are over, start a new one
-        I2cData(RTC_PTR, 4, 0, Sec, Min, Hour, 0);
+        I2cData(RTC_PTR, 4, 0, BcdSec, BcdMin, BcdHour, 0);
     }
 }
 
@@ -56,9 +60,9 @@ char TimeDecode(void)
 
     TimePoint = strcspn(RXbuff, ":" );
 
-    Hour = atoi(RXbuff+TimePoint-2);
-    Min  = atoi(RXbuff+TimePoint+1);
-    Sec  = atoi(RXbuff+TimePoint+4);
+    NtpHour = atoi(RXbuff+TimePoint-2);
+    NtpMin  = atoi(RXbuff+TimePoint+1);
+    NtpSec  = atoi(RXbuff+TimePoint+4);
     return '0';
 }
 

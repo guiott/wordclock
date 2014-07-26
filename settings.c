@@ -48,7 +48,7 @@ void Settings(void)
      * RD6 = Column G
      * RD7 = Column H
     */
-    TRISC = 0b00000000;
+    TRISD = 0b00000000;
 
     /*-------Port	E
      * RE0 = Column I

@@ -26,27 +26,24 @@ void CommSetting(void)
     0x0208         20MHz	9600      0,03%
     0x0411         20MHz	4800      0,03%
      */
-
-    #ifdef PLL //	40MhZ
-      SPBRGH=0;
-      SPBRG=0x0411;     //	9600	@	40MHz
-    #else
-      SPBRGH=0;
-      SPBRG=0x0208;     //	9600	@	20MHz
-    #endif
-
-    TXSTAbits.BRGH=1;   //High baud rate
     TXSTAbits.SYNC=0;   //asynchronous
     BAUDCONbits.BRG16=1;//16 bit Baud Rate Generator
+    TXSTAbits.BRGH=1;   //High baud rate
 
+    #ifdef PLL //	40MhZ
+      SPBRGH=0x04;
+      SPBRG =0x11;     //	9600	@	40MHz
+    #else
+      SPBRGH=0x02;
+      SPBRG =0x08;     //	9600	@	20MHz
+    #endif
 
     RCSTAbits.SPEN=1;   //enable serial port pins
     RCSTAbits.CREN=1;   //enable reception
     RCSTAbits.SREN=0;   //no effect
     TXSTAbits.TX9=0;    //8-bit transmission
     RCSTAbits.RX9=0;    //8-bit reception
-    TXSTAbits.TXEN=0;   //reset transmitter
-    TXSTAbits.TXEN=0;   //disable the transmitter
+    TXSTAbits.TXEN=1;   //enable the transmitter
     IPR1bits.TXIP=0;    //TX interrupt low priority
     PIE1bits.TXIE=0;    //disable TX interrupts
 
@@ -56,6 +53,18 @@ void CommSetting(void)
 
 char CommFsmIdle(void)
 {// do nothing
+        return '0' ;
+}
+
+char CommFsmClear(void)
+{// reset RX buffer
+    memset(RXbuff,'\0',MAX_RX_BUFFER);
+        return '0' ;
+}
+
+char CommFsmWriteRTC(void)
+{// write time just read from INRIM to RTC
+    RtcWriteTime();
         return '0' ;
 }
 
@@ -121,6 +130,13 @@ void CommFsmSched(struct FsmTable * FsmStruct)
           
           break;
 
+        case FsmDo:
+          CommFsmState = (* FsmStruct[FsmIndx].pCallback);
+          (* CommFsmState) () ;
+          FsmIndx++;
+          break;
+
+
         case FsmEnd:
           CommFsmState = (* FsmStruct[FsmIndx].pCallback);
           (* CommFsmState) () ;
@@ -139,13 +155,13 @@ void StartTx(const unsigned char * TxStr )
     TxBuffLen = strlen(TxStr);
     TxBuffIndx=0;
     memcpy(TxBuff, TxStr, TxBuffLen);
-    TXSTAbits.TXEN=1;   //enable the transmitter
-    PIE1bits.TXIE=1; //enable TX interrupts
+    // TXSTAbits.TXEN=1;   //enable the transmitter
+    PIE1bits.TXIE=1;    //enable TX interrupts
 }
 
-void StartRx(const unsigned char * TxStr )
+void StartRx(const unsigned char * RxStr )
 {
-    CommFsmFlag = 0;  // stop the FSM untile the full buffer has been sent
+    CommFsmFlag = 0;  // stop the FSM untile the full buffer has been received
     RxBuffIndx=0;
     PIE1bits.RCIE=1;  // enable RX interrupts
 }

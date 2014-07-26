@@ -30,9 +30,11 @@ unsigned char RxFsmFlag = 0;  // Rx FSM phase flag
 
 typedef char (*FsmCallbackFunc)(void);   // pointer to function
 char CommFsmIdle(void);
+char CommFsmClear(void);
+char CommFsmWriteRTC(void);
 void CommSetting(void);
 void StartTx(const unsigned char * TxStr );
-void StartRx(const unsigned char * TxStr );
+void StartRx(const unsigned char * RxStr );
 void CommFsmSched(struct FsmTable * FsmStruct);
 void StartCommFsmSched(struct FsmTable * FsmStruct);
 
@@ -52,17 +54,24 @@ struct FsmTable
     FsmCallbackFunc pCallback;  // function to call after RX or TX is over
 };
 
-enum Fsm{FsmRx, FsmTx, FsmEnd};
+enum Fsm{FsmRx, FsmTx, FsmDo, FsmEnd};
 
 struct FsmTable ReadTimeFsm[] =
 {/* scheduler used for comm protocol with WiFLy
   this reads time from http://www.inrim.it
  */
+    /*
+    {FsmTx, "exit\r\n", (FsmCallbackFunc)CommFsmIdle},  ????????????????????????????? add procedure to exit from command mode ??????????
+    {FsmRx, "EXIT", (FsmCallbackFunc)CommFsmIdle},
+    {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+    */
+
     {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
     {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
-    {FsmTx, "open\n", (FsmCallbackFunc)CommFsmIdle},
+    {FsmTx, "open\r\n", (FsmCallbackFunc)CommFsmIdle},
     {FsmRx, "*CLOS*", (FsmCallbackFunc)TimeDecode},
-    {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+    {FsmDo, "", (FsmCallbackFunc)CommFsmWriteRTC},
+    {FsmEnd, "", (FsmCallbackFunc)CommFsmClear}
 };
 
 #endif	/* COMM_H */

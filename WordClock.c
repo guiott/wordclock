@@ -76,10 +76,9 @@ while (1)  // main loop
     if(SQW_FLAG)
     {// 1Hz interrupt from RTC
         OneHzTick ++;
-        if(!(OneHzTick % 900))
+        if(!(OneHzTick % 9)) //??????????????????????????????????????????????????????? debug. actually 900
         {//every 60*15 = 900 seconds read Time Server via WiFly and update RTC
             StartCommFsmSched(ReadTimeFsm); //read time from http://www.inrim.it
-            RtcWriteTime();
         }
         else if(I2cBuffChk(RTC_PTR))
         {// if previous operations are over, start a new one
@@ -106,6 +105,7 @@ while (1)  // main loop
     }
 
     I2cService(); // controls if I2C needs service
+
 }  // main loop
 } // main ==========
 
@@ -188,13 +188,13 @@ void interrupt low_priority low_isr (void)
         }
     }
 
-    if (PIR1bits.TXIF) // TX buffer empty. Cleared when TXREG is written
+    if (PIR1bits.TXIF && PIE1bits.TXIE) // TX buffer empty. Cleared when TXREG is written
     {// load TXREG with the next byte to send
         TXREG = TxBuff[TxBuffIndx];
         TxBuffIndx++;
         if(TxBuffIndx>=TxBuffLen)
         {
-            TXSTAbits.TXEN=0; //disable the transmitter
+            // TXSTAbits.TXEN=0; //disable the transmitter
             PIE1bits.TXIE=0; //disable TX interrupts
             TxFsmFlag=1;     // call the second phase of active FSM step
             CommFsmFlag=1;
