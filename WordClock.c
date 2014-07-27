@@ -71,14 +71,18 @@ InterruptSettings();
 LightIndx=(int)((float)20/(MAX_LIGHT-MIN_LIGHT)*256);//duty cycle multiplier INT
 DutyCycle = 10;     // preset LED PWM to 50%
 
+StartCommFsmSched(ReadTimeFsm); //read time from http://www.inrim.i
+TimeSync = 1; // start time sync
+
 while (1)  // main loop
 {
     if(SQW_FLAG)
     {// 1Hz interrupt from RTC
         OneHzTick ++;
-        if(!(OneHzTick % 9)) //??????????????????????????????????????????????????????? debug. actually 900
-        {//every 60*15 = 900 seconds read Time Server via WiFly and update RTC
+        if(!(OneHzTick % 300))
+        {//every 60*5 = 300 seconds read Time Server via WiFly and update RTC
             StartCommFsmSched(ReadTimeFsm); //read time from http://www.inrim.it
+            TimeSync = 1; // start time sync
         }
         else if(I2cBuffChk(RTC_PTR))
         {// if previous operations are over, start a new one
@@ -86,6 +90,16 @@ while (1)  // main loop
         }
 
         SQW_FLAG=0; // I2C reading procedure from RTC has been started
+
+        if(CommFsmDoneFlag)    // the FSM has been started
+        {
+            CommFsmDoneFlag++;
+            if(CommFsmDoneFlag > 60)//after 1min FSM has not yet been executed
+            {
+                StartCommFsmSched(ExitCmdFsm); // try exit WiFly from CMD mode
+            }
+        }
+
     }
     else if(I2c[RTC_PTR].Done == 1)
     {// I2C operation terminated. Data have been read from RTC

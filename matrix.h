@@ -119,5 +119,6 @@ const int DutyTab[]=
 extern unsigned int Sec;
 extern unsigned int Min;
 extern unsigned int Hour;
+extern unsigned char TimeSync;
 #endif	/* MATRIX_H */
 

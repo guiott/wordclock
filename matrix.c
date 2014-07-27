@@ -166,7 +166,7 @@ void WordSetting()
     }
 
     if(Min <= 30)
-    {// after hal hour the word is "to" the next hour, before is "after"
+    {// after half hour the word is "to" the next hour, before is "after"
         Matrix[6]=0b000000011110;                   // E
     }
     else
@@ -210,34 +210,37 @@ void WordSetting()
             break;
     }
 
-    switch(Min % 5)
+    if(!TimeSync)// light up points only if RTC time is in sync with INRIM
     {
-        case 1:
-            Matrix[0] = Matrix[0] | 0b000000000001;// first point
-            break;
+        switch(Min % 5)
+        {
+            case 1:
+                Matrix[0] = Matrix[0] | 0b000000000001;// first point
+                break;
 
-        case 2:
-            Matrix[0] = Matrix[0] | 0b000000000001;// first point
-            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
-            break;
+            case 2:
+                Matrix[0] = Matrix[0] | 0b000000000001;// first point
+                Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+                break;
 
-        case 3:
-            Matrix[0] = Matrix[0] | 0b000000000001;// first point
-            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
-            Matrix[2] = Matrix[2] | 0b000000000001;// add third point
-            break;
+            case 3:
+                Matrix[0] = Matrix[0] | 0b000000000001;// first point
+                Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+                Matrix[2] = Matrix[2] | 0b000000000001;// add third point
+                break;
 
-        case 4:
-            Matrix[0] = Matrix[0] | 0b000000000001;// first point
-            Matrix[1] = Matrix[1] | 0b000000000001;// add second point
-            Matrix[2] = Matrix[2] | 0b000000000001;// add third point
-            Matrix[3] = Matrix[3] | 0b000000000001;// add fourth point
-            break;
+            case 4:
+                Matrix[0] = Matrix[0] | 0b000000000001;// first point
+                Matrix[1] = Matrix[1] | 0b000000000001;// add second point
+                Matrix[2] = Matrix[2] | 0b000000000001;// add third point
+                Matrix[3] = Matrix[3] | 0b000000000001;// add fourth point
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
     }
-
+    
     Hour = Hour % 12;
 
     if(Hour == 1)

@@ -23,10 +23,12 @@ extern "C" {
 #include <string.h>
 #include "common.h"
 
-unsigned char RxFlag;         // RX procedure status
-unsigned char CommFsmFlag=0;  // FSM active flag
-unsigned char TxFsmFlag;      // Tx FSM phase flag
-unsigned char RxFsmFlag = 0;  // Rx FSM phase flag
+unsigned char RxFlag;           // RX procedure status
+unsigned char CommFsmFlag=0;    // FSM active flag
+unsigned char CommFsmDoneFlag=0;// FSM is over?
+unsigned char TimeSync=0;       // Time has be syncronized?
+unsigned char TxFsmFlag;        // Tx FSM phase flag
+unsigned char RxFsmFlag = 0;    // Rx FSM phase flag
 
 typedef char (*FsmCallbackFunc)(void);   // pointer to function
 char CommFsmIdle(void);
@@ -56,16 +58,17 @@ struct FsmTable
 
 enum Fsm{FsmRx, FsmTx, FsmDo, FsmEnd};
 
+struct FsmTable ExitCmdFsm[] =
+{// scheduler used to exit from command mode
+    {FsmTx, "exit\r\n", (FsmCallbackFunc)CommFsmIdle}, 
+    {FsmRx, "EXIT", (FsmCallbackFunc)CommFsmIdle},
+    {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
+};
+
 struct FsmTable ReadTimeFsm[] =
 {/* scheduler used for comm protocol with WiFLy
   this reads time from http://www.inrim.it
  */
-    /*
-    {FsmTx, "exit\r\n", (FsmCallbackFunc)CommFsmIdle},  ????????????????????????????? add procedure to exit from command mode ??????????
-    {FsmRx, "EXIT", (FsmCallbackFunc)CommFsmIdle},
-    {FsmEnd, "", (FsmCallbackFunc)CommFsmIdle}
-    */
-
     {FsmTx, "$$$", (FsmCallbackFunc)CommFsmIdle},
     {FsmRx, "CMD", (FsmCallbackFunc)CommFsmIdle},
     {FsmTx, "open\r\n", (FsmCallbackFunc)CommFsmIdle},

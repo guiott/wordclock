@@ -65,16 +65,18 @@ char CommFsmClear(void)
 char CommFsmWriteRTC(void)
 {// write time just read from INRIM to RTC
     RtcWriteTime();
+    TimeSync=0; // time has been synchronized
         return '0' ;
 }
 
 void StartCommFsmSched(struct FsmTable * FsmStruct)
 {// initialize the FSM
     FsmIndx = 0;
-    CommFsmFlag = 1;    // kick off the FSM
+    CommFsmFlag = 1;        // kick off the FSM
     TxFsmFlag = 0;
     RxFsmFlag = 0;
     FsmStructActive = FsmStruct;
+    CommFsmDoneFlag = 1;    // the FSM is started
 }
 
 void CommFsmSched(struct FsmTable * FsmStruct)
@@ -98,18 +100,6 @@ void CommFsmSched(struct FsmTable * FsmStruct)
               FsmIndx++;
               RxFsmFlag = 0;
           }
-
-          /* receive char from UART and cycle until
-            FsmStruct[FsmIndx].Str
-          is recognized
-           *     FsmIndx++;
-
-          at the end start
-            FsmStruct[FsmIndx].pCallback
-          function
-           manage the RX timeout error
-            CommFsmFlag = 0;  // stop the FSM untile the whole string has been received
-          */
           break;
 
         case FsmTx:
@@ -141,6 +131,7 @@ void CommFsmSched(struct FsmTable * FsmStruct)
           CommFsmState = (* FsmStruct[FsmIndx].pCallback);
           (* CommFsmState) () ;
           CommFsmFlag = 0;
+          CommFsmDoneFlag = 0;    // the FSM is over
           break;
 
         default:
