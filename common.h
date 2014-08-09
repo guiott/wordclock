@@ -8,14 +8,18 @@
 #ifndef Common_H
     #define Common_H
 
+    #define TEST 1
+    //#define STATIC_TEST 1
+    //#define __SIM
+
     //#include <p18f4620.h>
     #include <p18cxxx.h>
     #define PLL 1
 
     #ifdef PLL  // 40MHz
-        #define XTAL_FREQ  40000000    //crystal frequency
+        #define _XTAL_FREQ 40000000.0   //crystal frequency
         #define PRESCALER0 256          //TIMER0 selected prescaler
-        #define PRESCALER1 1            //TIMER1 selected prescaler
+        #define PRESCALER1 8            //TIMER1 selected prescaler
         #define PRESCALER3 8            //TIMER3 selected prescaler
 
     #else
@@ -26,7 +30,7 @@
 
     #endif
 
-    #define FCY (XTAL_FREQ / 4)        //crystal divided by four
+    #define FCY (_XTAL_FREQ / 4)        //crystal divided by four
     #define TCY 1 / (float)FCY         //single instruction period
 
     #define TMR1_TICK TCY*PRESCALER1   //TIMER1 tick duration

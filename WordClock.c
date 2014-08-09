@@ -54,7 +54,10 @@ INTCONbits.GIEH=0;	// disable interrupt high
 INTCONbits.GIEL=0;	// disable interrupt low
 
 Settings();    // set ports and peripherals
-I2cSettings(); // set I2C ports and peripherals
+
+#ifndef __SIM
+    I2cSettings(); // set I2C ports and peripherals
+#endif
 
 // ==== enable interrupts
 INTCONbits.GIEH=1;	// enable interrupt high
@@ -64,7 +67,10 @@ SetTimer3(Timer3_ms);
 T3CONbits.TMR3ON=1; 
 SQW_FLAG=0;
 
-RtcInit();       
+#ifndef __SIM
+    RtcInit();
+#endif
+
 CommSetting();
 MatrixSetting();
 InterruptSettings();
@@ -73,6 +79,17 @@ DutyCycle = 10;     // preset LED PWM to 50%
 
 StartCommFsmSched(ReadTimeFsm); //read time from http://www.inrim.i
 TimeSync = 1; // start time sync
+
+#ifdef STATIC_TEST
+while(1)
+{//static LEDs test
+    INTCONbits.TMR0IE=0;
+    PIE1bits.TMR1IE=0;
+    PIE2bits.TMR3IE=0;
+    INTCONbits.INT0IE=0;
+    TestLed();
+}
+#endif
 
 while (1)  // main loop
 {
@@ -108,7 +125,9 @@ while (1)  // main loop
 
         if(Min != PrevMin)
         {// if time changed set a new Matrix
-            WordSetting();
+        #if(TEST == 0)
+            WordSetting();         // set the words on the matrix
+        #endif
             PrevMin = Min;
         }
     }
@@ -118,7 +137,7 @@ while (1)  // main loop
         CommFsmSched(FsmStructActive);
     }
 
-    I2cService(); // controls if I2C needs service
+    I2cService(); // controls if I2C needs service 
 
 }  // main loop
 } // main ==========
@@ -138,7 +157,7 @@ TMR0H = Count >> 8; // byte High
 TMR0L = Count;      // byte Low
 }
 
-void SetTimer1(unsigned char DutyCicle)
+void SetTimer1(unsigned char DutyCycle)
 {
 //set both High and Low registers for Timer1
 int Count = DutyTab[DutyCycle];
@@ -168,7 +187,7 @@ void interrupt low_priority low_isr (void)
         if (RxBuffIndx >= MAX_RX_BUFFER)
         {// buffer overflow
           RXerr = 3;
-          RxFlag	= 1;                // RX over
+          RxFlag	= 1;                  // RX over
           INTCONbits.TMR0IE=0;          // timeout interrupt TMR0 OFF
           T0CONbits.TMR0ON=0;           //TMR0 off
         }
@@ -202,7 +221,7 @@ void interrupt low_priority low_isr (void)
         }
     }
 
-    if (PIR1bits.TXIF && PIE1bits.TXIE) // TX buffer empty. Cleared when TXREG is written
+    if (PIR1bits.TXIF && PIE1bits.TXIE)//TX buff empty.Cleared when written
     {// load TXREG with the next byte to send
         TXREG = TxBuff[TxBuffIndx];
         TxBuffIndx++;
@@ -225,7 +244,7 @@ void interrupt low_priority low_isr (void)
 
      if (PIR1bits.ADIF)
     {// A new AD value has been read
-         PIR1bits.ADIF=0;               // reset flag di interrupt
+         PIR1bits.ADIF=0;                // reset interrupt flag
          DutyCycle=(ADRESH*LightIndx)>>8;//only the higest 8 bits are read
                                          //>>8 to convert back index to int
     }
@@ -240,15 +259,27 @@ void interrupt high_isr (void)
      {// used for LED matrix scan
         PIR2bits.TMR3IF = 0;    // reset of interrupt flag
         SetTimer3(Timer3_ms);
-        SetTimer1(DutyCycle);   // set Timer 1 in order to dimm LED light
+
+        DutyCycle=10; // ??????????????????????????????????????????????????????????????debug
+
+
+        SetTimer1(DutyCycle);   // set Timer 1 in order to dimm LED light  
         ScanMatrix();
         ClrWdt();
+
+        #if(TEST == 1)
+            static int C=0;
+            if(!(++C % 250))
+            {
+                TestMatrix();       // test all the LEDs in the matrix
+            }
+        #endif
      }
 
      if (PIR1bits.TMR1IF)       // timer 1 overflow?
      {// used for PWM LED light dimming
-        SetRowOff();            // switch off all rows
-        T1CONbits.TMR1ON=0;     //TMR1 off. It will be enabled at next cycle
+        SetColOff();            // switch off all rows
+        T1CONbits.TMR1ON=0;     // TMR1 off. It will be enabled at next cycle
         PIR1bits.TMR1IF = 0;    // reset of interrupt flag
      }
 
@@ -257,7 +288,7 @@ void interrupt high_isr (void)
         LED ^= 1;               // blink yellow led at 0.5Hz
         SQW_FLAG=1;
         INTCONbits.INT0IF = 0;  // reset of interrupt flag
-        ADCON0bits.GO_DONE = 1; // start ambient light reading
+        // ADCON0bits.GO_DONE = 1; // start ambient light reading   ????????????????????????????debug
      }
 
     if (PIR1bits.SSPIF)         // an I2C event is over

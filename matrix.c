@@ -9,12 +9,8 @@ void MatrixSetting(void)
     
     for(i=MinCol; i<=MaxCol; i++)
     {// pre-compute the bitmask in order to save time during runtime executions
-        BitMask[i]=(1 << (MaxCol -i));
+        BitMask[i]=(1 << (MaxCol - i));
     }
-    
-    SetRow(99);  // all rows off
-    SetRowOff(); // all columns off
-
     /* to debug
     for(i=0; i<=12; i++)
     {
@@ -25,6 +21,9 @@ void MatrixSetting(void)
 
 void ScanMatrix(void)
 {
+    static unsigned char Row = MINROW;   // current row ON
+    SetColOff();
+    SetRowOff();
     SetRow(Row);
     SetCol(Row);
     if((++Row) > MAXROW) (Row = MINROW); // scan a column every TMR3 interrupt
@@ -32,58 +31,45 @@ void ScanMatrix(void)
 
 void SetRow(unsigned char Row)
 {// from 0 to 9, enable one row at a time to scan matrix
-    #define ON  1
-    #define OFF 0
-
     switch (Row)
     {
         case 0:
-            Row9 = OFF;
             Row0 = ON;
             break;
             
         case 1:
-            Row0 = OFF;
             Row1 = ON;
             break;
             
         case 2:
-            Row1 = OFF;
             Row2 = ON;
             break;
  
         case 3:
-            Row2 = OFF;
             Row3 = ON;
             break;
  
         case 4:
-            Row3 = OFF;
             Row4 = ON;
             break;
  
         case 5:
-            Row4 = OFF;
             Row5 = ON;
             break;
  
         case 6:
-            Row5 = OFF;
             Row6 = ON;
             break;
  
         case 7:
-            Row6 = OFF;
             Row7 = ON;
             break;
  
         case 8:
-            Row7 = OFF;
             Row8 = ON;
             break;
  
         case 9:
-            Row8 = OFF;
             Row9 = ON;
             break;
         
@@ -91,16 +77,11 @@ void SetRow(unsigned char Row)
             SetRowOff();
             break;
     }
-
 }
 
 void SetColB(void)
 {// pre-fill the matrix with bytes instead of bits.
  // This wastes memory but saves a lot of time during runtime matrix scan
-
-    #define ON  1
-    #define OFF 0
-
     char Col;
     char Row;
     unsigned int Mask;
@@ -127,7 +108,23 @@ void SetCol(unsigned char Row)
 {/* from 'A' to 'L', enable all the column to light all the LEDs interested
     the byte matrix is pre-computed when LEDs to display change (every minute)
     this saves a lot of time during 1ms column scan
+
+     * RD0 = Column A
+     * RD1 = Column B
+     * RD2 = Column C
+     * RD3 = Column D
+     * RD4 = Column E
+     * RD5 = Column F
+     * RD6 = Column G
+     * RD7 = Column H
+  *
+     * RE0 = Column I
+     * RE1 = Column J
+     * RE2 = Column K
+  *
+     * RC5 = Column L
   */
+
     ColA = MatrixB[Row][11];
     ColB = MatrixB[Row][10];
     ColC = MatrixB[Row][9];
@@ -136,10 +133,25 @@ void SetCol(unsigned char Row)
     ColF = MatrixB[Row][6];
     ColG = MatrixB[Row][5];
     ColH = MatrixB[Row][4];
+
+    LATD = Dbits.Port;
+
     ColI = MatrixB[Row][3];
     ColJ = MatrixB[Row][2];
     ColK = MatrixB[Row][1];
+
+    LATE = Ebits.Port;
+
     ColL = MatrixB[Row][0];
+
+    LATC = PORTC | Cbits.Port;
+}
+
+void SetColOff(void)
+{
+    LATD = 0;
+    LATE = 0;
+    LATC = PORTC & 0b11011111;
 }
 
 void SetRowOff(void)
@@ -155,7 +167,6 @@ void SetRowOff(void)
     Row8 = OFF;
     Row9 = OFF;
 }
-
 void WordSetting()
 {// set the matrix with the words according to the new time
     int i;
@@ -307,4 +318,189 @@ void WordSetting()
     }
 
     SetColB();  
+}
+
+void TestMatrix()
+{
+    static unsigned char Xcol;
+    static unsigned char Yrow;
+    int i;
+    static int j = 0;
+
+   
+    for(i=MINROW; i<=MAXROW; i++)
+    {// reset the matrix
+        Matrix[i]=0;
+    }
+
+    switch(j)
+    {
+        case 0: // dot by dot
+            Matrix[Yrow]=0b0000100000000000 >> Xcol;
+            if((++Xcol)>MaxCol)
+            {
+                Xcol = MinCol;
+                if((++Yrow)>MAXROW)
+                {
+                    Yrow=MINROW;
+                    j++;
+                }
+            }
+            break;
+
+        case 1: // row by row
+            Matrix[Yrow]=0b0000111111111111;
+            if((++Yrow)>MAXROW)
+            {
+                Yrow=MINROW;
+                j++;
+            }
+            break;
+
+        case 2: //column by column
+            Matrix[0]=0b0000100000000000 >> Xcol;
+            Matrix[1]=0b0000100000000000 >> Xcol;
+            Matrix[2]=0b0000100000000000 >> Xcol;
+            Matrix[3]=0b0000100000000000 >> Xcol;
+            Matrix[4]=0b0000100000000000 >> Xcol;
+            Matrix[5]=0b0000100000000000 >> Xcol;
+            Matrix[6]=0b0000100000000000 >> Xcol;
+            Matrix[7]=0b0000100000000000 >> Xcol;
+            Matrix[8]=0b0000100000000000 >> Xcol;
+            Matrix[9]=0b0000100000000000 >> Xcol;
+            if((++Xcol)>MaxCol)
+            {
+                Xcol = MinCol;
+                j++;
+            }
+            break;
+
+        case 3: //diagonal left
+            Matrix[0]=0b0000100000000000 >> Xcol;
+            Matrix[1]=0b0000010000000000 >> Xcol;
+            Matrix[2]=0b0000001000000000 >> Xcol;
+            Matrix[3]=0b0000000100000000 >> Xcol;
+            Matrix[4]=0b0000000010000000 >> Xcol;
+            Matrix[5]=0b0000000001000000 >> Xcol;
+            Matrix[6]=0b0000000000100000 >> Xcol;
+            Matrix[7]=0b0000000000010000 >> Xcol;
+            Matrix[8]=0b1000000000001000 >> Xcol;
+            Matrix[9]=0b0100000000000100 >> Xcol;
+            if((++Xcol)>MaxCol)
+            {
+                Xcol = MinCol;
+                j++;
+            }
+            break;
+
+        case 4: //diagonal right
+            Matrix[0]=0b0000000000000100 << Xcol;
+            Matrix[1]=0b0000000000001000 << Xcol;
+            Matrix[2]=0b0000000000010000 << Xcol;
+            Matrix[3]=0b0000000000100000 << Xcol;
+            Matrix[4]=0b0000000001000000 << Xcol;
+            Matrix[5]=0b0000000010000000 << Xcol;
+            Matrix[6]=0b0000000100000000 << Xcol;
+            Matrix[7]=0b0000001000000000 << Xcol;
+            Matrix[8]=0b0000010000000001 << Xcol;
+            Matrix[9]=0b0000100000000010 << Xcol;
+            if((++Xcol)>MaxCol)
+            {
+                Xcol = MinCol;
+                j++;
+            }
+            break;
+
+        default:
+            j=0;
+            break;
+    }
+
+           // Matrix[0]=0b0000111111111111;
+
+    SetColB();
+}
+
+void TestLed(void)
+{
+    Row9=0;
+    Row0=1;
+    TestCol();
+    Row0=0;
+    Row1=1;
+    TestCol();
+    Row1=0;
+    Row2=1;
+    TestCol();
+    Row2=0;
+    Row3=1;
+    TestCol();
+    Row3=0;
+    Row4=1;
+    TestCol();
+    Row4=0;
+    Row5=1;
+    TestCol();
+    Row5=0;
+    Row6=1;
+    TestCol();
+    Row6=0;
+    Row7=1;
+    TestCol();
+    Row7=0;
+    Row8=1;
+    TestCol();
+    Row8=0;
+    Row9=1;
+    TestCol();
+}
+
+void TestCol(void)
+{
+    int Delay=5;
+    ColL=0;
+    ColA=1;
+    LongDelay(Delay);
+    ColA=0;
+    ColB=1;
+    LongDelay(Delay);
+    ColB=0;
+    ColC=1;
+    LongDelay(Delay);
+    ColC=0;
+    ColD=1;
+    LongDelay(Delay);
+    ColD=0;
+    ColE=1;
+    LongDelay(Delay);
+    ColE=0;
+    ColF=1;
+    LongDelay(Delay);
+    ColF=0;
+    ColG=1;
+    LongDelay(Delay);
+    ColG=0;
+    ColH=1;
+    LongDelay(Delay);
+    ColH=0;
+    ColI=1;
+    LongDelay(Delay);
+    ColI=0;
+    ColJ=1;
+    LongDelay(Delay);
+    ColJ=0;
+    ColK=1;
+    LongDelay(Delay);
+    ColK=0;
+    ColL=1;
+    LongDelay(Delay);
+}
+
+void LongDelay(int msX10)
+{
+    int i;
+    for(i=0;i<msX10;i++)
+    {
+        __delay_ms(10);
+    }
 }

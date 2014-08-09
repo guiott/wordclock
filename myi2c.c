@@ -258,7 +258,7 @@ void I2cHighService (void)
 
 void I2cService (void)
 {
-  if (I2cEventFlag)
+   if (I2cEventFlag)
   //SSP ISR signals that previous I2C action's over
  
   {
@@ -276,7 +276,7 @@ void I2cService (void)
 
     else
     {
-      if ((I2c[I2cDevPtr].Flag.Rx > 0) || (I2c[I2cDevPtr].Flag.Tx > 0))
+        if ((I2c[I2cDevPtr].Flag.Rx > 0) || (I2c[I2cDevPtr].Flag.Tx > 0))
       // check another record into the buffer for more bytes to exchange
       {
         I2cHighService();	// Initialize a new comm sequence

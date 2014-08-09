@@ -56,7 +56,7 @@ void Settings(void)
      * RE2 = Column K
      *
     */
-    TRISE = 0b11111000;
+    TRISE = 0b00000000;
 
     //-------A/D converter
     ADCON1bits.PCFG=0b1110; // only AN0 is an analog ports
@@ -119,20 +119,24 @@ void InterruptSettings(void)
     RCONbits.IPEN=1;        //interrupt priority enabled
 
     INTCON2bits.TMR0IP=0;   //TMR0 interrupt low priority
-    INTCONbits.TMR0IF = 0;  // reset of interrupt flag
+    INTCONbits.TMR0IF=0;    //reset of interrupt flag
     INTCONbits.TMR0IE=1;    //interrupt on TMR0 overflow enabled
 
-    INTCON2bits.INTEDG0=0;  //INTO interrupt on falling edge
-    INTCONbits.INT0IF = 0;  // reset of interrupt flag
-    INTCONbits.INT0IE=1;    //INT0 External Interrupt Enable
-
     IPR1bits.TMR1IP=1;      //TMR1 interrupt high priority
-    PIR1bits.TMR1IF = 0;    // reset of interrupt flag
+    PIR1bits.TMR1IF=0;      //reset of interrupt flag
     PIE1bits.TMR1IE=1;      //interrupt on TMR1 overflow enabled
 
+    IPR2bits.TMR3IP=1;      //TMR3 interrupt high priority
+    PIR2bits.TMR3IF=0;      //reset of interrupt flag
+    PIE2bits.TMR3IE=1;      //interrupt on TMR3 overflow enabled
+
+    INTCON2bits.INTEDG0=0;  //INTO interrupt on falling edge
+    INTCONbits.INT0IF = 0;  //reset of interrupt flag
+    INTCONbits.INT0IE=1;    //INT0 External Interrupt Enable
+
     IPR1bits.ADIP=0;        //AD interrupt low priority
-    PIR1bits.ADIF=0;        // reset of interrupt flag
-    PIE1bits.ADIE=1;        //interrupt on AD overflow enabled
+    PIR1bits.ADIF=0;        //reset of interrupt flag
+    PIE1bits.ADIE=1;        //AD interrupt enabled
 }
 
 void RtcInit(void)

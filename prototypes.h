@@ -32,8 +32,10 @@ char TimeDecode(void);
 void ScanMatrix(void);
 void MatrixSetting(void);
 void SetColB(void);
-void SetRow(char Row);
+void SetColOff(void);
 void SetRowOff(void);
 void WordSetting();
+void TestMatrix();
+void TestLed(void);
 
 #endif

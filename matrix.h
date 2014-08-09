@@ -19,6 +19,28 @@ extern "C" {
 }
 #endif
 
+typedef union
+{// to temporary store the PORTx bits
+    struct
+    {
+        unsigned P0                  :1;
+        unsigned P1                  :1;
+        unsigned P2                  :1;
+        unsigned P3                  :1;
+        unsigned P4                  :1;
+        unsigned P5                  :1;
+        unsigned P6                  :1;
+        unsigned P7                  :1;
+    };
+    struct
+    {
+        unsigned char Port;
+    };
+} PORTbits_t;
+volatile PORTbits_t Dbits;
+volatile PORTbits_t Ebits;
+volatile PORTbits_t Cbits;
+
 /*
      * RA1 = Row 0
      * RA2 = Row 1
@@ -55,7 +77,7 @@ extern "C" {
      * RE1 = Column J
      * RE2 = Column K
      * RC5 = Column L
- */
+ 
 #define ColA  LATDbits.LATD0
 #define ColB  LATDbits.LATD1
 #define ColC  LATDbits.LATD2
@@ -68,6 +90,20 @@ extern "C" {
 #define ColJ  LATEbits.LATE1
 #define ColK  LATEbits.LATE2
 #define ColL  LATCbits.LATC5
+*/
+
+#define ColA  Dbits.P0
+#define ColB  Dbits.P1
+#define ColC  Dbits.P2
+#define ColD  Dbits.P3
+#define ColE  Dbits.P4
+#define ColF  Dbits.P5
+#define ColG  Dbits.P6
+#define ColH  Dbits.P7
+#define ColI  Ebits.P0
+#define ColJ  Ebits.P1
+#define ColK  Ebits.P2
+#define ColL  Cbits.P5
 
 #define MINCOL 'A'
 #define MAXCOL 'L'
@@ -78,42 +114,49 @@ const unsigned char MaxCol= MAXCOL -65;
 #define MINROW 0
 #define MAXROW 9
 
+#define ON  1
+#define OFF 0
+
 void SetRow(char Row);
 void SetCol(char Row);
 void SetRowOff(void);
+void SetColOff(void);
 void MatrixSetting(void);
 void SetColB(void);
 void WordSetting();
+void TestMatrix();
+void TestCol(void);
+void LongDelay(int msX10);
 
-int Matrix[MAXROW+1];
-int MatrixB[MAXROW+1][MAXCOL -64];    // use bytes instead of bits to save time
-unsigned int BitMask[MAXCOL -64];
-unsigned char Row = MINROW;           // current row ON
+
+volatile int Matrix[MAXROW+1];
+volatile int MatrixB[MAXROW+1][MAXCOL -64];    // use bytes instead of bits to save time
+volatile unsigned int BitMask[MAXCOL -64];
 
 unsigned char DutyCycle;
 const int DutyTab[]=
-{// pre-computed TMR1 values to obtain LED dimming with duty cycles from
-    65535,          // 0%
-    65035,          // 5%
-    64535,          // 10%
-    64035,          // 15%
-    63535,          // 20%
-    63035,          // 25%
-    62535,          // 30%
-    62035,          // 35%
-    61535,          // 40%
-    61035,          // 45%
-    60535,          // 50%
-    60035,          // 55%
-    59535,          // 60%
-    59035,          // 65%
-    58535,          // 70%
-    58035,          // 75%
-    57535,          // 80%
-    57035,          // 85%
-    56535,          // 90%
-    56035,          // 95%
-    55635           // 99%  to avoid overlap with TMR3 cycle
+{// pre-computed TMR1 values to obtain LED dimming
+    65535,  // 0%
+    65472,  // 5%
+    65410,  // 10%
+    65347,  // 15%
+    65285,  // 20%
+    65222,  // 25%
+    65160,  // 30%
+    65097,  // 35%
+    65035,  // 40%
+    64972,  // 45%
+    64910,  // 50%
+    64847,  // 55%
+    64785,  // 60%
+    64722,  // 65%
+    64660,  // 70%
+    64597,  // 75%
+    64535,  // 80%
+    64472,  // 85%
+    64410,  // 90%
+    64347,  // 95%
+    64297// 99%  to avoid overlap with TMR3 cycle
 };
 
 extern unsigned int Sec;
