@@ -326,16 +326,23 @@ void TestMatrix()
     static unsigned char Yrow;
     int i;
     static int j = 0;
+    static int k = 0;
 
    
     for(i=MINROW; i<=MAXROW; i++)
     {// reset the matrix
         Matrix[i]=0;
     }
-
+    
     switch(j)
     {
-        case 0: // dot by dot
+        case 0: // char display
+            WriteMatrixChar('G', 'O', 7, 1);
+            TestTime = 5000;
+            j++;
+            break;
+
+        case 1: // dot by dot
             Matrix[Yrow]=0b0000100000000000 >> Xcol;
             if((++Xcol)>MaxCol)
             {
@@ -346,18 +353,20 @@ void TestMatrix()
                     j++;
                 }
             }
+            TestTime = 100;
             break;
 
-        case 1: // row by row
+        case 2: // row by row
             Matrix[Yrow]=0b0000111111111111;
             if((++Yrow)>MAXROW)
             {
                 Yrow=MINROW;
                 j++;
             }
+            TestTime = 300;
             break;
 
-        case 2: //column by column
+        case 3: //column by column
             Matrix[0]=0b0000100000000000 >> Xcol;
             Matrix[1]=0b0000100000000000 >> Xcol;
             Matrix[2]=0b0000100000000000 >> Xcol;
@@ -373,9 +382,10 @@ void TestMatrix()
                 Xcol = MinCol;
                 j++;
             }
+            TestTime = 300;
             break;
 
-        case 3: //diagonal left
+        case 4: //diagonal left
             Matrix[0]=0b0000100000000000 >> Xcol;
             Matrix[1]=0b0000010000000000 >> Xcol;
             Matrix[2]=0b0000001000000000 >> Xcol;
@@ -391,9 +401,10 @@ void TestMatrix()
                 Xcol = MinCol;
                 j++;
             }
+            TestTime = 300;
             break;
 
-        case 4: //diagonal right
+        case 5: //diagonal right
             Matrix[0]=0b0000000000000100 << Xcol;
             Matrix[1]=0b0000000000001000 << Xcol;
             Matrix[2]=0b0000000000010000 << Xcol;
@@ -409,14 +420,52 @@ void TestMatrix()
                 Xcol = MinCol;
                 j++;
             }
+            TestTime = 300;
+            break;
+
+       case 6: //all LEDs on
+           if(k%2)
+           {
+                Matrix[0]=0XFFFF;
+                Matrix[1]=0XFFFF;
+                Matrix[2]=0XFFFF;
+                Matrix[3]=0XFFFF;
+                Matrix[4]=0XFFFF;
+                Matrix[5]=0XFFFF;
+                Matrix[6]=0XFFFF;
+                Matrix[7]=0XFFFF;
+                Matrix[8]=0XFFFF;
+                Matrix[9]=0XFFFF;
+           }
+           else
+           {
+                Matrix[0]=0;
+                Matrix[1]=0;
+                Matrix[2]=0;
+                Matrix[3]=0;
+                Matrix[4]=0;
+                Matrix[5]=0;
+                Matrix[6]=0;
+                Matrix[7]=0;
+                Matrix[8]=0;
+                Matrix[9]=0;
+           }
+
+            if((++k)>8)
+            {
+                k = 0;
+                j++;
+            }
+            TestTime = 1000;
             break;
 
         default:
             j=0;
+            TestTime = 300;
             break;
     }
 
-           // Matrix[0]=0b0000111111111111;
+    // Matrix[0]=0b0000111111111111;
 
     SetColB();
 }

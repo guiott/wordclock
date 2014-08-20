@@ -29,6 +29,7 @@ char TimerStatus = 0;
 
 unsigned int Timer0_ms;
 unsigned int Timer3_ms;
+extern unsigned int TestTime;
 extern const int DutyTab[];
 extern unsigned char DutyCycle;
 

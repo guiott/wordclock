@@ -9,8 +9,8 @@
     #define Common_H
 
     #define TEST 1
-    //#define STATIC_TEST 1
-    //#define __SIM
+    // #define STATIC_TEST 1
+    // #define __SIM
 
     //#include <p18f4620.h>
     #include <p18cxxx.h>

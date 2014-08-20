@@ -149,13 +149,13 @@ void I2cLowService (void)
 			
 			case (WRITE):
 				/* sends Nth byte
-					 all bytes sents?
+					 all bytes sent?
            all bytes received?
            otherwise stops sequences
 				*/
 				SSPBUF = I2c[I2cDevPtr].TxBuff[Ptr.Tx];    // TX first byte
 				Ptr.Tx ++;                                 // points to next byte
-				if (Ptr.Tx >= I2c[I2cDevPtr].Flag.Tx)      // all bytes sents?
+				if (Ptr.Tx >= I2c[I2cDevPtr].Flag.Tx)      // all bytes sent?
 				{
    				if (I2c[I2cDevPtr].Flag.Rx > 0)  // all bytes received?
    				{
@@ -202,7 +202,7 @@ void I2cLowService (void)
 				
 				
 			case (RSTART):
-				// reinizializza bus senza rilasciarlo
+				// reinit bus bus without release
 				I2cStat = ADRR;              // next status = start RX
 				RestartI2C();
 				break;
@@ -386,7 +386,7 @@ Description of the I2C communication procedures
 	FINE
 
  * in the main loop the different flags are checked starting from below
- * the whole cycle is repeated for each device scnning th buffers:
+ * the whole cycle is repeated for each device scanning the buffers:
 
 1-I2c event? YES -> starts I2cLowService -> EXIT
   |
@@ -407,15 +407,15 @@ Description of the I2C communication procedures
 5-reset I2cDevPtr counter ->	EXIT
 
  Description of the FSM
-1-the I2c event is communicated from SSP	through	ISR
+1-the I2c event is communicated from SSP peripheral through	interrupt
 	I2cLowService executes the I2C sequence to exchange a single byte
 	reset I2C event or bus collision flag
- once exchanged all the buffer resets I2cBusyFlag	to enable upper level routine
+  once exchanged all the buffer resets I2cBusyFlag	to enable upper level routine
 
 2-I2cBusyFlag is set from I2cHighService and reset from	I2cLowService
 
 3-The device specific routine has filled up the buffer, set the I2cHighService
-    flags, initialized the I2cLowService seqEunce. This one exchanges each byte
+    flags, initialized the I2cLowService sequence. This one exchanges each byte
 		at each byte exchanged the counter is decreased
 		when the TX counter is 0 it starts the RX
 		when both counters are 0 it can start with the following device

@@ -127,7 +127,7 @@ void WordSetting();
 void TestMatrix();
 void TestCol(void);
 void LongDelay(int msX10);
-
+void WriteMatrixChar(unsigned char Ch1, unsigned char Ch2, int Pos1, int Pos2);
 
 volatile int Matrix[MAXROW+1];
 volatile int MatrixB[MAXROW+1][MAXCOL -64];    // use bytes instead of bits to save time
@@ -163,5 +163,8 @@ extern unsigned int Sec;
 extern unsigned int Min;
 extern unsigned int Hour;
 extern unsigned char TimeSync;
+
+unsigned int TestTime = 250;
+
 #endif	/* MATRIX_H */
 

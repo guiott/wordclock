@@ -37,5 +37,6 @@ void SetRowOff(void);
 void WordSetting();
 void TestMatrix();
 void TestLed(void);
+void WriteMatrixChar(unsigned char Ch1, unsigned char Ch2, int Pos1, int Pos2);
 
 #endif

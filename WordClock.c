@@ -269,7 +269,7 @@ void interrupt high_isr (void)
 
         #if(TEST == 1)
             static int C=0;
-            if(!(++C % 250))
+            if(!(++C % TestTime))
             {
                 TestMatrix();       // test all the LEDs in the matrix
             }
