@@ -242,10 +242,10 @@ void interrupt low_priority low_isr (void)
          RxFlag	= 1;                    // RX over
     }
 
-     if (PIR1bits.ADIF)
+    if (PIR1bits.ADIF)
     {// A new AD value has been read
          PIR1bits.ADIF=0;                // reset interrupt flag
-         DutyCycle=(ADRESH*LightIndx)>>8;//only the higest 8 bits are read
+         DutyCycle=(ADRESH*LightIndx)>>8;//only the highest 8 bits are read
                                          //>>8 to convert back index to int
     }
 
