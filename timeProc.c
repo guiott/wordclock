@@ -3,7 +3,25 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef TEST_WORD == 1
+void RtcReadTime(void)
+{/*convert the BCD time read from RTC registers to decimal values
+    Hour is in 12H mode without AM/PM
+  */
+    static unsigned int HourTmp;
 
+    if(++Min > 59)
+    {
+        Min=0;
+        if(++HourTmp > 11)
+        {
+            HourTmp=0;
+        }
+    }
+    Hour = HourTmp;
+    TimeSync = 0;
+}
+#else
 void RtcReadTime(void)
 {/*convert the BCD time read from RTC registers to decimal values
     Hour is in 12H mode without AM/PM
@@ -23,6 +41,9 @@ void RtcReadTime(void)
     Tens=((I2c[RTC_PTR].RxBuff[2]&0b00010000)>>4)*10;
     Hour=Units + Tens;
 }
+#endif
+
+
 
 void RtcWriteTime(void)
 {

@@ -8,7 +8,8 @@
 #ifndef Common_H
     #define Common_H
 
-    #define TEST 1
+    // #define TEST 1           // test LEDs
+    #define TEST_WORD 1         // test words
     // #define STATIC_TEST 1
     // #define __SIM
 

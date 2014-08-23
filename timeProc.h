@@ -32,6 +32,7 @@ unsigned char NtpMin;
 unsigned char NtpHour;
 
 extern unsigned char RXbuff[MAX_RX_BUFFER];	// RX buffer
+extern unsigned char TimeSync;       // Time has be syncronized?
 
 void I2cHighService (void);
 void I2cLowService (void);

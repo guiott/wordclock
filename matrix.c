@@ -176,14 +176,22 @@ void WordSetting()
         Matrix[i]=0;
     }
 
-    if(Min <= 30)
-    {// after half hour the word is "to" the next hour, before is "after"
-        Matrix[6]=0b000000011110;                   // E
+    if(Min >= 5)    // nothing if "o'clock"
+    {
+        if(Min < 35)
+        {// after half hour the word is "to" the next hour, before is "after"
+            Matrix[7]=0b100000000000;               // E
+        }
+        else
+        {
+            Hour++;
+            Matrix[6]=0b000000011110;               // MENO
+        }
     }
     else
     {
-        Hour++;
-        Matrix[7]=0b100000000000;                   // MENO
+    Matrix[6]=0b000000000000;
+    Matrix[7]=0b000000000000;
     }
 
     switch(Min / 5)
@@ -195,7 +203,7 @@ void WordSetting()
 
         case 2:
         case 10:
-            Matrix[9] = Matrix[9] | 0b111100000000;// DIECI
+            Matrix[9] = Matrix[9] | 0b111110000000;// DIECI
             break;
 
         case 3:
@@ -270,7 +278,7 @@ void WordSetting()
             break;
 
         case 2:
-            Matrix[1] = Matrix[1] | 0b000000011000;// DUE
+            Matrix[1] = Matrix[1] | 0b000000011100;// DUE
             break;
 
         case 3:
@@ -333,7 +341,7 @@ void TestMatrix()
     {// reset the matrix
         Matrix[i]=0;
     }
-    
+  
     switch(j)
     {
         case 0: // char display
@@ -465,7 +473,20 @@ void TestMatrix()
             break;
     }
 
-    // Matrix[0]=0b0000111111111111;
+    /*
+    TestTime = 1000;
+    //              ABCDEFGHIJKL
+    Matrix[0]=0b0000010101010101;
+    Matrix[1]=0b0000010101010101;
+    Matrix[2]=0b0000010101010101;
+    Matrix[3]=0b0000010101010101;
+    Matrix[4]=0b0000010101010101;
+    Matrix[5]=0b0000010101010101;
+    Matrix[6]=0b0000010101010101;
+    Matrix[7]=0b0000010101010101;
+    Matrix[8]=0b0000010101010101;
+    Matrix[9]=0b0000010101010101;
+    */
 
     SetColB();
 }
